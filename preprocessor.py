@@ -5,7 +5,7 @@ from faker import Faker
 n = 10000
 
 # create dataframes
-ratings_df = (pd.read_csv('data/ratings.csv')).head(n)
+ratings_df = ((pd.read_csv('data/ratings.csv')).sort_values(by='user_id')).head(n)
 
 # generate random names
 fake = Faker()
@@ -20,7 +20,7 @@ cols = ratings_df.columns.tolist()
 new_order = [cols[0]] + [cols[3], cols[4]] + cols[1:3] + cols[5:]
 ratings_df = ratings_df[new_order]
 # sort by user_id
-ratings_df = ratings_df.sort_values(by='user_id')
+# ratings_df = ratings_df.sort_values(by='user_id')
 books_df = pd.read_csv('data/books.csv')
 # split authors
 books_df['authors'] = books_df['authors'].str.split(', ')
@@ -34,11 +34,11 @@ books_df['rating_counts'] = books_df.apply(lambda row: {
 }, axis=1)
 # drop columms from books.csv
 books_df = books_df.drop(['ratings_1', 'ratings_2', 'ratings_3', 'ratings_4', 'ratings_5'], axis=1)
-books_df = books_df.drop(['work_id', 'goodreads_book_id', 'best_book_id', 'title', 'work_ratings_count', 'work_text_reviews_count', 'small_image_url'], axis=1)
+books_df = books_df.drop(['book_id', 'goodreads_book_id', 'best_book_id', 'title', 'work_ratings_count', 'work_text_reviews_count', 'small_image_url'], axis=1)
 # rename columns from books.csv
 books_df.rename(columns={'work_id': 'book_id'}, inplace=True)
 books_df.rename(columns={'original_title': 'title'}, inplace=True)
-
+books_df = books_df.sort_values(by='book_id')
 # merge users to the book data
 merged_df = pd.merge(ratings_df, books_df, on='book_id')
 
@@ -53,8 +53,13 @@ book_tags_merged_df = pd.merge(book_tags_df, tags_df, on='tag_id')
 book_tags_grouped_df = book_tags_merged_df.groupby('book_id')['tag_name'].apply(list).reset_index()
 
 merged_df = pd.merge(merged_df, book_tags_grouped_df, on='book_id')
-# display
-print(merged_df)
+# Assume 'book_details' is a placeholder for actual book detail columns
+aggregation = {
+    'user_id': lambda x: list(x),  # Aggregate user_id into a list
+    # For book details that are consistent within each book_id group, take the first occurrence
+}
 
-# write merged_df to a csv file
-merged_df.to_csv('merged.csv', index=False)
+# Group by book_id and apply aggregation
+books_details_users = ratings_df.groupby('book_id', as_index=False).agg(aggregation)
+books_details_users = pd.merge(books_df, books_details_users, on='book_id', how='left')
+print(books_details_users)
