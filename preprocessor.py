@@ -55,3 +55,6 @@ book_tags_grouped_df = book_tags_merged_df.groupby('book_id')['tag_name'].apply(
 merged_df = pd.merge(merged_df, book_tags_grouped_df, on='book_id')
 # display
 print(merged_df)
+
+# write merged_df to a csv file
+merged_df.to_csv('merged.csv', index=False)

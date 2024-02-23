@@ -1,11 +1,20 @@
 import csv
 import json
 import re
+import ast
 
 def clean_author_names(author_names):
     # Split author names by comma and space, then remove any non-alphabetic characters
     cleaned_authors = [re.sub(r'[^a-zA-Z\s]', '', author).strip() for author in author_names.split(',')]
     return [author for author in cleaned_authors if author]  # Remove empty strings
+
+def parse_rating_counts(rating_counts_string):
+    # Convert the string representation of dictionary into an actual dictionary
+    return ast.literal_eval(rating_counts_string)
+
+def parse_tags(tags_string):
+    # Convert the string representation of list into an actual list
+    return ast.literal_eval(tags_string)
 
 def csv_to_json(csv_file, json_file):
     # Open the CSV file
@@ -16,14 +25,14 @@ def csv_to_json(csv_file, json_file):
         data = []
         # Iterate over each row in the CSV file
         for row in reader:
-            # Convert ratings counts to dictionary
-            rating_counts = {
-                f"ratings_{i}": int(row[f"ratings_{i}"]) for i in range(1, 6)
-            }
+            # Parse rating counts
+            rating_counts = parse_rating_counts(row["rating_counts"])
             # Handle case where original publication year is represented as float
             original_publication_year = int(float(row["original_publication_year"])) if row["original_publication_year"] else None
             # Clean and split author names
             authors = clean_author_names(row["authors"])
+            # Parse tags
+            tags = parse_tags(row["tag_name"])
             # Create a dictionary for each book
             book_data = {
                 "book_id": row["book_id"],
@@ -31,12 +40,13 @@ def csv_to_json(csv_file, json_file):
                 "isbn13": row["isbn13"],
                 "authors": authors,
                 "original_publication_year": original_publication_year,
-                "title": row["original_title"],
+                "title": row["title"],
                 "language_code": row["language_code"],
                 "average_rating": float(row["average_rating"]) if row["average_rating"] else None,
                 "ratings_count": int(row["ratings_count"]) if row["ratings_count"] else None,
                 "rating_counts": rating_counts,
-                "image_url": row["image_url"]
+                "image_url": row["image_url"],
+                "tags": tags
             }
             # Append the book data to the list
             data.append(book_data)
@@ -46,7 +56,7 @@ def csv_to_json(csv_file, json_file):
         json.dump(data, jsonfile, indent=4)
 
 # Specify the input CSV file and output JSON file
-csv_file = 'data/books.csv'
+csv_file = 'data/merged.csv'
 json_file = 'books.json'
 
 # Convert CSV to JSON
