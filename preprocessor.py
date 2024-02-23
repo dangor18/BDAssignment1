@@ -1,7 +1,22 @@
 import pandas as pd
+from faker import Faker
+
+# number of rows
+n = 10000
 
 # create dataframes
-ratings_df = pd.read_csv('data/ratings.csv')
+ratings_df = (pd.read_csv('data/ratings.csv')).head(n)
+
+# generate random names
+fake = Faker()
+names = [fake.full_name() for _ in range(n)]
+surnames = [fake.last_name() for _ in range(n)]
+
+ratings_df['Name'] = names
+ratings_df['Surname'] = surnames
+# sort by user_id
+ratings_df = ratings_df.sort_values(by='user_id')
+
 books_df = pd.read_csv('data/books.csv')
 
 # drop columms from books.csv
@@ -10,19 +25,8 @@ books_df = books_df.drop(['book_id', 'goodreads_book_id', 'best_book_id', 'title
 books_df.rename(columns={'work_id': 'book_id'}, inplace=True)
 books_df.rename(columns={'original_title': 'title'}, inplace=True)
 
+# merge users to the book data
 merged_df = pd.merge(ratings_df, books_df, on='book_id')
 
-# initialize a new DataFrame to store the rows until user_id 264 (arbitrary)
-filtered_df = pd.DataFrame()
-
-# iterate through merged dataframe
-for index, row in merged_df.iterrows():
-    # check if the user_id equals 264
-    if row['user_id'] == 264:
-        break
-    else:
-        # append the row to the filtered_df DataFrame
-        filtered_df = filtered_df._append(row)
-
 # display
-print(filtered_df)
+print(merged_df)
