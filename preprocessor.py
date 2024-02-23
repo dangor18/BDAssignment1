@@ -52,16 +52,25 @@ book_tags_merged_df = pd.merge(book_tags_df, tags_df, on='tag_id')
 
 # group tags by book_id
 book_tags_grouped_df = book_tags_merged_df.groupby('book_id')['tag_name'].apply(list).reset_index()
+print(book_tags_grouped_df)
 
-books_with_ratings_df = pd.merge(books_with_ratings_df, book_tags_grouped_df, on='book_id')
-print(books_with_ratings_df)
+books_with_ratings_and_tags_df = pd.merge(books_with_ratings_df, book_tags_grouped_df, on='book_id')
+print(books_with_ratings_and_tags_df)
 
 # Group by book_id and aggregate user details
-user_ratings = books_with_ratings_df.groupby('book_id').apply(lambda x: x[['user_id', 'rating']].to_dict('records')).reset_index(name='user_ratings')
-print(user_ratings)
+# Assuming books_with_ratings_and_tags_df contains all needed details (ratings and tags included)
+# Now, you should aggregate user ratings here, where book details and tags are already merged
 
-# Group by book_id and apply aggregation
-# books_details_users = books_with_ratings_df.groupby('book_id', as_index=False).agg(aggregation)
-books_details_users = pd.merge(books_df, user_ratings, on='book_id', how='left')
-books_details_users.dropna(subset=['ratings'], inplace=True)
-print(books_details_users)
+# Correctly aggregate user ratings along with the book data that includes tags
+user_ratings = books_with_ratings_and_tags_df.groupby('book_id').apply(lambda x: x[['user_id', 'rating', 'Name', 'Surname']].to_dict('records')).reset_index(name='ratings')
+
+# Merge this with books_df if needed, but it seems you already have all book details in books_with_ratings_and_tags_df
+# If books_df contains additional details not present in books_with_ratings_and_tags_df, merge those details now
+
+# Since books_with_ratings_and_tags_df already contains book details and tags, you might just need to add the aggregated ratings:
+final_df = pd.merge(books_with_ratings_and_tags_df.drop_duplicates(subset=['book_id']), user_ratings, on='book_id', how='left')
+
+# Ensure to drop or select columns as needed to match your final structure, as it seems there might be redundant columns or missing steps in the shared code for the final merge.
+final_df.dropna(subset=['ratings'], inplace=True)
+print(final_df)
+final_df.to_csv("test.csv")
