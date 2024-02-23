@@ -1,1 +1,22 @@
 # BDAssignment1
+
+- [x] Design Schema/JSON 
+		- Matthew
+- [ ] Setup Devops
+		- [ ] Github
+				- Daniel
+		- [ ] Docker
+				- Jordy
+- [ ] Preprocessing
+		- JSON
+		- Joe Daniel
+- [ ] Create the App
+		- Jordy 
+		- and Gabe?
+- [ ] Query
+		- Everyone
+- [ ] Load into mongodb
+		- Matthew
+- [ ] Write Up
+		- Gabe
+		- Matthew
