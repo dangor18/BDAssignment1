@@ -2,7 +2,7 @@ import pandas as pd
 from faker import Faker
 
 # number of rows
-n = 10000
+n = 100000
 
 # create dataframes
 ratings_df = ((pd.read_csv('data/ratings.csv')).sort_values(by='user_id')).head(n)
@@ -40,7 +40,8 @@ books_df.rename(columns={'work_id': 'book_id'}, inplace=True)
 books_df.rename(columns={'original_title': 'title'}, inplace=True)
 books_df = books_df.sort_values(by='book_id')
 # merge users to the book data
-merged_df = pd.merge(ratings_df, books_df, on='book_id')
+books_with_ratings_df = pd.merge(ratings_df, books_df, on='book_id')
+print(books_with_ratings_df)
 
 book_tags_df = pd.read_csv('data/book_tags.csv')
 book_tags_df.rename(columns={'goodreads_book_id': 'book_id'}, inplace=True)
@@ -52,14 +53,15 @@ book_tags_merged_df = pd.merge(book_tags_df, tags_df, on='tag_id')
 # group tags by book_id
 book_tags_grouped_df = book_tags_merged_df.groupby('book_id')['tag_name'].apply(list).reset_index()
 
-merged_df = pd.merge(merged_df, book_tags_grouped_df, on='book_id')
-# Assume 'book_details' is a placeholder for actual book detail columns
-aggregation = {
-    'user_id': lambda x: list(x),  # Aggregate user_id into a list
-    # For book details that are consistent within each book_id group, take the first occurrence
-}
+books_with_ratings_df = pd.merge(books_with_ratings_df, book_tags_grouped_df, on='book_id')
+print(books_with_ratings_df)
+
+# Group by book_id and aggregate user details
+user_ratings = books_with_ratings_df.groupby('book_id').apply(lambda x: x[['user_id', 'rating']].to_dict('records')).reset_index(name='user_ratings')
+print(user_ratings)
 
 # Group by book_id and apply aggregation
-books_details_users = ratings_df.groupby('book_id', as_index=False).agg(aggregation)
-books_details_users = pd.merge(books_df, books_details_users, on='book_id', how='left')
+# books_details_users = books_with_ratings_df.groupby('book_id', as_index=False).agg(aggregation)
+books_details_users = pd.merge(books_df, user_ratings, on='book_id', how='left')
+books_details_users.dropna(subset=['ratings'], inplace=True)
 print(books_details_users)
