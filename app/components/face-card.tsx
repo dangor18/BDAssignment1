@@ -11,8 +11,8 @@ export function FaceCard({ name, image }: FaceCardProps) {
   return (
     <div className="aspect-card">
       <Card>
-        <Link href={`/${name.toLowerCase()}`} passHref>
-          <CardContent className="flex flex-col items-center gap-2 p-4 hover:outline rounded">
+        <Link href={`person/${name.toLowerCase()}`} passHref>
+          <CardContent className="flex flex-col items-center gap-2 p-4 transition-all duration-700 hover:scale-110 rounded">
             <Image
               alt={`Photo of ${name}`}
               className="rounded-full cursor-pointer"
