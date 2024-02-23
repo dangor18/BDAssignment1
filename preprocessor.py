@@ -36,7 +36,7 @@ books_df['rating_counts'] = books_df.apply(lambda row: {
 books_df = books_df.drop(['ratings_1', 'ratings_2', 'ratings_3', 'ratings_4', 'ratings_5'], axis=1)
 books_df = books_df.drop(['work_id', 'goodreads_book_id', 'best_book_id', 'title', 'work_ratings_count', 'work_text_reviews_count', 'small_image_url'], axis=1)
 # rename columns from books.csv
-# books_df.rename(columns={'work_id': 'book_id'}, inplace=True)
+books_df.rename(columns={'work_id': 'book_id'}, inplace=True)
 books_df.rename(columns={'original_title': 'title'}, inplace=True)
 
 # merge users to the book data
