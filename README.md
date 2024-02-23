@@ -3,9 +3,9 @@
 - [x] Design Schema/JSON 
 	- Matthew
 - [ ] Setup Devops
-	- [ ] Github
+	- [] Github
 		- Daniel
-	- [ ] Docker
+	- [x] Docker
 		- Jordy
 - [ ] Preprocessing
 	- JSON
