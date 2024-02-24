@@ -2,20 +2,17 @@ import pandas as pd
 from faker import Faker
 
 def ratings():
-    fake = Faker()
     # Read the original CSV file
     df = (pd.read_csv('data/ratings.csv')).head(100000)
-
-    # Generate a unique name for each user_id
-    user_ids = df['user_id'].unique()
-    names = {user_id: fake.name() for user_id in user_ids}
-
+    user_names_df = pd.read_csv('user_data.csv')
+    df = pd.merge(df, user_names_df, on='user_id')
+    
     df.rename(columns={'book_id': 'work_id'}, inplace=True)
     # Group by book_id and aggregate ratings for each book with user objects
     grouped = df.groupby('work_id').apply(lambda x: x.apply(lambda row: {
         "user": {
             "user_id": row['user_id'],
-            "user_name": names[row['user_id']]
+            "user_name": row['user_name']
         },
         "rating": row['rating']
     }, axis=1).tolist())
