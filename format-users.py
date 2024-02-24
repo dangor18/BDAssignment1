@@ -5,8 +5,8 @@ import os
 
 # Define the limit values
 MAX_LINES_READ = 100000
-MAX_ITEMS_NESTED = 10
-MAX_RATINGS_PER_USER = 10  # Limit the number of ratings per user
+MAX_ITEMS_NESTED = 2
+MAX_RATINGS_PER_USER = 2  # Limit the number of ratings per user
 MAX_USERS = 10000
 
 # Read the CSV files with limits
@@ -26,7 +26,7 @@ for index, row in merged_data.iterrows():
         break  # Break loop if we've reached the limit of 10 items
     
     user_id = row['user_id']
-    full_name = row['full_name']
+    user_name = row['user_name']
     book_ratings_str = row['book_ratings']
     
     # Convert string representation of list of dictionaries to actual list of dictionaries
@@ -47,8 +47,8 @@ for index, row in merged_data.iterrows():
     # Create the JSON object
     user_json = {
         "user_id": user_id,
-        "user_name": full_name,
-        "to_read": to_read_books,
+        "user_name": user_name,
+        "to_read": to_read_books[:MAX_ITEMS_NESTED],
         "ratings": [{"book_id": str(book['book']), "rating": book['rating']} for book in book_ratings]
     }
     
