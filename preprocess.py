@@ -7,10 +7,9 @@ def ratings():
     df = (pd.read_csv('data/ratings.csv')).head(100000)
     user_names_df = pd.read_csv('user_data.csv')
     df = pd.merge(df, user_names_df, on='user_id')
-    
-    df.rename(columns={'book_id': 'work_id'}, inplace=True)
+    #df.rename(columns={'book_id': 'work_id'}, inplace=True)
     # Group by book_id and aggregate ratings for each book with user objects
-    grouped = df.groupby('work_id').apply(lambda x: x.apply(lambda row: {
+    grouped = df.groupby('book_id').apply(lambda x: x.apply(lambda row: {
         "user": {
             "user_id": row['user_id'],
             "user_name": row['user_name']
@@ -19,7 +18,7 @@ def ratings():
     }, axis=1).tolist())
 
     # Create a new DataFrame with book_id and ratings
-    new_df = pd.DataFrame({'work_id': grouped.index, 'ratings': grouped.values})
+    new_df = pd.DataFrame({'book_id': grouped.index, 'ratings': grouped.values})
     #print(new_df)
     return new_df
 
@@ -50,7 +49,7 @@ def tags():
 
     # Group tags by book_id and aggregate into a list of dictionaries
     book_tags_grouped = book_tags_merged_df.groupby('goodreads_book_id').apply(lambda x: x[['tag_id', 'tag_name']].apply(lambda row: {'tag_id': row['tag_id'], 'tag_name': row['tag_name']}, axis=1).tolist()).reset_index(name='tags')
-
+    
     final_df = pd.merge(books_df, book_tags_grouped, on='goodreads_book_id')
     #print(final_df)
     return final_df
@@ -78,10 +77,13 @@ def transform_csv(input_csv, output_csv):
 
 if __name__ == "__main__":
     book_ratings_df = ratings()
+    print(book_ratings_df[book_ratings_df['book_id'] == 258])
     book_tags_df = tags()
+    print(book_tags_df[book_tags_df['book_id'] == 258])
 
-    final_df = pd.merge(book_ratings_df, book_tags_df, on='work_id')
-    #print(final_df)
+    final_df = book_tags_df.merge(book_ratings_df, on='book_id')
+    print(final_df[final_df['book_id'] == 258])
+    """
     # write data to a new csv file
     final_df.to_csv('data/merged.csv', index=False)
     # Specify input and output CSV file paths
@@ -102,5 +104,5 @@ if __name__ == "__main__":
     new_df.to_csv('ratings_grouped_by_user.csv', index=False)
     
     print("Preprocessing completed.")
-
+    """
 
