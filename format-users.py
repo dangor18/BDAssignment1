@@ -4,9 +4,10 @@ import ast
 import os
 
 # Define the limit values
-MAX_LINES_READ = 10000
+MAX_LINES_READ = 100000
 MAX_ITEMS_NESTED = 10
 MAX_RATINGS_PER_USER = 10  # Limit the number of ratings per user
+MAX_USERS = 10000
 
 # Read the CSV files with limits
 user_data = pd.read_csv('user_data.csv', nrows=MAX_LINES_READ)
@@ -21,7 +22,7 @@ json_data = []
 
 # Iterate over each row in the merged data with limit for number of lines
 for index, row in merged_data.iterrows():
-    if index >= MAX_ITEMS_NESTED:
+    if index >= MAX_USERS:
         break  # Break loop if we've reached the limit of 10 items
     
     user_id = row['user_id']
@@ -45,9 +46,6 @@ for index, row in merged_data.iterrows():
     # Append the JSON object to the list
     json_data.append(user_json)
 
-# Check if the users.json file exists and remove it
-if os.path.exists('users.json'):
-    os.remove('users.json')
 
 # Write the JSON data to the users.json file using the specified format
 with open('users-collection.json', 'w', encoding='utf-8') as json_file:
