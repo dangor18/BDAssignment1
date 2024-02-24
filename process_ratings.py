@@ -1,16 +1,28 @@
 import pandas as pd
+from faker import Faker
+fake = Faker()
 
 # Read the original CSV file
-df = pd.read_csv('data/ratings.csv')
+df = pd.read_csv('data/ratings.csv').head(10000)
 
-# Group by book_id and aggregate ratings for each book
-grouped = df.groupby('book_id').apply(lambda x: x[['user_id', 'rating']].values.tolist())
+
+# Generate a unique name for each user_id
+user_ids = df['user_id'].unique()
+names = {user_id: fake.name() for user_id in user_ids}
+
+# Group by book_id and aggregate ratings for each book with user objects
+grouped = df.groupby('book_id').apply(lambda x: x.apply(lambda row: {
+    "user": {
+        "user_id": row['user_id'],
+        "user_name": names[row['user_id']]
+    },
+    "rating": row['rating']
+}, axis=1).tolist())
 
 # Create a new DataFrame with book_id and ratings
 new_df = pd.DataFrame({'book_id': grouped.index, 'ratings': grouped.values})
 
-# Replace NaN values with an empty list
-new_df['ratings'].fillna(value=pd.Series([[]] * len(new_df)), inplace=True)
-
 # Save the new DataFrame to a CSV file
-new_df.to_csv('grouped_ratings.csv', index=False)
+new_df.to_csv('grouped_ratings_with_user_objects.csv', index=False)
+
+print(new_df)

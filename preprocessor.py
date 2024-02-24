@@ -73,4 +73,4 @@ final_df = pd.merge(books_with_ratings_and_tags_df.drop_duplicates(subset=['book
 # Ensure to drop or select columns as needed to match your final structure, as it seems there might be redundant columns or missing steps in the shared code for the final merge.
 final_df.dropna(subset=['ratings'], inplace=True)
 print(final_df)
-final_df.to_csv("test.csv")
+final_df.to_json('output.json', orient='records', lines=True)
