@@ -21,21 +21,7 @@
         {
             "user": {
                 "user_id": 1,
-                "user_name": "NameNameson",
-                "to_read": [
-                    "4640799",
-                    "3212258"
-                ],
-                "ratings": [
-                    {
-                        "book_id": "2792775",
-                        "rating": 4
-                    },
-                    {
-                        "book_id": "4640799",
-                        "rating": 3
-                    }
-                ]
+                "user_name": "NameNameson" 
             },
             "rating": 4
         }
