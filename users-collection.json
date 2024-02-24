@@ -1,0 +1,472 @@
+[
+    {
+        "user_id": 1,
+        "user_name": "Mary Martinez",
+        "to_read": [],
+        "ratings": [
+            {
+                "book_id": "258",
+                "rating": 5
+            },
+            {
+                "book_id": "268",
+                "rating": 3
+            },
+            {
+                "book_id": "5556",
+                "rating": 3
+            },
+            {
+                "book_id": "3638",
+                "rating": 3
+            },
+            {
+                "book_id": "1796",
+                "rating": 5
+            },
+            {
+                "book_id": "867",
+                "rating": 3
+            },
+            {
+                "book_id": "47",
+                "rating": 3
+            },
+            {
+                "book_id": "2738",
+                "rating": 3
+            },
+            {
+                "book_id": "4691",
+                "rating": 4
+            },
+            {
+                "book_id": "238",
+                "rating": 2
+            }
+        ]
+    },
+    {
+        "user_id": 2,
+        "user_name": "Adam Lewis",
+        "to_read": [],
+        "ratings": [
+            {
+                "book_id": "4081",
+                "rating": 4
+            },
+            {
+                "book_id": "260",
+                "rating": 5
+            },
+            {
+                "book_id": "9296",
+                "rating": 5
+            },
+            {
+                "book_id": "2318",
+                "rating": 3
+            },
+            {
+                "book_id": "26",
+                "rating": 4
+            },
+            {
+                "book_id": "315",
+                "rating": 3
+            },
+            {
+                "book_id": "33",
+                "rating": 4
+            },
+            {
+                "book_id": "301",
+                "rating": 5
+            },
+            {
+                "book_id": "2686",
+                "rating": 5
+            },
+            {
+                "book_id": "3753",
+                "rating": 5
+            }
+        ]
+    },
+    {
+        "user_id": 3,
+        "user_name": "Crystal West",
+        "to_read": [],
+        "ratings": [
+            {
+                "book_id": "8452",
+                "rating": 1
+            },
+            {
+                "book_id": "522",
+                "rating": 1
+            },
+            {
+                "book_id": "4788",
+                "rating": 2
+            },
+            {
+                "book_id": "150",
+                "rating": 2
+            },
+            {
+                "book_id": "9962",
+                "rating": 1
+            },
+            {
+                "book_id": "9790",
+                "rating": 1
+            },
+            {
+                "book_id": "1283",
+                "rating": 1
+            },
+            {
+                "book_id": "9049",
+                "rating": 1
+            },
+            {
+                "book_id": "9215",
+                "rating": 1
+            },
+            {
+                "book_id": "4",
+                "rating": 3
+            }
+        ]
+    },
+    {
+        "user_id": 4,
+        "user_name": "Tracy Howard",
+        "to_read": [],
+        "ratings": [
+            {
+                "book_id": "70",
+                "rating": 4
+            },
+            {
+                "book_id": "264",
+                "rating": 3
+            },
+            {
+                "book_id": "388",
+                "rating": 4
+            },
+            {
+                "book_id": "18",
+                "rating": 5
+            },
+            {
+                "book_id": "27",
+                "rating": 5
+            },
+            {
+                "book_id": "21",
+                "rating": 5
+            },
+            {
+                "book_id": "2",
+                "rating": 5
+            },
+            {
+                "book_id": "23",
+                "rating": 5
+            },
+            {
+                "book_id": "24",
+                "rating": 5
+            },
+            {
+                "book_id": "964",
+                "rating": 4
+            }
+        ]
+    },
+    {
+        "user_id": 5,
+        "user_name": "Keith Perry",
+        "to_read": [],
+        "ratings": [
+            {
+                "book_id": "7601",
+                "rating": 4
+            },
+            {
+                "book_id": "441",
+                "rating": 4
+            },
+            {
+                "book_id": "6344",
+                "rating": 4
+            },
+            {
+                "book_id": "4335",
+                "rating": 4
+            },
+            {
+                "book_id": "1485",
+                "rating": 4
+            },
+            {
+                "book_id": "1145",
+                "rating": 4
+            },
+            {
+                "book_id": "2592",
+                "rating": 4
+            },
+            {
+                "book_id": "431",
+                "rating": 3
+            },
+            {
+                "book_id": "326",
+                "rating": 3
+            },
+            {
+                "book_id": "887",
+                "rating": 3
+            }
+        ]
+    },
+    {
+        "user_id": 6,
+        "user_name": "Daniel Spears",
+        "to_read": [],
+        "ratings": [
+            {
+                "book_id": "6351",
+                "rating": 4
+            },
+            {
+                "book_id": "520",
+                "rating": 4
+            },
+            {
+                "book_id": "3928",
+                "rating": 5
+            },
+            {
+                "book_id": "2661",
+                "rating": 5
+            },
+            {
+                "book_id": "710",
+                "rating": 4
+            },
+            {
+                "book_id": "40",
+                "rating": 5
+            },
+            {
+                "book_id": "604",
+                "rating": 4
+            },
+            {
+                "book_id": "1102",
+                "rating": 4
+            },
+            {
+                "book_id": "895",
+                "rating": 3
+            },
+            {
+                "book_id": "495",
+                "rating": 4
+            }
+        ]
+    },
+    {
+        "user_id": 7,
+        "user_name": "Mario Branch",
+        "to_read": [],
+        "ratings": [
+            {
+                "book_id": "84",
+                "rating": 4
+            },
+            {
+                "book_id": "3797",
+                "rating": 2
+            },
+            {
+                "book_id": "1117",
+                "rating": 3
+            },
+            {
+                "book_id": "116",
+                "rating": 4
+            },
+            {
+                "book_id": "725",
+                "rating": 5
+            },
+            {
+                "book_id": "806",
+                "rating": 3
+            },
+            {
+                "book_id": "1053",
+                "rating": 2
+            },
+            {
+                "book_id": "936",
+                "rating": 3
+            },
+            {
+                "book_id": "953",
+                "rating": 1
+            },
+            {
+                "book_id": "612",
+                "rating": 5
+            }
+        ]
+    },
+    {
+        "user_id": 8,
+        "user_name": "Robert Fitzgerald",
+        "to_read": [],
+        "ratings": [
+            {
+                "book_id": "2732",
+                "rating": 5
+            },
+            {
+                "book_id": "1432",
+                "rating": 3
+            },
+            {
+                "book_id": "479",
+                "rating": 4
+            },
+            {
+                "book_id": "3020",
+                "rating": 5
+            },
+            {
+                "book_id": "6195",
+                "rating": 4
+            },
+            {
+                "book_id": "614",
+                "rating": 4
+            },
+            {
+                "book_id": "4622",
+                "rating": 5
+            },
+            {
+                "book_id": "9114",
+                "rating": 5
+            },
+            {
+                "book_id": "194",
+                "rating": 4
+            },
+            {
+                "book_id": "14",
+                "rating": 5
+            }
+        ]
+    },
+    {
+        "user_id": 9,
+        "user_name": "Lori Aguilar",
+        "to_read": [],
+        "ratings": [
+            {
+                "book_id": "397",
+                "rating": 3
+            },
+            {
+                "book_id": "658",
+                "rating": 4
+            },
+            {
+                "book_id": "101",
+                "rating": 5
+            },
+            {
+                "book_id": "344",
+                "rating": 4
+            },
+            {
+                "book_id": "372",
+                "rating": 4
+            },
+            {
+                "book_id": "943",
+                "rating": 5
+            },
+            {
+                "book_id": "1923",
+                "rating": 4
+            },
+            {
+                "book_id": "122",
+                "rating": 4
+            },
+            {
+                "book_id": "212",
+                "rating": 5
+            },
+            {
+                "book_id": "1642",
+                "rating": 4
+            }
+        ]
+    },
+    {
+        "user_id": 10,
+        "user_name": "Sarah Graham",
+        "to_read": [],
+        "ratings": [
+            {
+                "book_id": "11",
+                "rating": 3
+            },
+            {
+                "book_id": "5084",
+                "rating": 2
+            },
+            {
+                "book_id": "883",
+                "rating": 4
+            },
+            {
+                "book_id": "217",
+                "rating": 4
+            },
+            {
+                "book_id": "103",
+                "rating": 5
+            },
+            {
+                "book_id": "1506",
+                "rating": 4
+            },
+            {
+                "book_id": "5926",
+                "rating": 2
+            },
+            {
+                "book_id": "495",
+                "rating": 3
+            },
+            {
+                "book_id": "5",
+                "rating": 5
+            },
+            {
+                "book_id": "4",
+                "rating": 5
+            }
+        ]
+    }
+]
