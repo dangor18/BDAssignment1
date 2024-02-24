@@ -63,3 +63,5 @@ if __name__ == "__main__":
 
     final_df = pd.merge(book_ratings_df, book_tags_df, on='work_id')
     print(final_df)
+    # write data to a new csv file
+    final_df.to_csv('data/merged.csv', index=False)
