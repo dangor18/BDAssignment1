@@ -1,9 +1,8 @@
 const mongoose = require("mongoose")
-const book = require("./Book")
 
 const ratingCounts = new mongoose.Schema({
   average_rating: Number,
-  ratings_count: Number,
+  ratings_total: Number,
   ratings_1: Number,
   ratings_2: Number,
   ratings_3: Number,
@@ -19,7 +18,7 @@ const bookSchema = new mongoose.Schema({
   title: String,
   language_code: String,
   rating_counts: ratingCounts,
-  "ratings": [
+  ratings: [
     {
       user: mongoose.SchemaTypes.ObjectId,
       rating: Number
@@ -34,4 +33,7 @@ const bookSchema = new mongoose.Schema({
   ]
 })
 
-module.exports = mongoose.model("Book", bookSchema)
+module.exports = {
+  model: mongoose.model("Book", bookSchema),
+  schema: bookSchema
+}
