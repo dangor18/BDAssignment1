@@ -5,7 +5,6 @@ fake = Faker()
 # Read the original CSV file
 df = pd.read_csv('data/ratings.csv').head(10000)
 
-
 # Generate a unique name for each user_id
 user_ids = df['user_id'].unique()
 names = {user_id: fake.name() for user_id in user_ids}
