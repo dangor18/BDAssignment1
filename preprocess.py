@@ -2,7 +2,6 @@ import pandas as pd
 from faker import Faker
 import csv
 
-
 def ratings():
     # Read the original CSV file
     df = (pd.read_csv('data/ratings.csv')).head(100000)
@@ -76,8 +75,6 @@ def transform_csv(input_csv, output_csv):
         writer.writerow(['user_id', 'book_ids'])
         for user_id, book_ids in user_books.items():
             writer.writerow([user_id, ','.join(book_ids)])
-
-
 
 if __name__ == "__main__":
     book_ratings_df = ratings()
