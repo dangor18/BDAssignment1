@@ -5,7 +5,7 @@ import ast
 import itertools
 
 # Limit values
-MAX_LINES_TO_READ = 100000
+MAX_LINES_TO_READ = 10000000
 MAX_RATINGS_PER_BOOK = 10
 MAX_TAGS_PER_BOOK = 5  # Specify the maximum number of tags to list for each book
 
@@ -20,7 +20,8 @@ def parse_rating_counts(rating_counts_string):
 
 def parse_tags(tags_string):
     # Convert the string representation of list into an actual list
-    return ast.literal_eval(tags_string)[:MAX_TAGS_PER_BOOK]  # Limit the number of tags
+    tags = ast.literal_eval(tags_string)[:MAX_TAGS_PER_BOOK]  # Limit the number of tags
+    return tags
 
 def parse_book_ratings(ratings_csv):
     # Read ratings data from grouped_ratings_with_user_objects.csv file
@@ -52,6 +53,7 @@ def parse_user_books(to_read_csv):
 
 def csv_to_json(csv_file, json_file, ratings_csv, to_read_csv):
     print("Starting CSV to JSON conversion...")
+    
     # Parse book ratings from ratings CSV
     book_ratings = parse_book_ratings(ratings_csv)
     
@@ -73,9 +75,9 @@ def csv_to_json(csv_file, json_file, ratings_csv, to_read_csv):
             # Clean and split author names
             authors = clean_author_names(row["authors"])
             # Parse tags
-            tags = parse_tags(row["tag_name"])
+            tags = parse_tags(row["tags"])
             # Get book ratings
-            book_id = row["book_id"]
+            book_id = row["work_id"]
             ratings = book_ratings.get(book_id, [])
             # Create a dictionary for each book
             book_data = {
@@ -106,7 +108,7 @@ def csv_to_json(csv_file, json_file, ratings_csv, to_read_csv):
 # Specify the input CSV files and output JSON file
 csv_file = 'data/merged.csv'
 json_file = 'books.json'
-ratings_csv = 'grouped_ratings_with_user_objects.csv'  # Updated CSV file
+ratings_csv = 'grouped_ratings_with_user_objects.csv'
 to_read_csv = 'to_read_merged.csv'
 
 # Convert CSV to JSON

@@ -20,7 +20,7 @@ merged_data = pd.merge(user_data, ratings_grouped_by_user, on='user_id')
 # Initialize an empty list to store the final JSON objects
 json_data = []
 
-# Iterate over each row in the merged data with limit for number of lines
+## Iterate over each row in the merged data with limit for number of lines
 for index, row in merged_data.iterrows():
     if index >= MAX_USERS:
         break  # Break loop if we've reached the limit of 10 items
@@ -35,17 +35,25 @@ for index, row in merged_data.iterrows():
     # Apply the nested limit to the number of ratings per user
     book_ratings = book_ratings[:MAX_RATINGS_PER_USER]
     
+    # Extract book IDs to be read if available
+    to_read_books_ids = []
+    to_read_row = to_read_merged[to_read_merged['user_id'] == user_id]
+    if not to_read_row.empty:
+        to_read_books_ids = [int(book_id) for book_id in to_read_row['book_ids'].iloc[0].split(',') if book_id]
+    
+    # Create the to_read section in the same format as ratings
+    to_read_books = [{"book_id": str(book_id)} for book_id in to_read_books_ids]
+    
     # Create the JSON object
     user_json = {
         "user_id": user_id,
         "user_name": full_name,
-        "to_read": [],
+        "to_read": to_read_books,
         "ratings": [{"book_id": str(book['book']), "rating": book['rating']} for book in book_ratings]
     }
     
     # Append the JSON object to the list
     json_data.append(user_json)
-
 
 # Write the JSON data to the users.json file using the specified format
 with open('users-collection.json', 'w', encoding='utf-8') as json_file:
