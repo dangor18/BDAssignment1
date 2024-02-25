@@ -3,6 +3,5 @@ venv/
 .env
 .vscode/
 DS_Store
-*.csv
 *.json
 tempCodeRunnerFile.py
