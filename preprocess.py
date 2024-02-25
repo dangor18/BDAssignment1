@@ -126,27 +126,6 @@ def user_to_read():
     #grouped_df.to_csv("test.csv")
     return grouped_df
 
-def transform_csv(input_csv, output_csv):
-    user_books = {}
-
-    # read input CSV and aggregate book IDs for each user
-    with open(input_csv, 'r', newline='') as csvfile:
-        reader = csv.DictReader(csvfile)
-        for row in reader:
-            user_id = row['user_id']
-            book_id = row['book_id']
-            if user_id in user_books:
-                user_books[user_id].append(book_id)
-            else:
-                user_books[user_id] = [book_id]
-
-    # write aggregated data to output CSV
-    with open(output_csv, 'w', newline='') as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerow(['user_id', 'book_ids'])
-        for user_id, book_ids in user_books.items():
-            writer.writerow([user_id, ','.join(book_ids)])
-
 if __name__ == "__main__":
     # book to ratings objects dataframe
     book_ratings_df = book_to_user_ratings()
@@ -158,26 +137,12 @@ if __name__ == "__main__":
     book_final_df = book_tags_df.merge(book_ratings_df, on='book_id')
     print(book_final_df)
     # write data to a new csv file
-    book_final_df.to_csv('data/merged.csv', index=False)
+    book_final_df.to_csv('data/book_final.csv', index=False)
 
     # merge for user data
     user_final_df = user_to_book_ratings().merge(user_to_read(), on='user_id', how='left')
     print(user_final_df)
-    # specify input and output CSV file paths
-    input_csv = 'data/to_read.csv'
-    output_csv = 'to_read_merged.csv'
 
-    # transform CSV
-    transform_csv(input_csv, output_csv)
-    df = pd.read_csv('data/ratings.csv')
-
-    # group by user_id and aggregate book_id and rating as a list of dictionaries
-    grouped = df.groupby('user_id').apply(lambda x: x[['book_id', 'rating']].apply(lambda y: {'book': y['book_id'], 'rating': y['rating']}, axis=1).tolist())
-
-    # create a new DataFrame with user_id and book_ratings
-    new_df = pd.DataFrame({'user_id': grouped.index, 'book_ratings': grouped.values})
-
-    # save the new DataFrame to a CSV file
-    new_df.to_csv('ratings_grouped_by_user.csv', index=False)
+    user_final_df.to_csv('data/user_final.csv', index=False)
     
     print("Preprocessing completed.")
