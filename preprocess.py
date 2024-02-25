@@ -6,6 +6,7 @@ import ast
 # tags per book
 MAX_TAGS = 2
 MAX_TO_READ = 2
+MAX_RATINGS_BOOK = 2
 
 def book_to_user_ratings():
     # read the original CSV file
@@ -111,7 +112,7 @@ def user_to_book_ratings():
             "tags": row["tags"]
         },
         "rating": row['rating']
-    }, axis=1).tolist()).reset_index(name='ratings')
+    }, axis=1).tolist()[:MAX_RATINGS_BOOK]).reset_index(name='ratings')
 
     grouped_df = grouped[['user_id', 'user_name', 'ratings']]
     #print(grouped_df)
