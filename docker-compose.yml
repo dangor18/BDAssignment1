@@ -1,10 +1,24 @@
 services:
+
   mongodb:
     image: mongo:latest
+    container_name: mongodb
     ports:
-      - 27017:27017
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: goodbooks
     volumes:
       - mongodbdata:/data/db
+
+  mongo_seed:
+    image: mongo:latest
+    links:
+      - mongodb
+    volumes:
+      - ./mongo-seed:/mongo-seed
+    command:
+      - /mongo-seed/import.sh
+
 volumes:
   mongodbdata:
     driver: local
