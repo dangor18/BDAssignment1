@@ -1,6 +1,9 @@
 import pandas as pd
 import csv
 
+# tags per book
+MAX_TAGS = 5
+
 def book_to_user_ratings():
     # read the original CSV file
     df = (pd.read_csv('data/ratings.csv')).head(10000)
@@ -47,8 +50,7 @@ def book_to_tags():
     book_tags_merged_df = pd.merge(book_tags_df, tags_df, on='tag_id')
 
     # group tags by book_id and aggregate into a list of dictionaries
-    book_tags_grouped = book_tags_merged_df.groupby('goodreads_book_id').apply(lambda x: x[['tag_id', 'tag_name']].apply(lambda row: {'tag_id': row['tag_id'], 'tag_name': row['tag_name']}, axis=1).tolist()[:5]).reset_index(name='tags')
-    #book_tags_grouped = book_tags_merged_df.groupby('goodreads_book_id').apply(lambda x: x[['tag_id', 'tag_name']].apply(lambda row: {'tag_id': row['tag_id'], 'tag_name': row['tag_name']}, axis=1).tolist()[:5]).reset_index(name='tags')
+    book_tags_grouped = book_tags_merged_df.groupby('goodreads_book_id').apply(lambda x: x[['tag_id', 'tag_name']].apply(lambda row: {'tag_id': row['tag_id'], 'tag_name': row['tag_name']}, axis=1).tolist()[:MAX_TAGS]).reset_index(name='tags')
     
     final_df = pd.merge(books_df, book_tags_grouped, on='goodreads_book_id')
     #print(final_df)
@@ -63,7 +65,7 @@ def user_to_book_ratings():
     books_df = book_to_tags()
     merged_df = ratings_df.merge(books_df, on='book_id')
     
-    grouped = merged_df.groupby('user_id').apply(lambda x: x.apply(lambda row: {
+    grouped = merged_df.groupby(['user_id', 'user_name']).apply(lambda x: x.apply(lambda row: {
         "book": {
             "book_id": row['book_id'],
             "goodreads_book_id": row['goodreads_book_id'],
@@ -79,9 +81,9 @@ def user_to_book_ratings():
             "tags": row["tags"]
         },
         "rating": row['rating']
-    }, axis=1).tolist())
+    }, axis=1).tolist()).reset_index(name='ratings')
 
-    grouped_df = pd.DataFrame({'user_id': grouped.index, 'ratings': grouped.values})
+    grouped_df = grouped[['user_id', 'user_name', 'ratings']]
     #print(grouped_df)
     #grouped_df.to_csv("test.csv")
     return grouped_df
