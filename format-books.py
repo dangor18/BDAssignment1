@@ -28,7 +28,7 @@ def parse_ratings(ratings_string):
     ratings = ast.literal_eval(ratings_string)[:MAX_RATINGS_PER_BOOK]  # Limit the number of ratings
     return ratings
 
-def csv_to_json(csv_file, json_file, to_read_csv):
+def csv_to_json(csv_file, json_file):
     print("Starting CSV to JSON conversion...")
     
     # Open the CSV file
@@ -76,9 +76,8 @@ def csv_to_json(csv_file, json_file, to_read_csv):
     print(f"JSON file '{json_file}' written successfully.")
 
 # Specify the input CSV files and output JSON file
-csv_file = 'data/merged.csv'
+csv_file = 'data/book_final.csv'
 json_file = 'books.json'
-to_read_csv = 'to_read_merged.csv'
 
 # Convert CSV to JSON
-csv_to_json(csv_file, json_file, to_read_csv)
+csv_to_json(csv_file, json_file)

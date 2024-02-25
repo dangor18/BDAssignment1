@@ -1,9 +1,11 @@
 import pandas as pd
 import csv
+import json
+import ast
 
 # tags per book
-MAX_TAGS = 5
-MAX_TO_READ = 5
+MAX_TAGS = 2
+MAX_TO_READ = 2
 
 def book_to_user_ratings():
     # read the original CSV file
@@ -154,23 +156,69 @@ def user_to_read():
     #grouped_df.to_csv("test.csv")
     return grouped_df
 
+def convert_dataframe_to_json(dataframe):
+    # Initialize an empty list to store the final JSON objects
+    json_data = []
+
+    # Iterate over each row in the DataFrame
+    for index, row in dataframe.iterrows():
+        user_id = row['user_id']
+        user_name = row['user_name']
+
+        # Replace NaN values with "nan"
+        ratings_str = str(row['ratings']).replace("nan", '"nan"')
+        to_read_str = str(row['to_read']).replace("nan", '"nan"')
+
+        # Initialize ratings and to_read as empty lists
+        ratings = []
+        to_read = []
+
+        # Parse the ratings column
+        if ratings_str != "":
+           try:
+               ratings = ast.literal_eval(ratings_str)
+           except ValueError as e:
+               print(f"Error parsing ratings JSON for user {user_id}: {e}")
+
+           # Parse the to_read column
+           if to_read_str != "":
+               try:
+                   to_read = ast.literal_eval(to_read_str)
+               except ValueError as e:
+                   print(f"Error parsing to_read JSON for user {user_id}: {e}")
+
+        # Create the JSON object for the user
+        user_json = {
+            "user_id": user_id,
+            "user_name": user_name,
+            "ratings": ratings,
+            "to_read": to_read
+        }
+
+        json_data.append(user_json)
+    return json_data
+
 if __name__ == "__main__":
     # book to ratings objects dataframe
-    book_ratings_df = book_to_user_ratings()
+    #book_ratings_df = book_to_user_ratings()
     
     # books to tags object dataframe
-    book_tags_df = book_to_tags()
+    #book_tags_df = book_to_tags()
 
     # merge the two
-    book_final_df = book_tags_df.merge(book_ratings_df, on='book_id')
+    #book_final_df = book_tags_df.merge(book_ratings_df, on='book_id')
     #print(book_final_df)
     # write data to a new csv file
-    book_final_df.to_csv('data/book_final.csv', index=False)
+    #book_final_df.to_csv('data/book_final.csv', index=False)
 
     # merge for user data
     user_final_df = user_to_book_ratings().merge(user_to_read(), on='user_id', how='left')
     #print(user_final_df)
 
-    user_final_df.to_csv('data/user_final.csv', index=False)
+    #user_final_df.to_csv('data/user_final.csv', index=False)
     
     print("Preprocessing completed.")
+    with open('users.json', 'w', encoding='utf-8') as json_file:
+        json.dump(convert_dataframe_to_json(user_final_df), json_file, indent=4)
+
+    

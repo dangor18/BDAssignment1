@@ -1,60 +1,53 @@
 import pandas as pd
 import json
-import ast
+import ast  # Import ast module to safely evaluate literal strings
 import os
 
-# Define the limit values
-MAX_LINES_READ = 100000
-MAX_ITEMS_NESTED = 2
-MAX_RATINGS_PER_USER = 2  # Limit the number of ratings per user
-MAX_USERS = 10000
-
-# Read the CSV files with limits
-user_data = pd.read_csv('user_data.csv', nrows=MAX_LINES_READ)
-ratings_grouped_by_user = pd.read_csv('ratings_grouped_by_user.csv', nrows=MAX_LINES_READ)
-to_read_merged = pd.read_csv('to_read_merged.csv', nrows=MAX_LINES_READ)
-
-# Merge user_data and ratings_grouped_by_user on user_id
-merged_data = pd.merge(user_data, ratings_grouped_by_user, on='user_id')
+# Read the CSV file from the data folder
+user_final = pd.read_csv(os.path.join('data', 'user_final.csv'))
 
 # Initialize an empty list to store the final JSON objects
 json_data = []
 
-## Iterate over each row in the merged data with limit for number of lines
-for index, row in merged_data.iterrows():
-    if index >= MAX_USERS:
-        break  # Break loop if we've reached the limit of 10 items
-    
+# Iterate over each row in the user_final data
+for index, row in user_final.iterrows():
     user_id = row['user_id']
     user_name = row['user_name']
-    book_ratings_str = row['book_ratings']
     
-    # Convert string representation of list of dictionaries to actual list of dictionaries
-    book_ratings = ast.literal_eval(book_ratings_str)
+    # Replace NaN values with "nan"
+    ratings_str = str(row['ratings']).replace("nan", '"nan"')
+    to_read_str = str(row['to_read']).replace("nan", '"nan"')
     
-    # Apply the nested limit to the number of ratings per user
-    book_ratings = book_ratings[:MAX_RATINGS_PER_USER]
+    print(user_id, "bruhhuhhuhuhhhhhhhhhhhhhhh")
+    # Parse the ratings column
+    print(ratings_str, "ratings_str")
+    if ratings_str != "":
+        try:
+            ratings = ast.literal_eval(ratings_str)
+        except ValueError as e:
+            #print(f"Error parsing ratings JSON for user {user_id}: {e}")
+            ratings = []
     
-    # Extract book IDs to be read if available
-    to_read_books_ids = []
-    to_read_row = to_read_merged[to_read_merged['user_id'] == user_id]
-    if not to_read_row.empty:
-        to_read_books_ids = [int(book_id) for book_id in to_read_row['book_ids'].iloc[0].split(',') if book_id]
+    if to_read_str != "":
+        # Parse the to_read column
+        try:
+            print(to_read_str, "to_read_str")
+            to_read = ast.literal_eval(to_read_str)
+        except ValueError as e:
+            #print(f"Error parsing to_read JSON for user {user_id}: {e}")
+            to_read = []
     
-    # Create the to_read section in the same format as ratings
-    to_read_books = [{"book_id": str(book_id)} for book_id in to_read_books_ids]
-    
-    # Create the JSON object
+    # Create the JSON object for the user
     user_json = {
         "user_id": user_id,
         "user_name": user_name,
-        "to_read": to_read_books[:MAX_ITEMS_NESTED],
-        "ratings": [{"book_id": str(book['book']), "rating": book['rating']} for book in book_ratings]
+        "ratings": ratings,
+        "to_read": to_read
     }
     
-    # Append the JSON object to the list
+    # Append the user JSON object to the list
     json_data.append(user_json)
 
 # Write the JSON data to the users.json file using the specified format
-with open('users-collection.json', 'w', encoding='utf-8') as json_file:
+with open('users.json', 'w', encoding='utf-8') as json_file:
     json.dump(json_data, json_file, indent=4)
