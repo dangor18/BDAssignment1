@@ -3,6 +3,7 @@ import csv
 
 # tags per book
 MAX_TAGS = 5
+MAX_TO_READ = 5
 
 def book_to_user_ratings():
     # read the original CSV file
@@ -146,7 +147,7 @@ def user_to_read():
             "image_url": row['image_url'],
             "tags": row["tags"]
         }
-    }, axis=1).tolist())
+    }, axis=1).tolist()[:MAX_TO_READ])
 
     grouped_df = pd.DataFrame({'user_id': grouped.index, 'to_read': grouped.values})
     #print(grouped_df)
