@@ -6,7 +6,7 @@ import random
 fake = Faker()
 
 # Generate data and write to CSV
-with open('user_data.csv', 'w', newline='') as csvfile:
+with open('data/user_data.csv', 'w', newline='') as csvfile:
     fieldnames = ['user_id', 'full_name']
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 

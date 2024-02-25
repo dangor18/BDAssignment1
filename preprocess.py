@@ -13,7 +13,7 @@ MAX_RATINGS_BOOK = 2
 def book_to_user_ratings():
     # read the original CSV file
     df = (pd.read_csv('data/ratings.csv')).head(10000)
-    user_names_df = pd.read_csv('user_data.csv')
+    user_names_df = pd.read_csv('data/user_data.csv')
     df = pd.merge(df, user_names_df, on='user_id')
     #df.rename(columns={'book_id': 'work_id'}, inplace=True)
     # group by book_id and aggregate ratings for each book with user objects
@@ -91,7 +91,7 @@ def book_to_tags():
 def user_to_book_ratings():
     # read files
     ratings_df = pd.read_csv('data/ratings.csv').head(10000)
-    user_names_df = pd.read_csv('user_data.csv')
+    user_names_df = pd.read_csv('data/user_data.csv')
     ratings_df = pd.merge(ratings_df, user_names_df, on='user_id')
     
     books_df = book_to_tags()
@@ -131,7 +131,7 @@ def user_to_read():
     read_df = pd.merge(ratings_df, read_df, on='user_id')
     
     # add user names
-    user_names_df = pd.read_csv('user_data.csv')
+    user_names_df = pd.read_csv('data/user_data.csv')
     read_df = pd.merge(read_df, user_names_df, on='user_id')
     
     books_df = book_to_tags()
