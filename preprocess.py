@@ -4,11 +4,20 @@ import json
 import ast
 import itertools
 import re
+import warnings
 
-# tags per book
-MAX_TAGS = 2
-MAX_TO_READ = 2
-MAX_RATINGS_BOOK = 2
+# Limit values
+# Books Collection
+MAX_LINES_TO_READ = 10000000
+MAX_RATINGS_PER_BOOK = 50
+MAX_TAGS_PER_BOOK = 50
+
+# Users collections
+MAX_TAGS = 5
+MAX_TO_READ = 10
+MAX_RATINGS_BOOK = 100
+
+warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 def book_to_user_ratings():
     # read the original CSV file
@@ -29,31 +38,6 @@ def book_to_user_ratings():
     new_df = pd.DataFrame({'book_id': grouped.index, 'ratings': grouped.values})
     #print(new_df)
     return new_df
-
-""""
-def book_to_read():
-    # read files
-    read_df = pd.read_csv('data/to_read.csv')
-    ratings_df = pd.read_csv('data/ratings.csv').head(10000)
-    
-    # only get users to_read data who you're taking from ratings for consistency
-    ratings_df = ratings_df.drop(['book_id', 'rating'], axis=1)
-    read_df = pd.merge(ratings_df, read_df, on='user_id')
-    
-    # group by book_id and aggregate ratings for each book with user objects
-    grouped = read_df.groupby('book_id').apply(lambda x: x.apply(lambda row: {
-        "user": {
-            "user_id": row['user_id'],
-            "user_name": row['user_name']
-        },
-        "rating": row['rating']
-    }, axis=1).tolist())
-
-    # create a new DataFrame with book_id and ratings
-    new_df = pd.DataFrame({'book_id': grouped.index, 'ratings': grouped.values})
-    #print(new_df)
-    return new_df
-"""
 
 def book_to_tags():
     books_df = pd.read_csv('data/books.csv')
@@ -205,10 +189,6 @@ def user_dataframe_to_json(dataframe):
     return json_data
 
 # Book data parsing -----------------------------------------------------------
-# Limit values
-MAX_LINES_TO_READ = 10000000
-MAX_RATINGS_PER_BOOK = 10
-MAX_TAGS_PER_BOOK = 5 
 
 def clean_author_names(author_names):
     # Split author names by comma and space, then remove any non-alphabetic characters
