@@ -167,8 +167,8 @@ def convert_dataframe_to_json(dataframe):
         user_name = row['user_name']
 
         # Replace NaN values with "nan"
-        ratings_str = str(row['ratings']).replace("nan", '"nan"')
-        to_read_str = str(row['to_read']).replace("nan", '"nan"')
+        ratings_str = str(row['ratings'])
+        to_read_str = str(row['to_read'])
 
         # Initialize ratings and to_read as empty lists
         ratings = []
