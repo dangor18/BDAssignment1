@@ -85,8 +85,6 @@ def user_to_book_ratings():
     grouped = merged_df.groupby(['user_id', 'user_name']).apply(lambda x: x.apply(lambda row: {
         "book": {
             "book_id": row['book_id'],
-            "goodreads_book_id": row['goodreads_book_id'],
-            "work_id": row['work_id'],
             "authors": row['authors'],
             "title": row['title'],
             "isbn": row['isbn'],
@@ -124,8 +122,6 @@ def user_to_read():
     grouped = merged_df.groupby('user_id').apply(lambda x: x.apply(lambda row: {
         "book": {
             "book_id": row['book_id'],
-            "goodreads_book_id": row['goodreads_book_id'],
-            "work_id": row['work_id'],
             "authors": row['authors'],
             "title": row['title'],
             "isbn": row['isbn'],
