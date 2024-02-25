@@ -47,7 +47,8 @@ def book_to_tags():
     book_tags_merged_df = pd.merge(book_tags_df, tags_df, on='tag_id')
 
     # group tags by book_id and aggregate into a list of dictionaries
-    book_tags_grouped = book_tags_merged_df.groupby('goodreads_book_id').apply(lambda x: x[['tag_id', 'tag_name']].apply(lambda row: {'tag_id': row['tag_id'], 'tag_name': row['tag_name']}, axis=1).tolist()).reset_index(name='tags')
+    book_tags_grouped = book_tags_merged_df.groupby('goodreads_book_id').apply(lambda x: x[['tag_id', 'tag_name']].apply(lambda row: {'tag_id': row['tag_id'], 'tag_name': row['tag_name']}, axis=1).tolist()[:5]).reset_index(name='tags')
+    #book_tags_grouped = book_tags_merged_df.groupby('goodreads_book_id').apply(lambda x: x[['tag_id', 'tag_name']].apply(lambda row: {'tag_id': row['tag_id'], 'tag_name': row['tag_name']}, axis=1).tolist()[:5]).reset_index(name='tags')
     
     final_df = pd.merge(books_df, book_tags_grouped, on='goodreads_book_id')
     #print(final_df)
@@ -59,40 +60,34 @@ def user_to_book_ratings():
     user_names_df = pd.read_csv('user_data.csv')
     ratings_df = pd.merge(ratings_df, user_names_df, on='user_id')
     
-    books_df = pd.read_csv('data/books.csv')
-    books_df = books_df.drop(['ratings_1', 'ratings_2', 'ratings_3', 'ratings_4', 'ratings_5', 'best_book_id', 'title', 'work_ratings_count', 'work_text_reviews_count', 'small_image_url'], axis=1)
-    books_df.rename(columns={'original_title': 'title'}, inplace=True)
-    
-    # Merge ratings_df with books_df on 'book_id'
+    books_df = book_to_tags()
     merged_df = ratings_df.merge(books_df, on='book_id')
     
-    # Define a function to structure each book's data as a dictionary
-    def book_data(row):
-        return {
-            'book_id': row['book_id'],
-            'rating': row['rating'],
-            'goodreads_book_id': row['goodreads_book_id'],
-            'title': row['title'],
-            'language_code': row['language_code'],
-            'average_rating': row['average_rating'],
-            'ratings_count': row['ratings_count'],
-            'image_url': row['image_url']
-        }
-    
-    # Group by user_id and user_name, then apply the function to each book in the group
-    grouped = merged_df.groupby(['user_id', 'user_name']).apply(lambda x: x.apply(book_data, axis=1).tolist()).reset_index(name='books')
-    
-    # Convert the grouped object into a more friendly format, such as a list of dictionaries
-    result = [{
-        'user_id': row['user_id'],
-        'user_name': row['user_name'],
-        'books': row['books']
-    } for index, row in grouped.iterrows()]
-    result_df = pd.DataFrame(result)
-    #print(result_df)
+    grouped = merged_df.groupby('user_id').apply(lambda x: x.apply(lambda row: {
+        "book": {
+            "book_id": row['book_id'],
+            "goodreads_book_id": row['goodreads_book_id'],
+            "work_id": row['work_id'],
+            "authors": row['authors'],
+            "title": row['title'],
+            "isbn": row['isbn'],
+            "isbn13": row['isbn13'],
+            "language_code": row['language_code'],
+            "average_rating": row['average_rating'],
+            "ratings_count": row['ratings_count'],
+            "image_url": row['image_url'],
+            "tags": row["tags"]
+        },
+        "rating": row['rating']
+    }, axis=1).tolist())
+
+    # create a new DataFrame with book_id and ratings
+    new_df = pd.DataFrame({'user_id': grouped.index, 'ratings': grouped.values})
+    #print(new_df)
+    new_df.to_csv("test.csv")
     #return result
 
-def user_to_book_to_read():
+def user_to_read():
     return
 
 def transform_csv(input_csv, output_csv):
