@@ -2,6 +2,8 @@ import pandas as pd
 import csv
 import json
 import ast
+import itertools
+import re
 
 # tags per book
 MAX_TAGS = 2
@@ -157,7 +159,8 @@ def user_to_read():
     #grouped_df.to_csv("test.csv")
     return grouped_df
 
-def convert_dataframe_to_json(dataframe):
+# User data parsing -----------------------------------------------------------
+def user_dataframe_to_json(dataframe):
     # Initialize an empty list to store the final JSON objects
     json_data = []
 
@@ -179,14 +182,16 @@ def convert_dataframe_to_json(dataframe):
            try:
                ratings = ast.literal_eval(ratings_str)
            except ValueError as e:
-               print(f"Error parsing ratings JSON for user {user_id}: {e}")
+               pass
+               #print(f"Error parsing ratings JSON for user {user_id}: {e}")
 
            # Parse the to_read column
            if to_read_str != "":
                try:
                    to_read = ast.literal_eval(to_read_str)
                except ValueError as e:
-                   print(f"Error parsing to_read JSON for user {user_id}: {e}")
+                   pass
+                   #print(f"Error parsing to_read JSON for user {user_id}: {e}")
 
         # Create the JSON object for the user
         user_json = {
@@ -199,18 +204,91 @@ def convert_dataframe_to_json(dataframe):
         json_data.append(user_json)
     return json_data
 
+# Book data parsing -----------------------------------------------------------
+# Limit values
+MAX_LINES_TO_READ = 10000000
+MAX_RATINGS_PER_BOOK = 10
+MAX_TAGS_PER_BOOK = 5 
+
+def clean_author_names(author_names):
+    # Split author names by comma and space, then remove any non-alphabetic characters
+    cleaned_authors = [re.sub(r'[^a-zA-Z\s]', '', author).strip() for author in author_names.split(',')]
+    return [author for author in cleaned_authors if author]  # Remove empty strings
+
+def parse_rating_counts(rating_counts_string):
+    # Convert the string representation of dictionary into an actual dictionary
+    return ast.literal_eval(rating_counts_string)
+
+def parse_tags(tags_string):
+    # Convert the string representation of list into an actual list
+    tags = ast.literal_eval(tags_string)[:MAX_TAGS_PER_BOOK]  # Limit the number of tags
+    return tags
+
+def parse_ratings(ratings_string):
+    # Convert the string representation of list into an actual list
+    ratings = ast.literal_eval(ratings_string)[:MAX_RATINGS_PER_BOOK]  # Limit the number of ratings
+    return ratings
+
+def csv_to_json(csv_file, json_file):
+    #print("Starting CSV to JSON conversion...")
+    
+    # Open the CSV file
+    with open(csv_file, 'r', newline='', encoding='utf-8') as csvfile:
+        # Read the CSV file as a dictionary
+        reader = csv.DictReader(itertools.islice(csvfile, MAX_LINES_TO_READ))
+        # Initialize an empty list to store the data
+        data = []
+        # Iterate over each row in the CSV file
+        for row in reader:
+            # Parse rating counts
+            rating_counts = parse_rating_counts(row["rating_counts"])
+            # Handle case where original publication year is represented as float
+            original_publication_year = int(float(row["original_publication_year"])) if row["original_publication_year"] else None
+            # Clean and split author names
+            authors = clean_author_names(row["authors"])
+            # Parse tags
+            tags = parse_tags(row["tags"])
+            # Get book ratings
+            ratings = parse_ratings(row["ratings"])
+            # Create a dictionary for each book
+            book_data = {
+                "book_id": row["work_id"],
+                "isbn": row["isbn"],
+                "isbn13": row["isbn13"],
+                "authors": authors,
+                "original_publication_year": original_publication_year,
+                "title": row["title"],
+                "language_code": row["language_code"],
+                "average_rating": float(row["average_rating"]) if row["average_rating"] else None,
+                "ratings_count": int(row["ratings_count"]) if row["ratings_count"] else None,
+                "rating_counts": rating_counts,
+                "image_url": row["image_url"],
+                "tags": tags,
+                "ratings": ratings
+            }
+            # Append the book data to the list
+            data.append(book_data)
+    #print("CSV to JSON conversion completed.")
+    
+    # Write the data to a JSON file
+    #print("Writing JSON file...")
+    with open(json_file, 'w', encoding='utf-8') as jsonfile:
+        json.dump(data, jsonfile, indent=4)
+    #print(f"JSON file '{json_file}' written successfully.")
+
 if __name__ == "__main__":
     # book to ratings objects dataframe
-    #book_ratings_df = book_to_user_ratings()
+    book_ratings_df = book_to_user_ratings()
     
     # books to tags object dataframe
-    #book_tags_df = book_to_tags()
+    book_tags_df = book_to_tags()
 
     # merge the two
-    #book_final_df = book_tags_df.merge(book_ratings_df, on='book_id')
+    book_final_df = book_tags_df.merge(book_ratings_df, on='book_id')
     #print(book_final_df)
     # write data to a new csv file
-    #book_final_df.to_csv('data/book_final.csv', index=False)
+    book_final_df.to_csv('data/book_final.csv', index=False)
+    
 
     # merge for user data
     user_final_df = user_to_book_ratings().merge(user_to_read(), on='user_id', how='left')
@@ -218,8 +296,14 @@ if __name__ == "__main__":
 
     #user_final_df.to_csv('data/user_final.csv', index=False)
     
-    print("Preprocessing completed.")
+    # Specify the input CSV files and output JSON file
+    csv_file = 'data/book_final.csv'
+    json_file = 'books.json'
+
+    # Convert CSV to JSON
+    csv_to_json(csv_file, json_file)
+    
     with open('users.json', 'w', encoding='utf-8') as json_file:
-        json.dump(convert_dataframe_to_json(user_final_df), json_file, indent=4)
+        json.dump(user_dataframe_to_json(user_final_df), json_file, indent=4)
 
     
