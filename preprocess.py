@@ -78,6 +78,7 @@ def book_to_tags():
     book_tags_grouped = book_tags_merged_df.groupby('goodreads_book_id').apply(lambda x: x[['tag_id', 'tag_name']].apply(lambda row: {'tag_id': row['tag_id'], 'tag_name': row['tag_name']}, axis=1).tolist()[:MAX_TAGS]).reset_index(name='tags')
     
     final_df = pd.merge(books_df, book_tags_grouped, on='goodreads_book_id')
+    final_df = final_df.dropna()
     #print(final_df)
     return final_df
 
@@ -88,7 +89,8 @@ def user_to_book_ratings():
     ratings_df = pd.merge(ratings_df, user_names_df, on='user_id')
     
     books_df = book_to_tags()
-    merged_df = ratings_df.merge(books_df, on='book_id')
+    merged_df = books_df.merge(ratings_df, on='book_id')
+    #merged_df.to_csv("test.csv")
     
     grouped = merged_df.groupby(['user_id', 'user_name']).apply(lambda x: x.apply(lambda row: {
         "book": {
@@ -127,7 +129,7 @@ def user_to_read():
     read_df = pd.merge(read_df, user_names_df, on='user_id')
     
     books_df = book_to_tags()
-    merged_df = read_df.merge(books_df, on='book_id')
+    merged_df = books_df.merge(read_df, on='book_id')
     
     grouped = merged_df.groupby('user_id').apply(lambda x: x.apply(lambda row: {
         "book": {
@@ -160,13 +162,13 @@ if __name__ == "__main__":
 
     # merge the two
     book_final_df = book_tags_df.merge(book_ratings_df, on='book_id')
-    print(book_final_df)
+    #print(book_final_df)
     # write data to a new csv file
     book_final_df.to_csv('data/book_final.csv', index=False)
 
     # merge for user data
     user_final_df = user_to_book_ratings().merge(user_to_read(), on='user_id', how='left')
-    print(user_final_df)
+    #print(user_final_df)
 
     user_final_df.to_csv('data/user_final.csv', index=False)
     
