@@ -44,7 +44,7 @@ def book_to_tags():
     # split authors
     books_df['authors'] = books_df['authors'].str.split(', ')
     # iterate over each row and create a dictionary over ratings_x col's
-    books_df['rating_counts'] = books_df.apply(lambda row: {
+    books_df['total_ratings'] = books_df.apply(lambda row: {
         'ratings_1': row['ratings_1'],
         'ratings_2': row['ratings_2'],
         'ratings_3': row['ratings_3'],
@@ -217,7 +217,7 @@ def csv_to_json(csv_file, json_file):
         # Iterate over each row in the CSV file
         for row in reader:
             # Parse rating counts
-            rating_counts = parse_rating_counts(row["rating_counts"])
+            rating_counts = parse_rating_counts(row["total_ratings"])
             # Handle case where original publication year is represented as float
             original_publication_year = int(float(row["original_publication_year"])) if row["original_publication_year"] else None
             # Clean and split author names
@@ -237,7 +237,7 @@ def csv_to_json(csv_file, json_file):
                 "language_code": row["language_code"],
                 "average_rating": float(row["average_rating"]) if row["average_rating"] else None,
                 "ratings_count": int(row["ratings_count"]) if row["ratings_count"] else None,
-                "rating_counts": rating_counts,
+                "total_ratings": rating_counts,
                 "image_url": row["image_url"],
                 "tags": tags,
                 "ratings": ratings
