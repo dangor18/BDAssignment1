@@ -18,8 +18,8 @@ def main():
     db = client['bookstore']
     
     # Read data from JSON files
-    users_data = read_json('users.json')
-    books_data = read_json('books.json')
+    users_data = read_json('mongo-seed/users.json')
+    books_data = read_json('mongo-seed/books.json')
     
     # Get collections
     users_collection = db['users']
