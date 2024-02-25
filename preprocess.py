@@ -146,22 +146,21 @@ def transform_csv(input_csv, output_csv):
             writer.writerow([user_id, ','.join(book_ids)])
 
 if __name__ == "__main__":
-    user_final_df = user_to_book_ratings().merge(user_to_read(), on='user_id', how='left')
-    print(user_final_df)
     # book to ratings objects dataframe
     book_ratings_df = book_to_user_ratings()
-    #print(book_ratings_df)
+    
     # books to tags object dataframe
     book_tags_df = book_to_tags()
-    #print(book_tags_df)
 
     # merge the two
     book_final_df = book_tags_df.merge(book_ratings_df, on='book_id')
-    #print(final_df)
+    print(book_final_df)
     # write data to a new csv file
     book_final_df.to_csv('data/merged.csv', index=False)
 
+    # merge for user data
     user_final_df = user_to_book_ratings().merge(user_to_read(), on='user_id', how='left')
+    print(user_final_df)
     # specify input and output CSV file paths
     input_csv = 'data/to_read.csv'
     output_csv = 'to_read_merged.csv'
