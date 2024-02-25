@@ -1,7 +1,7 @@
 import pandas as pd
 import csv
 
-def ratings():
+def book_to_user_ratings():
     # read the original CSV file
     df = (pd.read_csv('data/ratings.csv')).head(10000)
     user_names_df = pd.read_csv('user_data.csv')
@@ -21,7 +21,7 @@ def ratings():
     #print(new_df)
     return new_df
 
-def tags():
+def book_to_tags():
     books_df = pd.read_csv('data/books.csv')
     # split authors
     books_df['authors'] = books_df['authors'].str.split(', ')
@@ -53,6 +53,48 @@ def tags():
     #print(final_df)
     return final_df
 
+def user_to_book_ratings():
+    # Assuming the necessary CSV files are located in the 'data' directory and named accordingly.
+    ratings_df = pd.read_csv('data/ratings.csv').head(10000)
+    user_names_df = pd.read_csv('user_data.csv')
+    ratings_df = pd.merge(ratings_df, user_names_df, on='user_id')
+    
+    books_df = pd.read_csv('data/books.csv')
+    books_df = books_df.drop(['ratings_1', 'ratings_2', 'ratings_3', 'ratings_4', 'ratings_5', 'best_book_id', 'title', 'work_ratings_count', 'work_text_reviews_count', 'small_image_url'], axis=1)
+    books_df.rename(columns={'original_title': 'title'}, inplace=True)
+    
+    # Merge ratings_df with books_df on 'book_id'
+    merged_df = ratings_df.merge(books_df, on='book_id')
+    
+    # Define a function to structure each book's data as a dictionary
+    def book_data(row):
+        return {
+            'book_id': row['book_id'],
+            'rating': row['rating'],
+            'goodreads_book_id': row['goodreads_book_id'],
+            'title': row['title'],
+            'language_code': row['language_code'],
+            'average_rating': row['average_rating'],
+            'ratings_count': row['ratings_count'],
+            'image_url': row['image_url']
+        }
+    
+    # Group by user_id and user_name, then apply the function to each book in the group
+    grouped = merged_df.groupby(['user_id', 'user_name']).apply(lambda x: x.apply(book_data, axis=1).tolist()).reset_index(name='books')
+    
+    # Convert the grouped object into a more friendly format, such as a list of dictionaries
+    result = [{
+        'user_id': row['user_id'],
+        'user_name': row['user_name'],
+        'books': row['books']
+    } for index, row in grouped.iterrows()]
+    result_df = pd.DataFrame(result)
+    #print(result_df)
+    #return result
+
+def user_to_book_to_read():
+    return
+
 def transform_csv(input_csv, output_csv):
     user_books = {}
 
@@ -75,17 +117,17 @@ def transform_csv(input_csv, output_csv):
             writer.writerow([user_id, ','.join(book_ids)])
 
 if __name__ == "__main__":
+    user_to_book_ratings()
     # book to ratings objects dataframe
-    book_ratings_df = ratings()
-    print(book_ratings_df)
+    book_ratings_df = book_to_user_ratings()
+    #print(book_ratings_df)
     # books to tags object dataframe
-    book_tags_df = tags()
-    print(book_tags_df)
+    book_tags_df = book_to_tags()
+    #print(book_tags_df)
 
     # merge the two
     final_df = book_tags_df.merge(book_ratings_df, on='book_id')
-    print(final_df)
-    
+    #print(final_df)
     
     # write data to a new csv file
     final_df.to_csv('data/merged.csv', index=False)
