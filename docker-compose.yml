@@ -1,14 +1,24 @@
 services:
+
   mongodb:
     image: mongo:latest
-    env_file: ./.env
+    container_name: mongodb
     ports:
-      - $MONGODB_LOCAL_PORT:$MONGODB_CONTAINER_PORT
+      - "27017:27017"
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=$MONGODB_USER 
-      - MONGO_INITDB_ROOT_PASSWORD=$MONGODB_PASSWORD
+      MONGO_INITDB_DATABASE: goodbooks
     volumes:
       - mongodbdata:/data/db
+
+  mongo_seed:
+    image: mongo:latest
+    links:
+      - mongodb
+    volumes:
+      - ./mongo-seed:/mongo-seed
+    command:
+      - /mongo-seed/import.sh
+
 volumes:
   mongodbdata:
     driver: local

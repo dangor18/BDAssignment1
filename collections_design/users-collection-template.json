@@ -1,0 +1,83 @@
+{
+    "user_id": 1,
+    "user_name": "Mary Martinez",
+    "ratings": [
+        {
+            "book": {
+                "book_id": 47,
+                "authors": [
+                    "Markus Zusak"
+                ],
+                "title": "The Book Thief",
+                "isbn": "375831002",
+                "isbn13": 9780375831000.0,
+                "language_code": "eng",
+                "average_rating": 4.36,
+                "ratings_count": 1159741,
+                "image_url": "https://images.gr-assets.com/books/1390053681m/19063.jpg",
+                "tags": [
+                    {
+                        "tag_id": 11557,
+                        "tag_name": "favorites"
+                    },
+                    {
+                        "tag_id": 30574,
+                        "tag_name": "to-read"
+                    },
+                    {
+                        "tag_id": 14487,
+                        "tag_name": "historical-fiction"
+                    },
+                    {
+                        "tag_id": 11743,
+                        "tag_name": "fiction"
+                    },
+                    {
+                        "tag_id": 33114,
+                        "tag_name": "young-adult"
+                    }
+                ]
+            },
+            "rating": 3
+        }
+    ],
+    "to_read": [
+        {
+            "book": {
+                "book_id": 112,
+                "authors": [
+                    "Jojo Moyes"
+                ],
+                "title": "Me Before You",
+                "isbn": "670026603",
+                "isbn13": 9780670026610.0,
+                "language_code": "eng",
+                "average_rating": 4.27,
+                "ratings_count": 587647,
+                "image_url": "https://images.gr-assets.com/books/1357108762m/15507958.jpg",
+                "tags": [
+                    {
+                        "tag_id": 30574,
+                        "tag_name": "to-read"
+                    },
+                    {
+                        "tag_id": 11557,
+                        "tag_name": "favorites"
+                    },
+                    {
+                        "tag_id": 17213,
+                        "tag_name": "kindle"
+                    },
+                    {
+                        "tag_id": 26138,
+                        "tag_name": "romance"
+                    },
+                    {
+                        "tag_id": 3389,
+                        "tag_name": "audiobook"
+                    }
+                ]
+            }
+        }
+    ]
+}
