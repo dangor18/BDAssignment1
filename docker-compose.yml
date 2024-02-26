@@ -19,6 +19,13 @@ services:
     command:
       - /mongo-seed/import.sh
 
+  frontend:
+    build: ./app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongodb
+
 volumes:
   mongodbdata:
     driver: local
