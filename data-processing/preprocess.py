@@ -18,6 +18,7 @@ MAX_RATINGS_BOOK = 100
 
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 
+# returns a dataframe with book_id to list of user ratings
 def book_to_user_ratings():
     df = (pd.read_csv('data_processing/data/ratings.csv')).head(10000)
     user_names_df = pd.read_csv('data_processing/data/user_data.csv')
@@ -32,6 +33,7 @@ def book_to_user_ratings():
     new_df = pd.DataFrame({'book_id': grouped.index, 'ratings': grouped.values})
     return new_df
 
+# returns a dataframe with book_id to list of tags
 def book_to_tags():
     books_df = pd.read_csv('data_processing/data/books.csv')
     books_df['authors'] = books_df['authors'].str.split(', ')    
@@ -42,6 +44,7 @@ def book_to_tags():
         'ratings_4': row['ratings_4'],
         'ratings_5': row['ratings_5']
     }, axis=1)
+    # drop unnecesary columns
     books_df = books_df.drop(['ratings_1', 'ratings_2', 'ratings_3', 'ratings_4', 'ratings_5'], axis=1)
     books_df = books_df.drop(['best_book_id', 'title', 'work_ratings_count', 'work_text_reviews_count', 'small_image_url'], axis=1)
     
@@ -56,6 +59,7 @@ def book_to_tags():
     final_df = final_df.dropna()
     return final_df
 
+# returns a dataframe with user_id to list of book ratings
 def user_to_book_ratings():
     ratings_df = pd.read_csv('data_processing/data/ratings.csv').head(10000)
     user_names_df = pd.read_csv('data_processing/data/user_data.csv')
@@ -81,6 +85,7 @@ def user_to_book_ratings():
     grouped_df = grouped[['user_id', 'user_name', 'ratings']]
     return grouped_df
 
+# returns a dataframe with user_id to list of user to read books
 def user_to_read():
     read_df = pd.read_csv('data_processing/data/to_read.csv')
     ratings_df = pd.read_csv('data_processing/data/ratings.csv').head(10000)
