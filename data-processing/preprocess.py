@@ -6,26 +6,27 @@ import itertools
 import re
 import warnings
 
-# Limit values
-# Books Collection
+# limits
+# books collection
 MAX_LINES_TO_READ = 10000000
 MAX_RATINGS_PER_BOOK = 50
 MAX_TAGS_PER_BOOK = 50
 
-# Users collections
+# users collections
 MAX_TAGS = 5
 MAX_TO_READ = 10
 MAX_RATINGS_BOOK = 100
 
+# ignore warnings (pandas depreciated functions)
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 def book_to_user_ratings():
-    # read the original CSV file
+    # read ratings.csv
     df = (pd.read_csv('data_processing/data/ratings.csv')).head(10000)
     user_names_df = pd.read_csv('data_processing/data/user_data.csv')
     df = pd.merge(df, user_names_df, on='user_id')
-    #df.rename(columns={'book_id': 'work_id'}, inplace=True)
-    # group by book_id and aggregate ratings for each book with user objects
+    
+    # group by book_id
     grouped = df.groupby('book_id').apply(lambda x: x.apply(lambda row: {
         "user": {
             "user_id": row['user_id'],
@@ -43,7 +44,7 @@ def book_to_tags():
     books_df = pd.read_csv('data_processing/data/books.csv')
     # split authors
     books_df['authors'] = books_df['authors'].str.split(', ')
-    # iterate over each row and create a dictionary over ratings_x col's
+    
     books_df['total_ratings'] = books_df.apply(lambda row: {
         'ratings_1': row['ratings_1'],
         'ratings_2': row['ratings_2'],
@@ -64,7 +65,7 @@ def book_to_tags():
     # merge book_tags with tags to get the tag names along with their IDs for each book
     book_tags_merged_df = pd.merge(book_tags_df, tags_df, on='tag_id')
 
-    # group tags by book_id and aggregate into a list of dictionaries
+    # group tags by book_id
     book_tags_grouped = book_tags_merged_df.groupby('goodreads_book_id').apply(lambda x: x[['tag_id', 'tag_name']].apply(lambda row: {'tag_id': row['tag_id'], 'tag_name': row['tag_name']}, axis=1).tolist()[:MAX_TAGS]).reset_index(name='tags')
     
     final_df = pd.merge(books_df, book_tags_grouped, on='goodreads_book_id')
@@ -281,5 +282,3 @@ if __name__ == "__main__":
     
     with open('users.json', 'w', encoding='utf-8') as json_file:
         json.dump(user_dataframe_to_json(user_final_df), json_file, indent=4)
-
-    
