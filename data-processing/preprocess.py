@@ -195,17 +195,22 @@ def csv_to_json(csv_file, json_file):
         json.dump(data, jsonfile, indent=4)
 
 if __name__ == "__main__":
+    # book_id to list of user ratings
     book_ratings_df = book_to_user_ratings()
     
+    # book_id to list of book tags
     book_tags_df = book_to_tags()
+    # merge for final book data
     book_final_df = book_tags_df.merge(book_ratings_df, on='book_id')
     
     book_final_df.to_csv('data_processing/data/book_final.csv', index=False)
+    # final user data merge
     user_final_df = user_to_book_ratings().merge(user_to_read(), on='user_id', how='left')
 
     csv_file = 'data_processing/data/book_final.csv'
     json_file = 'books.json'
-
+    
+    # json conversion
     csv_to_json(csv_file, json_file)
     
     with open('users.json', 'w', encoding='utf-8') as json_file:
