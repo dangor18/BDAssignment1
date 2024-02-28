@@ -15,7 +15,8 @@
 \end{titlepage}
 \tableofcontents
 #+END_LATEX
-#+LATEX_HEADER: \hypersetup{colorlinks=true, allcolors=blue} \usepackage{titlesec} \usepackage{geometry} \geometry{margin=1.5in} \usepackage{minted} \newcommand{\sectionbreak}{\clearpage}
+#+LATEX_HEADER: \hypersetup{colorlinks=true, allcolors=blue} \usepackage{titlesec} \usepackage{geometry} \geometry{margin=1.2in} \usepackage{minted} \newcommand{\sectionbreak}{\clearpage} \usepackage{graphicx} \usepackage{changepage}
+
 #+OPTIONS: toc:nil
 \pagebreak
 
@@ -34,16 +35,15 @@ The dataset initially contained multiple csv files representing information on b
   - *~book_tags.csv~*: Each entry is a ~book_id~ to ~tag_id~ mapping.
   - *~tags.csv~*: Each entry is a tag_id to ~tag_name~ mapping.
   - *~to_read.csv~* : Each entry is a ~user_id~ to ~goodreads_book_id~ mapping which represents a user adding a book to their ~to_read~ list.
-** Data Pre-Processing:
-The data was processed such that the data was represented in JSON format with evidence of nested objects so that we could demonstrate the capabilities of MongoDB\\
+** Data Pre-Processing
+The data was processed such that the data was represented in JSON format with evidence of nested objects so that we could demonstrate the capabilities of MongoDB.\\
 \linebreak
 Here is a quick outline on how we processed the data to create JSON files:\\
 Libraries used: ~Pandas~, ~PyArrow~, ~Faker~\\
 \linebreak
 ~Pandas~ was used to load the csv files into dataframes where we merged data and applied ~group by~ aggregate functions to obtain lists of data objects per a unique entry id. This was useful, for example, when we obtained a list of tags per ~book_id~.\\
 \linebreak
-~Faker~ was used to generate random usernames for each id that were then written to ~user_data.csv~.
-The ~dataframes~ were then converted into JSON files.\\
+~Faker~ was used to generate random usernames for each id that were then written to ~user_data.csv~. The ~dataframes~ were then converted into JSON files.\\
 \linebreak
 All data pre-processing code is in the data-processing directory but the output JSON files are included in the final submission.
 
@@ -113,14 +113,11 @@ Both Collection Schemas were designed by creating hand-made JSON example objects
 }
 #+end_src
 
-#+ATTR_LATEX: :width 0.5\textwidth
-#+CAPTION: Collection 1 Diagram
-[[./Collection1.png]]
-
+\newgeometry{margin=0in}
+#+ATTR_LATEX: :height 1.2\textwidth :angle 180
+[[file:Collection1Rotate.png]]
+\restoregeometry
 ** Collection 2 - ~users~
-#+ATTR_LATEX: :width 0.5\textwidth
-#+CAPTION: Collection 2 Diagram
-[[./Collection2.png]]
 
 #+begin_src js
 {
@@ -208,4 +205,45 @@ Both Collection Schemas were designed by creating hand-made JSON example objects
 }
 #+end_src
 
+\newgeometry{margin=0in}
+#+ATTR_LATEX: :height 1.2\textwidth :angle 180
+[[file:Collection1Rotate.png]]
+\restoregeometry
+
 ** Explanation and Justification
+The data in CSV format emulates the functionality of a relational database. Many of the fields have foreign keys that point to elements in the other CSV files. Document store database favour efficiency over consistency, thus, we have nested a copy of the relevant object where the value would have otherwise been a foreign key. The process by how this was achieved was highlighted in "[[*Data Pre-Processing][Data Pre-Processing]]".
+
+The data was seeded into the following 2 collections:
+- ~books~
+- ~users~\\
+\linebreak
+
+
+
+
+Collection of users: what books user X wants to read.
+*** Books
+The ~books~ collection roughly followed the format of ~books.csv~ (outlined in "[[*Data Set Explanation][Data Set Explanation]]") with some modifications. We omitted unnecessary information and altered the names of some of the properties to make their semantic meaning clearer. As a result each book document includes:
+- General information about the book (~title~, ~author~, ~original_publication_year~, etc.).
+- Aggregated rating values (~average_rating~, ~total_ratings~, ~ratings_counts~).
+- A ~ratings~ list
+  - Each element represents a ~user~'s review of that book. It includes the ~user~'s basic information and the assigned ~rating~ score.
+- A ~tags~ list. Each tag represents a genre or category the book belongs to.\\
+\linebreak
+The most significant element of our design was the aforementioned nesting. Rather than store a separate ~tags~ collection, all the tags associated with the book are stored as a list of objects. The same is true for ~ratings~, which is a list of rating objects.\\
+\linebreak
+Use case examples:\\
+Collection of books: Querying to see the average rating of a book and the distribution of ratings of a particular book
+*** Users
+Unlike ~books~, the ~users~ collection does not directly correspond to a csv file. Instead, ~users~ was created by combining data from ~ratings.csv~, ~to_read.csv~, and ~books.csv~. We chose to create the user collection in order to demonstrate the importance of collection design with regards to query efficiency. While the ~users~ contains a lot of duplicate data from ~books~, it does so in a way that places information about the users at the top of the nesting hierarchy. This means that data about individual users can be obtained without performing expensive joins. The chosen collection design allows one to access, store and perform analytics from the perspective of the user. Each document in the ~users~ collection includes the following:
+- A ~user_id~ and ~user_name~ (randomly generated, as explained in "[[*Data Pre-Processing][Data Pre-Processing]]").
+- A ~ratings~ list:
+  - Each element represents a score that the user has given to a book.
+  - The element includes a ~book~ object and a given ~rating~ score.
+  - The nested ~book~ object includes all high-level data about that book, as would be found in the ~books~ collection.
+- A ~to_read~ list.
+  - Each element represents a book that the user has added to their ~to_read~ list (ie. plans to read that book).
+  - The element is represented as a ~book~ object that is identical in structure to those represented in the ~ratings~ list.\\
+\linebreak
+Use case examples:\\
+Collection of users: what books user X wants to read.
