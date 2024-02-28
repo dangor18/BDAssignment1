@@ -1,4 +1,3 @@
-#+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
 #+BEGIN_LATEX
 \begin{titlepage}
 
@@ -33,7 +32,7 @@ The dataset initially contained multiple csv files representing information on b
   - The rest of the fields are self explanatory but include info relating to authors, title, release date, and isbn number.
 - *ratings.csv*: Each entry is a ~user_id~ to ~book_id~ mapping with a rating.
   - *~book_tags.csv~*: Each entry is a ~book_id~ to ~tag_id~ mapping.
-  - *~tags.csv~*: Each entry is a tag_id to tag_name mapping.
+  - *~tags.csv~*: Each entry is a tag_id to ~tag_name~ mapping.
   - *~to_read.csv~* : Each entry is a ~user_id~ to ~goodreads_book_id~ mapping which represents a user adding a book to their ~to_read~ list.
 ** Data Pre-Processing:
 The data was processed such that the data was represented in JSON format with evidence of nested objects so that we could demonstrate the capabilities of MongoDB\\
@@ -47,4 +46,5 @@ Libraries used: ~Pandas~, ~PyArrow~, ~Faker~\\
 The ~dataframes~ were then converted into JSON files.\\
 \linebreak
 All data pre-processing code is in the data-processing directory but the output JSON files are included in the final submission.
-**
+
+* Design a MongoDB Database
