@@ -15,7 +15,7 @@
 \end{titlepage}
 \tableofcontents
 #+END_LATEX
-#+LATEX_HEADER: \hypersetup{colorlinks=true, allcolors=blue} \usepackage{titlesec} \usepackage{geometry} \geometry{margin=1.2in} \usepackage{minted} \newcommand{\sectionbreak}{\clearpage} \usepackage{graphicx} \usepackage{changepage}
+#+LATEX_HEADER: \hypersetup{colorlinks=true, allcolors=blue} \usepackage{titlesec} \usepackage{geometry} \geometry{margin=1.2in} \usepackage{minted} \newcommand{\sectionbreak}{\clearpage} \usepackage{graphicx} \usepackage{changepage} \usepackage{inconsolata}
 
 #+OPTIONS: toc:nil
 \pagebreak
@@ -217,11 +217,6 @@ The data was seeded into the following 2 collections:
 - ~books~
 - ~users~\\
 \linebreak
-
-
-
-
-Collection of users: what books user X wants to read.
 *** Books
 The ~books~ collection roughly followed the format of ~books.csv~ (outlined in "[[*Data Set Explanation][Data Set Explanation]]") with some modifications. We omitted unnecessary information and altered the names of some of the properties to make their semantic meaning clearer. As a result each book document includes:
 - General information about the book (~title~, ~author~, ~original_publication_year~, etc.).
@@ -233,7 +228,7 @@ The ~books~ collection roughly followed the format of ~books.csv~ (outlined in "
 The most significant element of our design was the aforementioned nesting. Rather than store a separate ~tags~ collection, all the tags associated with the book are stored as a list of objects. The same is true for ~ratings~, which is a list of rating objects.\\
 \linebreak
 Use case examples:\\
-Collection of books: Querying to see the average rating of a book and the distribution of ratings of a particular book
+- Collection of books: Querying to see the average rating of a book and the distribution of ratings of a particular book
 *** Users
 Unlike ~books~, the ~users~ collection does not directly correspond to a csv file. Instead, ~users~ was created by combining data from ~ratings.csv~, ~to_read.csv~, and ~books.csv~. We chose to create the user collection in order to demonstrate the importance of collection design with regards to query efficiency. While the ~users~ contains a lot of duplicate data from ~books~, it does so in a way that places information about the users at the top of the nesting hierarchy. This means that data about individual users can be obtained without performing expensive joins. The chosen collection design allows one to access, store and perform analytics from the perspective of the user. Each document in the ~users~ collection includes the following:
 - A ~user_id~ and ~user_name~ (randomly generated, as explained in "[[*Data Pre-Processing][Data Pre-Processing]]").
@@ -246,4 +241,4 @@ Unlike ~books~, the ~users~ collection does not directly correspond to a csv fil
   - The element is represented as a ~book~ object that is identical in structure to those represented in the ~ratings~ list.\\
 \linebreak
 Use case examples:\\
-Collection of users: what books user X wants to read.
+        Collection of users: what books user X wants to read.
