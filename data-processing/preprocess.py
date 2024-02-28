@@ -5,6 +5,7 @@ import ast
 import itertools
 import re
 import warnings
+import os
 
 # books collection
 MAX_LINES_TO_READ = 10000000
@@ -20,10 +21,10 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 # returns a dataframe with book_id to list of user ratings
 def book_to_user_ratings():
-    df = (pd.read_csv('data_processing/data/ratings.csv')).head(10000)
-    user_names_df = pd.read_csv('data_processing/data/user_data.csv')
-    df = pd.merge(df, user_names_df, on='user_id')
-    grouped = df.groupby('book_id').apply(lambda x: x.apply(lambda row: {
+    ratings_df = (pd.read_csv('data-processing/data/ratings.csv')).head(10000)
+    user_names_df = pd.read_csv('data-processing/data/user_data.csv')
+    ratings_df = pd.merge(ratings_df, user_names_df, on='user_id')
+    grouped = ratings_df.groupby('book_id').apply(lambda x: x.apply(lambda row: {
         "user": {
             "user_id": row['user_id'],
             "user_name": row['user_name']
@@ -35,7 +36,7 @@ def book_to_user_ratings():
 
 # returns a dataframe with book_id to list of tags
 def book_to_tags():
-    books_df = pd.read_csv('data_processing/data/books.csv')
+    books_df = pd.read_csv('data-processing/data/books.csv')
     books_df['authors'] = books_df['authors'].str.split(', ')    
     books_df['total_ratings'] = books_df.apply(lambda row: {
         'ratings_1': row['ratings_1'],
@@ -50,19 +51,20 @@ def book_to_tags():
     
     books_df.rename(columns={'original_title': 'title'}, inplace=True)
     books_df = books_df.sort_values(by='work_id')
-    book_tags_df = pd.read_csv('data_processing/data/book_tags.csv')
-    tags_df = pd.read_csv('data_processing/data/tags.csv')
+    book_tags_df = pd.read_csv('data-processing/data/book_tags.csv')
+    tags_df = pd.read_csv('data-processing/data/tags.csv')
 
     book_tags_merged_df = pd.merge(book_tags_df, tags_df, on='tag_id')
     book_tags_grouped = book_tags_merged_df.groupby('goodreads_book_id').apply(lambda x: x[['tag_id', 'tag_name']].apply(lambda row: {'tag_id': row['tag_id'], 'tag_name': row['tag_name']}, axis=1).tolist()[:MAX_TAGS]).reset_index(name='tags')
     final_df = pd.merge(books_df, book_tags_grouped, on='goodreads_book_id')
+    # drop any null values
     final_df = final_df.dropna()
     return final_df
 
 # returns a dataframe with user_id to list of book ratings
 def user_to_book_ratings():
-    ratings_df = pd.read_csv('data_processing/data/ratings.csv').head(10000)
-    user_names_df = pd.read_csv('data_processing/data/user_data.csv')
+    ratings_df = pd.read_csv('data-processing/data/ratings.csv').head(10000)
+    user_names_df = pd.read_csv('data-processing/data/user_data.csv')
     ratings_df = pd.merge(ratings_df, user_names_df, on='user_id')
     books_df = book_to_tags()
     merged_df = books_df.merge(ratings_df, on='book_id')
@@ -87,11 +89,11 @@ def user_to_book_ratings():
 
 # returns a dataframe with user_id to list of user to read books
 def user_to_read():
-    read_df = pd.read_csv('data_processing/data/to_read.csv')
-    ratings_df = pd.read_csv('data_processing/data/ratings.csv').head(10000)
+    read_df = pd.read_csv('data-processing/data/to_read.csv')
+    ratings_df = pd.read_csv('data-processing/data/ratings.csv').head(10000)
     ratings_df = ratings_df.drop(['book_id', 'rating'], axis=1)
     read_df = pd.merge(ratings_df, read_df, on='user_id')
-    user_names_df = pd.read_csv('data_processing/data/user_data.csv')
+    user_names_df = pd.read_csv('data-processing/data/user_data.csv')
     read_df = pd.merge(read_df, user_names_df, on='user_id')    
     books_df = book_to_tags()
     merged_df = books_df.merge(read_df, on='book_id')
@@ -203,11 +205,11 @@ if __name__ == "__main__":
     # merge for final book data
     book_final_df = book_tags_df.merge(book_ratings_df, on='book_id')
     
-    book_final_df.to_csv('data_processing/data/book_final.csv', index=False)
+    book_final_df.to_csv('data-processing/data/book_final.csv', index=False)
     # final user data merge
     user_final_df = user_to_book_ratings().merge(user_to_read(), on='user_id', how='left')
 
-    csv_file = 'data_processing/data/book_final.csv'
+    csv_file = 'data-processing/data/book_final.csv'
     json_file = 'books.json'
     
     # json conversion
@@ -215,3 +217,7 @@ if __name__ == "__main__":
     
     with open('users.json', 'w', encoding='utf-8') as json_file:
         json.dump(user_dataframe_to_json(user_final_df), json_file, indent=4)
+    
+    # delete book_final.csv
+    if os.path.exists('data-processing/data/book_final.csv'):
+        os.remove('data-processing/data/book_final.csv')
