@@ -1,4 +1,4 @@
-% Created 2024-02-28 Wed 19:02
+% Created 2024-02-28 Wed 19:19
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -12,7 +12,7 @@
 \usepackage{amssymb}
 \usepackage{capt-of}
 \usepackage{hyperref}
-\hypersetup{colorlinks=true, allcolors=blue} \usepackage{titlesec} \usepackage{geometry} \geometry{margin=1.5in}
+\hypersetup{colorlinks=true, allcolors=blue} \usepackage{titlesec} \usepackage{geometry} \geometry{margin=1.5in} \usepackage{minted} \newcommand{\sectionbreak}{\clearpage}
 \author{Matthew}
 \date{\today}
 \title{}
@@ -44,9 +44,9 @@
 \end{LATEX}
 \pagebreak
 \section{Find or Create a Suitable Data Set}
-\label{sec:orge8a58fc}
-\subsection{Explanation of data set}
-\label{sec:org3844cac}
+\label{sec:orgbdb6631}
+\subsection{Data Set Explanation}
+\label{sec:org677db01}
 Link to the dataset: \url{https://github.com/zygmuntz/goodbooks-10k}\\
 \linebreak
 The dataset initially contained multiple csv files representing information on books, and user data on book ratings. This dataset was chosen as its ideal for a MongoDB database due to its semi-structured nature and nested data, which is particularly useful for storing ratings and book tags. \\
@@ -67,7 +67,7 @@ The dataset initially contained multiple csv files representing information on b
 \end{itemize}
 \end{itemize}
 \subsection{Data Pre-Processing:}
-\label{sec:org2489794}
+\label{sec:org9713f28}
 The data was processed such that the data was represented in JSON format with evidence of nested objects so that we could demonstrate the capabilities of MongoDB\\
 \linebreak
 Here is a quick outline on how we processed the data to create JSON files:\\
@@ -80,5 +80,171 @@ The \texttt{dataframes} were then converted into JSON files.\\
 \linebreak
 All data pre-processing code is in the data-processing directory but the output JSON files are included in the final submission.
 \section{Design a MongoDB Database}
-\label{sec:orgd5d40b5}
+\label{sec:orge278c95}
+Both Collection Schemas were designed by creating hand-made JSON example objects. Each of these objects shows what a document in the DB may look like. Underneath each JSON example, we have included a diagram which represents the example's nesting visually.
+\subsection{Collection 1 - \texttt{books}}
+\label{sec:orgc673378}
+
+\paragraph{JSON example} \small
+\begin{minted}[]{js}
+{
+    "book_id": "98",
+    "isbn": "1401359604",
+    "isbn13": "9781401359610.0",
+    "authors": [
+        "Plum Sykes"
+    ],
+    "original_publication_year": 2004,
+    "title": "Bergdorf Blondes",
+    "language_code": "en-US",
+    "average_rating": 3.26,
+    "ratings_count": 23795,
+    "total_ratings": {
+        "ratings_1": 2020,
+        "ratings_2": 4428,
+        "ratings_3": 8669,
+        "ratings_4": 6144,
+        "ratings_5": 4561
+    },
+    "image_url": "https://s.gr-assets.com/assets/nophoto/book/111x148-bcc042a9c91a29c1d680899eff700a03.png",
+    "tags": [
+        {
+            "tag_id": 11743,
+            "tag_name": "fiction"
+        },
+        {
+            "tag_id": 8717,
+            "tag_name": "currently-reading"
+        },
+        {
+            "tag_id": 8055,
+            "tag_name": "contemporary"
+        }
+    ],
+    "ratings": [
+        {
+            "user": {
+                "user_id": 237,
+                "user_name": "David Smith"
+            },
+            "rating": 1
+        },
+        {
+            "user": {
+                "user_id": 364,
+                "user_name": "Christina Calderon"
+            },
+            "rating": 1
+        },
+        {
+            "user": {
+                "user_id": 399,
+                "user_name": "Stephen Pugh"
+            },
+            "rating": 2
+        }
+    ]
+}
+\end{minted}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.5\textwidth]{./Collection1.png}
+\caption{Collection 1 Diagram}
+\end{figure}
+\subsection{Collection 2 - \texttt{users}}
+\label{sec:orgf957f48}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.5\textwidth]{./Collection2.png}
+\caption{Collection 2 Diagram}
+\end{figure}
+
+\begin{minted}[]{js}
+{
+    "user_id": 1,
+    "user_name": "Mary Martinez",
+    "ratings": [
+        {
+            "book": {
+                "book_id": 47,
+                "authors": [
+                    "Markus Zusak"
+                ],
+                "title": "The Book Thief",
+                "isbn": "375831002",
+                "isbn13": 9780375831000.0,
+                "language_code": "eng",
+                "average_rating": 4.36,
+                "ratings_count": 1159741,
+                "image_url": "https://images.gr-assets.com/books/1390053681m/19063.jpg",
+                "tags": [
+                    {
+                        "tag_id": 11557,
+                        "tag_name": "favorites"
+                    },
+                    {
+                        "tag_id": 30574,
+                        "tag_name": "to-read"
+                    },
+                    {
+                        "tag_id": 14487,
+                        "tag_name": "historical-fiction"
+                    },
+                    {
+                        "tag_id": 11743,
+                        "tag_name": "fiction"
+                    },
+                    {
+                        "tag_id": 33114,
+                        "tag_name": "young-adult"
+                    }
+                ]
+            },
+            "rating": 3
+        }
+    ],
+    "to_read": [
+        {
+            "book": {
+                "book_id": 112,
+                "authors": [
+                    "Jojo Moyes"
+                ],
+                "title": "Me Before You",
+                "isbn": "670026603",
+                "isbn13": 9780670026610.0,
+                "language_code": "eng",
+                "average_rating": 4.27,
+                "ratings_count": 587647,
+                "image_url": "https://images.gr-assets.com/books/1357108762m/15507958.jpg",
+                "tags": [
+                    {
+                        "tag_id": 30574,
+                        "tag_name": "to-read"
+                    },
+                    {
+                        "tag_id": 11557,
+                        "tag_name": "favorites"
+                    },
+                    {
+                        "tag_id": 17213,
+                        "tag_name": "kindle"
+                    },
+                    {
+                        "tag_id": 26138,
+                        "tag_name": "romance"
+                    },
+                    {
+                        "tag_id": 3389,
+                        "tag_name": "audiobook"
+                    }
+                ]
+            }
+        }
+    ]
+}
+\end{minted}
+\subsection{Explanation and Justification}
+\label{sec:org9900c0d}
 \end{document}
