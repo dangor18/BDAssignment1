@@ -70,7 +70,7 @@ const BookSchema = new Schema<IBook>({
         }],
         required: true
     }
-});
+})
 
 const UserSchema = new Schema<IUser>({
     user_id: {
@@ -81,48 +81,14 @@ const UserSchema = new Schema<IUser>({
         type: String,
         required: true
     },
-    ratings: {
-        type: [{
-            book: {
-                book_id: Number,
-                authors: [String],
-                title: String,
-                isbn: String,
-                isbn13: Number,
-                language_code: String,
-                average_rating: Number,
-                ratings_count: Number,
-                image_url: String,
-                tags: [{
-                    tag_id: Number,
-                    tag_name: String
-                }]
-            },
-            rating: Number
-        }],
-        required: true
-    },
-    to_read: {
-        type: [{
-            book: {
-                book_id: Number,
-                authors: [String],
-                title: String,
-                isbn: String,
-                isbn13: Number,
-                language_code: String,
-                average_rating: Number,
-                ratings_count: Number,
-                image_url: String,
-                tags: [{
-                    tag_id: Number,
-                    tag_name: String
-                }]
-            }
-        }],
-        required: true
-    }
-});
+    ratings: [{
+        book: BookSchema,
+        rating: Number
+    }],
+    to_read: [{
+        book: BookSchema
+    }]
+})
 
 const Book: Model<IBook> = model<IBook>('Book', BookSchema)
 const User: Model<IUser> = model<IUser>('User', UserSchema)
