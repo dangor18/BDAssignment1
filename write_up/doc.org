@@ -519,7 +519,7 @@ db.users.aggregate([ {
 \pagebreak
 *** 3
 *Description*\\
-Update a user that has rated "The Book Thief" with 4 stars. Change their name to: "Update_User!"\\
+Update a user that has rated "The Book Thief" with 4 stars. Change their name to: ~"Update_User!"~\\
 \linebreak
 *Query*
 #+begin_src js
@@ -555,7 +555,8 @@ db.books.deleteMany({
 ** WHLJOS001
 *** 1
 *Description*\\
-Find the names and ratings of the top 50 fiction books with at least 1000 ratings.\\
+Find the names and ratings of the top 50 fiction books with at least 1000 ratings. The result would be too large to show in a single screen but several are shown in the image below.
+\\
 \linebreak
 *Query*
 #+begin_src js
@@ -576,7 +577,7 @@ db.books.aggregate([{
 \pagebreak
 *** 2
 *Description*\\
-Delete all users who have never rated a book and never marked a book as to_read:
+Delete all users who have never rated a book and never marked a book as ~to_read~. Since this database has only a subset of the full dataset it seems that no users were found to both not have rated or marked a book as to read, so no data was deleted.
 \\
 \linebreak
 *Query*
@@ -596,7 +597,7 @@ db.users.deleteMany({
 \pagebreak
 *** 3
 *Description*\\
-Delete all books with an average rating less than 2 and more than 300 ratings.\\
+Delete all books with an average rating less than 2 and more than 300 ratings. Similar to the previous query, since this is only a select subset of the dataset no books were found that matched the query. So no books were deleted in this case.\\
 \linebreak
 *Query*
 #+begin_src js
