@@ -1,4 +1,4 @@
-% Created 2024-02-29 Thu 22:51
+% Created 2024-02-29 Thu 22:54
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -45,9 +45,9 @@
 \end{LATEX}
 \pagebreak
 \section{Find or Create a Suitable Data Set}
-\label{sec:org5bd2419}
+\label{sec:org4f5ac53}
 \subsection{Data Set Explanation}
-\label{sec:org7f91e07}
+\label{sec:orge51e814}
 Link to the dataset: \url{https://github.com/zygmuntz/goodbooks-10k}\\
 \linebreak
 The dataset includes data from an online book review platform (\url{https://goodreads.com/}). It includes information about the books, users, book tags, and book rating scores. The dataset initially contained multiple csv files. This dataset was chosen as its ideal for a MongoDB database due to its semi-structured nature and nested data, which is particularly useful for storing ratings and book tags. \\
@@ -68,7 +68,7 @@ The dataset includes data from an online book review platform (\url{https://good
 \end{itemize}
 \end{itemize}
 \subsection{Data Pre-Processing}
-\label{sec:org500a8bc}
+\label{sec:org565b93f}
 The data was processed such that the data was represented in JSON format with evidence of nested objects so that we could demonstrate the capabilities of MongoDB.\\
 \linebreak
 Here is a quick outline of how we processed the data to create JSON files:\\
@@ -80,10 +80,10 @@ Libraries used: \texttt{Pandas}, \texttt{PyArrow}, \texttt{Faker}\\
 \linebreak
 All data pre-processing code is in the data-processing directory but the output JSON files are included in the final submission.
 \section{Design a MongoDB Database}
-\label{sec:orge5442e2}
+\label{sec:orgd79d75a}
 Both Collection Schemas were designed by creating hand-made JSON example objects. Each of these objects shows what a document in the DB would look like. Underneath each JSON example, we have included a diagram which represents the example's nesting visually.
 \subsection{Collection 1 - \texttt{books}}
-\label{sec:orgc0b7682}
+\label{sec:org1036276}
 
 \paragraph{JSON example} \small
 \begin{minted}[]{js}
@@ -98,8 +98,8 @@ Both Collection Schemas were designed by creating hand-made JSON example objects
     "title": "Bergdorf Blondes",
     "language_code": "en-US",
     "average_rating": 3.26,
-    "total_ratings": 23795,
-    "rating_counts": {
+    "ratings_count": 23795,
+    "total_ratings": {
         "ratings_1": 2020,
         "ratings_2": 4428,
         "ratings_3": 8669,
@@ -153,7 +153,7 @@ Both Collection Schemas were designed by creating hand-made JSON example objects
 \end{center}
 \restoregeometry
 \subsection{Collection 2 - \texttt{users}}
-\label{sec:org9e6c5ec}
+\label{sec:org754eaa4}
 
 \begin{minted}[]{js}
 {
@@ -247,8 +247,8 @@ Both Collection Schemas were designed by creating hand-made JSON example objects
 \end{center}
 \restoregeometry
 \subsection{Explanation and Justification}
-\label{sec:org278f48f}
-The data in CSV format emulates the functionality of a relational database. Many of the fields have foreign keys that point to elements in the other CSV files. Document store database favour efficiency over consistency, thus, we have nested a copy of the relevant object where the value would have otherwise been a foreign key. The process by how this was achieved was highlighted in ``\hyperref[sec:org500a8bc]{Data Pre-Processing}''.
+\label{sec:org5c10c16}
+The data in CSV format emulates the functionality of a relational database. Many of the fields have foreign keys that point to elements in the other CSV files. Document store database favour efficiency over consistency, thus, we have nested a copy of the relevant object where the value would have otherwise been a foreign key. The process by how this was achieved was highlighted in ``\hyperref[sec:org565b93f]{Data Pre-Processing}''.
 
 The data was seeded into the following 2 collections:
 \begin{itemize}
@@ -257,8 +257,8 @@ The data was seeded into the following 2 collections:
 \end{itemize}
 \linebreak
 \subsubsection{Books}
-\label{sec:orgb68a504}
-The \texttt{books} collection roughly followed the format of \texttt{books.csv} (outlined in ``\hyperref[sec:org7f91e07]{Data Set Explanation}'') with some modifications. We omitted unnecessary information and altered the names of some of the properties to make their semantic meaning clearer. As a result each book document includes:
+\label{sec:orgb458340}
+The \texttt{books} collection roughly followed the format of \texttt{books.csv} (outlined in ``\hyperref[sec:orge51e814]{Data Set Explanation}'') with some modifications. We omitted unnecessary information and altered the names of some of the properties to make their semantic meaning clearer. As a result each book document includes:
 \begin{itemize}
 \item General information about the book (\texttt{title}, \texttt{author}, \texttt{original\_publication\_year}, etc.).
 \item Aggregated rating values (\texttt{average\_rating}, \texttt{total\_ratings}, \texttt{ratings\_counts}).
@@ -276,10 +276,10 @@ Use case examples:\\
 \item Collection of books: Querying to see the average rating of a book and the distribution of ratings of a particular book
 \end{itemize}
 \subsubsection{Users}
-\label{sec:orgcb3fb77}
+\label{sec:org7215dde}
 Unlike \texttt{books}, the \texttt{users} collection does not directly correspond to a csv file. Instead, \texttt{users} was created by combining data from \texttt{ratings.csv}, \texttt{to\_read.csv}, and \texttt{books.csv}. We chose to create the user collection in order to demonstrate the importance of collection design with regards to query efficiency. While the \texttt{users} contains a lot of duplicate data from \texttt{books}, it does so in a way that places information about the users at the top of the nesting hierarchy. This means that data about individual users can be obtained without performing expensive joins. The chosen collection design allows one to access, store and perform analytics from the perspective of the user. Each document in the \texttt{users} collection includes the following:
 \begin{itemize}
-\item A \texttt{user\_id} and \texttt{user\_name} (randomly generated, as explained in ``\hyperref[sec:org500a8bc]{Data Pre-Processing}'').
+\item A \texttt{user\_id} and \texttt{user\_name} (randomly generated, as explained in ``\hyperref[sec:org565b93f]{Data Pre-Processing}'').
 \item A \texttt{ratings} list:
 \begin{itemize}
 \item Each element represents a score that the user has given to a book.
@@ -296,22 +296,22 @@ Unlike \texttt{books}, the \texttt{users} collection does not directly correspon
 Use case examples:\\
         Collection of users: what books user X wants to read.
 \section{Create and Load This MongoDB Database}
-\label{sec:org6d1ca56}
+\label{sec:org8c0985a}
 \subsection{Load the Database}
-\label{sec:org792aef6}
-The process of creating and loading the database was significantly simplified on account of the fact that we had already \hyperref[sec:org500a8bc]{Pre-Processed} the data into JSON format. For each collection, a shell command is called to seed the JSON data into their associated collections. The creation of the database is implicit ie. inserting data into the non-existent database leads to its creation. The commands use \texttt{mongoimport}, a CLI tool designed for extracting data from plain-text formats (eg. JSON) and inserting them into MongoDB databases.
+\label{sec:org4ca9e75}
+The process of creating and loading the database was significantly simplified on account of the fact that we had already \hyperref[sec:org565b93f]{Pre-Processed} the data into JSON format. For each collection, a shell command is called to seed the JSON data into their associated collections. The creation of the database is implicit ie. inserting data into the non-existent database leads to its creation. The commands use \texttt{mongoimport}, a CLI tool designed for extracting data from plain-text formats (eg. JSON) and inserting them into MongoDB databases.
 \subsubsection{Books Collection}
-\label{sec:org44e90ea}
+\label{sec:org10b6cc2}
 \begin{minted}[]{bash}
 mongoimport --db bookstore --collection books --file mongo-seed/books.json --jsonArray
 \end{minted}
 \subsubsection{Users Collection}
-\label{sec:org9fb5bb2}
+\label{sec:org4113460}
 \begin{minted}[]{bash}
 mongoimport --db bookstore --collection users --file mongo-seed/users.json --jsonArray
 \end{minted}
 \subsection{Testing}
-\label{sec:org2df9bd0}
+\label{sec:org3783a88}
 The shell commands were tested and the output has been annotated on the following page:
 \newgeometry{margin=0.1in}
 \begin{center}
@@ -319,9 +319,9 @@ The shell commands were tested and the output has been annotated on the followin
 \end{center}
 \restoregeometry
 \section{Discuss the Relative Benefits and Disadvantages of MongoDB}
-\label{sec:org18cdea5}
+\label{sec:org05e6bba}
 \subsection{MongoDB (Document Store)}
-\label{sec:org4f11a86}
+\label{sec:org93adfaf}
 MongoDB is a document store database. Document store databases favour low retrieval latency and efficiency over consistency and functionality (expressiveness) when compared with relational databases. MongoDB is flexible: it facilitates incremental schema modification as the schema is not rigidly defined. This can improve development velocity and account for changing stakeholder requirements.\\
 \linebreak
 MongoDB is highly scalable and will be efficient with the ever increasing addition of books being published. MongoDB meets a good middle-ground when compared with other NoSQL databases. It is facilitates nested data and objects and allows querying on those objects without being overly strict or complex. Each Book and User is able to store all necessary information while allow for performant data retrieval without the overhead of complex joins.\\
@@ -339,7 +339,7 @@ The disadvantages of using a MongoDB are that there is a high degree of duplicat
 \end{itemize}
 \end{itemize}
 \subsection{Graph DB}
-\label{sec:org77b90d5}
+\label{sec:orgfca63e9}
 Graph databases allow for expressive and performant relationship representation and would be ideal for relationship-related queries. Each relationship can be given properties that qualitatively describe that relationship. This is ideal for data where the relationships to other data is the primary provider of utility (eg. a knowledge graph), as opposed to the structured categorisation (as is the case in MongoDB and relational databases).\\
 \linebreak
 The chosen dataset is highly structured without a large number of annotated relationships between data and it thus is a poor choice for graph DBs. The dataset would not leverage the benefits of a graph DB and would miss out on the well-fitted benefits of MongoDB, namely schema flexibility, performance, scalability, and simplicity.
@@ -355,7 +355,7 @@ The chosen dataset is highly structured without a large number of annotated rela
 \end{itemize}
 \end{itemize}
 \subsection{Key-value Store}
-\label{sec:orgd4ff47d}
+\label{sec:orgd04f335}
 Key-Value stores are extremely simple. They are very similar to a document store but with fewer capabilities in data representation and querying. They offer many of the same benefits of schema flexibility, scalability, and performance. Their key benefit and disadvantage over document stores is their simplicity. The simplicity is limiting but ideal for data that can be modelled simply. The chosen dataset is not suited for a key-value store as it includes more complex nested objects.
 \begin{itemize}
 \item \textbf{Benefits}: High performance, Scalability, Simplicity, Flexibility
@@ -367,7 +367,7 @@ Key-Value stores are extremely simple. They are very similar to a document store
 \end{itemize}
 \end{itemize}
 \subsection{Relational}
-\label{sec:org1a353ec}
+\label{sec:org651086e}
 Relational databases are great for keeping data consistent and for effectively maintaining the relationships of the data. Their ability to store relationships (via foreign keys) between data ensures the following benefits: data consistency, minimal duplication, and expressive queries. Relational databases falter when needing to retrieve large quantities of data from different tables. Joins become very expensive as the size of a dataset grows. Data analysis and operations are impacted substantially. It becomes inefficient with very large (big) data.\\
 \linebreak
 The goodbooks dataset at present would be well suited to a relational database, however, if we were to massively increase the scale of the data stored the efficiency gains of MongoDB would quickly become apparent. The data is not updated frequently enough for critical operations and thus the consistency benefits provided by a relational database would be negligible.
@@ -383,7 +383,7 @@ The goodbooks dataset at present would be well suited to a relational database, 
 \end{itemize}
 \end{itemize}
 \subsection{Column Family}
-\label{sec:org137f617}
+\label{sec:org56fba81}
 Column Family DBs are similar to relational databases, however, they bundle groups of frequently accessed columns together. This reduces the performance issues that may occur in relational databases. It does, however, still require up-front schema design without obtaining the expressiveness benefits provided by relational databases.\\
 \linebreak
 
@@ -403,7 +403,7 @@ At present, the \texttt{goodbooks} database is not well suited to being effectiv
 \end{itemize}
 \end{itemize}
 \subsection{Hierarchical}
-\label{sec:org6b8e6d7}
+\label{sec:orgcc6b674}
 Hierarchical databases are optimised for data that can be stored as deeply nested hierarchies. Document Store DBs are also well suited for hierarchical nesting, however, their access performance greatly suffers when the depth of those hierarchies becomes excessive. Thus, hierarchical databases are great for data with inherently deep hierarchical structure. Hierarchical databases would be effective for fast lookup and to effectively store this data.\\
 \linebreak
 While the \texttt{goodbooks} dataset does include hierarchies, the hierarchies seldom extend beyond a depth of 5. This means the data is not inherently hierarchical and does not suffer from performance detriments when traversing the nested data. On account of this, a hierarchical database would be a poor choice as it would miss out on the key benefits of MongoDB (flexibility in particular).
@@ -419,11 +419,11 @@ While the \texttt{goodbooks} dataset does include hierarchies, the hierarchies s
 \end{itemize}
 \end{itemize}
 \section{Query and Updating the Database}
-\label{sec:org965f929}
+\label{sec:org1de6e3b}
 \subsection{GRDDAN017}
-\label{sec:orgca7435d}
+\label{sec:org4fe2f5d}
 \subsubsection{1}
-\label{sec:orgec233d5}
+\label{sec:org5a63283}
 \textbf{Description}\\
 Find the book title and author list of the top 3 highest rated books.\\
 \linebreak
@@ -440,7 +440,7 @@ db.books.find({},{
 \end{center}
 \pagebreak
 \subsubsection{2}
-\label{sec:orgb4c8dfd}
+\label{sec:org0b4ab63}
 \textbf{Description}\\
 Find 2 books with the ``fantasy'' tag with a high average rating.\\
 \linebreak
@@ -457,7 +457,7 @@ db.books.find({
 \end{center}
 \pagebreak
 \subsubsection{3}
-\label{sec:org230ea22}
+\label{sec:org7c00fc1}
 \textbf{Description}\\
 Find users who have rated a book but have an empty to\textsubscript{read} list.\\
 \linebreak
@@ -477,7 +477,7 @@ db.users.find({
 \end{center}
 \pagebreak
 \subsubsection{4}
-\label{sec:org35e1d43}
+\label{sec:org0b0a735}
 \textbf{Description}\\
 Add a book to a user's to-read list.\\
 \linebreak
@@ -502,9 +502,9 @@ db.users.updateOne({
 \end{center}
 \pagebreak
 \subsection{MRCGAB004}
-\label{sec:orgc4df649}
+\label{sec:org2f1f908}
 \subsubsection{1}
-\label{sec:org02696f2}
+\label{sec:org6213ea2}
 \textbf{Description}\\
 Find and return a list of users’ names  who want to read “The book Thief”.\\
 \linebreak
@@ -523,7 +523,7 @@ db.users.find( {
 \end{center}
 \pagebreak
 \subsubsection{2}
-\label{sec:orgf0fa95d}
+\label{sec:org4668200}
 \textbf{Description}\\
 Find a list of books published after 2004 and return the title and year it was published.\\
 \linebreak
@@ -542,7 +542,7 @@ db.books.find({
 \end{center}
 \pagebreak
 \subsubsection{3}
-\label{sec:org5c0bbd5}
+\label{sec:orgda7e86c}
 \textbf{Description}\\
 Update the book “Bergdorf Blondes” with a new publishing date of 2005 db.books.updateOne. \\
 \linebreak
@@ -562,7 +562,7 @@ db.books.updateOne({
 \end{center}
 \pagebreak
 \subsubsection{4}
-\label{sec:org4e4afc4}
+\label{sec:org5654e2a}
 \textbf{Description}\\
 Delete user with the user\textsubscript{id} 32.\\
 \linebreak
@@ -578,9 +578,9 @@ db.users.deleteOne({"user_id":32})
 \end{center}
 \pagebreak
 \subsection{CRGMAT002}
-\label{sec:org892163e}
+\label{sec:org4b3b166}
 \subsubsection{1}
-\label{sec:org806847c}
+\label{sec:org4c3b9e2}
 \textbf{Description}\\
 Find the top 5 books (by average\textsubscript{rating}) with tag\textsubscript{name} ``sci-fi''. Show only a single author for each book. \\
 \linebreak
@@ -599,7 +599,7 @@ db.books.find({
 \end{center}
 \pagebreak
 \subsubsection{2}
-\label{sec:org1b33d65}
+\label{sec:orgafd8ec4}
 \textbf{Description}\\
 Aggregate user\textsubscript{ids} alongside the total number of ratings that user has submitted (size of ratings array). The result is sorted by the number of ratings they have submitted and the top 10 are shown. \\
 \linebreak
@@ -620,7 +620,7 @@ db.users.aggregate([ {
 \end{center}
 \pagebreak
 \subsubsection{3}
-\label{sec:org1cf562b}
+\label{sec:orgcc45bf3}
 \textbf{Description}\\
 Update a user that has rated ``The Book Thief'' with 4 stars. Change their name to: \texttt{"Update\_User!"}\\
 \linebreak
@@ -639,7 +639,7 @@ db.users.updateOne({
 \end{center}
 \pagebreak
 \subsubsection{4}
-\label{sec:org1ce98e7}
+\label{sec:org2e97d3c}
 \textbf{Description}\\
 test\\
 \linebreak
@@ -659,9 +659,9 @@ db.books.deleteMany({
 \end{center}
 \pagebreak
 \subsection{WHLJOS001}
-\label{sec:org51bf95d}
+\label{sec:org8a98154}
 \subsubsection{1}
-\label{sec:orgbfb20df}
+\label{sec:org8056b8b}
 \textbf{Description}\\
 Find the names and ratings of the top 50 fiction books with at least 1000 ratings. The result would be too large to show in a single screen but several are shown in the image below.
 
@@ -685,7 +685,7 @@ db.books.aggregate([{
 \end{center}
 \pagebreak
 \subsubsection{2}
-\label{sec:orgb6a9edb}
+\label{sec:org4654213}
 \textbf{Description}\\
 Delete all users who have never rated a book and never marked a book as \texttt{to\_read}. Since this database has only a subset of the full dataset it seems that no users were found to both not have rated or marked a book as to read, so no data was deleted.
 
@@ -705,7 +705,7 @@ db.users.deleteMany({
 \end{center}
 \pagebreak
 \subsubsection{3}
-\label{sec:orgebb6676}
+\label{sec:org26f40a4}
 \textbf{Description}\\
 Delete all books with an average rating less than 2 and more than 300 ratings. Similar to the previous query, since this is only a select subset of the dataset no books were found that matched the query. So no books were deleted in this case.\\
 \linebreak
@@ -727,7 +727,7 @@ db.books.deleteMany({
 \end{center}
 \pagebreak
 \subsubsection{4}
-\label{sec:orgc32ebff}
+\label{sec:org6c5eab5}
 \textbf{Description}\\
 Find the name of the user who has rated the most books.\\
 \linebreak
@@ -753,9 +753,9 @@ db.users.aggregate({
 \end{center}
 \pagebreak
 \subsection{KFWJOR001}
-\label{sec:org63164a6}
+\label{sec:orgddd99c3}
 \subsubsection{1}
-\label{sec:org1ca5c7a}
+\label{sec:orgbbf3a5b}
 \textbf{Description}\\
 Finding users who have rated the most diverse genres
 \linebreak
@@ -784,7 +784,7 @@ db.users.aggregate([
 \end{center}
 \pagebreak
 \subsubsection{2}
-\label{sec:org9e175c8}
+\label{sec:orgbeb157a}
 \textbf{Description}\\
 Find highly rated books and only show their title, authors and average rating
 
@@ -801,7 +801,7 @@ db.books.find({ "average_rating": { $gte: 4.5 } }, {title: 1, authors:1, average
 \end{center}
 \pagebreak
 \subsubsection{3}
-\label{sec:orgc8ef325}
+\label{sec:orgf276176}
 \textbf{Description}\\
 Give all books published before 2010 the “classic” tag\\
 \linebreak
@@ -836,7 +836,7 @@ db.books.updateMany( {
 \end{center}
 \pagebreak
 \subsubsection{4}
-\label{sec:org611c19a}
+\label{sec:orgd06be3c}
 \textbf{Description}\\
 Updates all books authored by J.K. Rowling (all Harry Potter) by removing the incorrect author “Mary Grandpr`` while also removing any ratings below 5 stars for those books\\
 \linebreak
@@ -889,10 +889,10 @@ db.books.updateMany(
 \includegraphics[width=1\textwidth]{images/KFWJOR001/4-after-books.png}
 \end{center}
 \section{Link the Database to a Program}
-\label{sec:org7c5b026}
+\label{sec:orgabfadd9}
 Instructions for running the program can be found in \texttt{README.md}.
 \section{Contribution Statement}
-\label{sec:org4855421}
+\label{sec:orga0dbfa2}
 \begin{center}
 \begin{tabular}{ll}
 \hline
