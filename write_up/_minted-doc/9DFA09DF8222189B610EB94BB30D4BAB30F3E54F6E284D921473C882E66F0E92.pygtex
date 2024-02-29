@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+mongoimport\PYG{+w}{ }\PYGZhy{}\PYGZhy{}db\PYG{+w}{ }bookstore\PYG{+w}{ }\PYGZhy{}\PYGZhy{}collection\PYG{+w}{ }users\PYG{+w}{ }\PYGZhy{}\PYGZhy{}file\PYG{+w}{ }mongo\PYGZhy{}seed/users.json\PYG{+w}{ }\PYGZhy{}\PYGZhy{}jsonArray
+mongoimport\PYG{+w}{ }\PYGZhy{}\PYGZhy{}db\PYG{+w}{ }bookstore\PYG{+w}{ }\PYGZhy{}\PYGZhy{}collection\PYG{+w}{ }books\PYG{+w}{ }\PYGZhy{}\PYGZhy{}file\PYG{+w}{ }mongo\PYGZhy{}seed/books.json\PYG{+w}{ }\PYGZhy{}\PYGZhy{}jsonArray
+\end{Verbatim}

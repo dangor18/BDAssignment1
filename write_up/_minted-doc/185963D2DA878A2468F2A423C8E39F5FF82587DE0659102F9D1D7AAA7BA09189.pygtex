@@ -1,0 +1,85 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{l+s+s2}{\PYGZdq{}user\PYGZus{}id\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{1}\PYG{p}{,}
+\PYG{+w}{    }\PYG{l+s+s2}{\PYGZdq{}user\PYGZus{}name\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}Mary Martinez\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{l+s+s2}{\PYGZdq{}ratings\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{p}{[}
+\PYG{+w}{        }\PYG{p}{\PYGZob{}}
+\PYG{+w}{            }\PYG{l+s+s2}{\PYGZdq{}book\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{                }\PYG{l+s+s2}{\PYGZdq{}book\PYGZus{}id\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{47}\PYG{p}{,}
+\PYG{+w}{                }\PYG{l+s+s2}{\PYGZdq{}authors\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{p}{[}
+\PYG{+w}{                    }\PYG{l+s+s2}{\PYGZdq{}Markus Zusak\PYGZdq{}}
+\PYG{+w}{                }\PYG{p}{],}
+\PYG{+w}{                }\PYG{l+s+s2}{\PYGZdq{}title\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}The Book Thief\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{                }\PYG{l+s+s2}{\PYGZdq{}isbn\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}375831002\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{                }\PYG{l+s+s2}{\PYGZdq{}isbn13\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{9780375831000.0}\PYG{p}{,}
+\PYG{+w}{                }\PYG{l+s+s2}{\PYGZdq{}language\PYGZus{}code\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}eng\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{                }\PYG{l+s+s2}{\PYGZdq{}average\PYGZus{}rating\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{4.36}\PYG{p}{,}
+\PYG{+w}{                }\PYG{l+s+s2}{\PYGZdq{}ratings\PYGZus{}count\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{1159741}\PYG{p}{,}
+\PYG{+w}{                }\PYG{l+s+s2}{\PYGZdq{}image\PYGZus{}url\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}https://images.gr\PYGZhy{}assets.com/books/1390053681m/19063.jpg\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{                }\PYG{l+s+s2}{\PYGZdq{}tags\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{p}{[}
+\PYG{+w}{                    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{                        }\PYG{l+s+s2}{\PYGZdq{}tag\PYGZus{}id\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{11557}\PYG{p}{,}
+\PYG{+w}{                        }\PYG{l+s+s2}{\PYGZdq{}tag\PYGZus{}name\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}favorites\PYGZdq{}}
+\PYG{+w}{                    }\PYG{p}{\PYGZcb{},}
+\PYG{+w}{                    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{                        }\PYG{l+s+s2}{\PYGZdq{}tag\PYGZus{}id\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{30574}\PYG{p}{,}
+\PYG{+w}{                        }\PYG{l+s+s2}{\PYGZdq{}tag\PYGZus{}name\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}to\PYGZhy{}read\PYGZdq{}}
+\PYG{+w}{                    }\PYG{p}{\PYGZcb{},}
+\PYG{+w}{                    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{                        }\PYG{l+s+s2}{\PYGZdq{}tag\PYGZus{}id\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{14487}\PYG{p}{,}
+\PYG{+w}{                        }\PYG{l+s+s2}{\PYGZdq{}tag\PYGZus{}name\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}historical\PYGZhy{}fiction\PYGZdq{}}
+\PYG{+w}{                    }\PYG{p}{\PYGZcb{},}
+\PYG{+w}{                    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{                        }\PYG{l+s+s2}{\PYGZdq{}tag\PYGZus{}id\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{11743}\PYG{p}{,}
+\PYG{+w}{                        }\PYG{l+s+s2}{\PYGZdq{}tag\PYGZus{}name\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}fiction\PYGZdq{}}
+\PYG{+w}{                    }\PYG{p}{\PYGZcb{},}
+\PYG{+w}{                    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{                        }\PYG{l+s+s2}{\PYGZdq{}tag\PYGZus{}id\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{33114}\PYG{p}{,}
+\PYG{+w}{                        }\PYG{l+s+s2}{\PYGZdq{}tag\PYGZus{}name\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}young\PYGZhy{}adult\PYGZdq{}}
+\PYG{+w}{                    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{                }\PYG{p}{]}
+\PYG{+w}{            }\PYG{p}{\PYGZcb{},}
+\PYG{+w}{            }\PYG{l+s+s2}{\PYGZdq{}rating\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{3}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{p}{],}
+\PYG{+w}{    }\PYG{l+s+s2}{\PYGZdq{}to\PYGZus{}read\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{p}{[}
+\PYG{+w}{        }\PYG{p}{\PYGZob{}}
+\PYG{+w}{            }\PYG{l+s+s2}{\PYGZdq{}book\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{                }\PYG{l+s+s2}{\PYGZdq{}book\PYGZus{}id\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{112}\PYG{p}{,}
+\PYG{+w}{                }\PYG{l+s+s2}{\PYGZdq{}authors\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{p}{[}
+\PYG{+w}{                    }\PYG{l+s+s2}{\PYGZdq{}Jojo Moyes\PYGZdq{}}
+\PYG{+w}{                }\PYG{p}{],}
+\PYG{+w}{                }\PYG{l+s+s2}{\PYGZdq{}title\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}Me Before You\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{                }\PYG{l+s+s2}{\PYGZdq{}isbn\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}670026603\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{                }\PYG{l+s+s2}{\PYGZdq{}isbn13\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{9780670026610.0}\PYG{p}{,}
+\PYG{+w}{                }\PYG{l+s+s2}{\PYGZdq{}language\PYGZus{}code\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}eng\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{                }\PYG{l+s+s2}{\PYGZdq{}average\PYGZus{}rating\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{4.27}\PYG{p}{,}
+\PYG{+w}{                }\PYG{l+s+s2}{\PYGZdq{}ratings\PYGZus{}count\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{587647}\PYG{p}{,}
+\PYG{+w}{                }\PYG{l+s+s2}{\PYGZdq{}image\PYGZus{}url\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}https://images.gr\PYGZhy{}assets.com/books/1357108762m/15507958.jpg\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{                }\PYG{l+s+s2}{\PYGZdq{}tags\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{p}{[}
+\PYG{+w}{                    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{                        }\PYG{l+s+s2}{\PYGZdq{}tag\PYGZus{}id\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{30574}\PYG{p}{,}
+\PYG{+w}{                        }\PYG{l+s+s2}{\PYGZdq{}tag\PYGZus{}name\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}to\PYGZhy{}read\PYGZdq{}}
+\PYG{+w}{                    }\PYG{p}{\PYGZcb{},}
+\PYG{+w}{                    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{                        }\PYG{l+s+s2}{\PYGZdq{}tag\PYGZus{}id\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{11557}\PYG{p}{,}
+\PYG{+w}{                        }\PYG{l+s+s2}{\PYGZdq{}tag\PYGZus{}name\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}favorites\PYGZdq{}}
+\PYG{+w}{                    }\PYG{p}{\PYGZcb{},}
+\PYG{+w}{                    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{                        }\PYG{l+s+s2}{\PYGZdq{}tag\PYGZus{}id\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{17213}\PYG{p}{,}
+\PYG{+w}{                        }\PYG{l+s+s2}{\PYGZdq{}tag\PYGZus{}name\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}kindle\PYGZdq{}}
+\PYG{+w}{                    }\PYG{p}{\PYGZcb{},}
+\PYG{+w}{                    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{                        }\PYG{l+s+s2}{\PYGZdq{}tag\PYGZus{}id\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{26138}\PYG{p}{,}
+\PYG{+w}{                        }\PYG{l+s+s2}{\PYGZdq{}tag\PYGZus{}name\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}romance\PYGZdq{}}
+\PYG{+w}{                    }\PYG{p}{\PYGZcb{},}
+\PYG{+w}{                    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{                        }\PYG{l+s+s2}{\PYGZdq{}tag\PYGZus{}id\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{3389}\PYG{p}{,}
+\PYG{+w}{                        }\PYG{l+s+s2}{\PYGZdq{}tag\PYGZus{}name\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}audiobook\PYGZdq{}}
+\PYG{+w}{                    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{                }\PYG{p}{]}
+\PYG{+w}{            }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{p}{]}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

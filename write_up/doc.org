@@ -114,7 +114,7 @@ Both Collection Schemas were designed by creating hand-made JSON example objects
 #+end_src
 
 \newgeometry{margin=0in}
-#+ATTR_LATEX: :height 1.2\textwidth :angle 180
+#+ATTR_LATEX: :height 1.2\textwidth
 [[file:Collection1Rotate.png]]
 \restoregeometry
 ** Collection 2 - ~users~
@@ -206,7 +206,7 @@ Both Collection Schemas were designed by creating hand-made JSON example objects
 #+end_src
 
 \newgeometry{margin=0in}
-#+ATTR_LATEX: :height 1.2\textwidth :angle 180
+#+ATTR_LATEX: :height 1.2\textwidth
 [[file:Collection2Rotate.png]]
 \restoregeometry
 
@@ -245,17 +245,21 @@ Use case examples:\\
 
 * Create and Load This MongoDB Database
 ** Load the Database
-\paragraph{Loading via Python}
-The database was loaded programatically via ~PyMongo~. The script for which can be found as ~load_database.py~. This was done that the process of seeding the databae could be done automatically such that it is identical for each member of our group. The script very simply reads in the json data produced in "[[*Data Pre-Processing]]" and calls ~insertMany~ on the database.
+The process of creating and loading the database was significantly simplified on account of the fact that we had already [[*Data Pre-Processing][Pre-Processed]] the data into JSON format. For each collection, a shell command is called to seed the JSON data into their associated collections. The creation of the database is implicit ie. inserting data into the non-existent database leads to its creation. The commands use ~mongoimport~, a CLI tool designed for extracting data from plain-text formats (eg. JSON) and inserting them into MongoDB databases.
 
-\paragraph{Loading via shell}
-However, the database can also be loaded via the following shell commands:
-
-#+begin_src shell
-mongoimport --db goodbooks --collection users --file mongo-seed/users.json --jsonArray
-mongoimport --db goodbooks --collection books --file mongo-seed/books.json --jsonArray
+*** Books Collection
+#+begin_src bash
+mongoimport --db bookstore --collection books --file mongo-seed/books.json --jsonArray
 #+end_src
 
-These commands similarly
+*** Users Collection
+#+begin_src bash
+mongoimport --db bookstore --collection users --file mongo-seed/users.json --jsonArray
+#+end_src
 
 ** Testing
+The shell commands were tested and the output has been annotated on the following page:
+\newgeometry{margin=0.1in}
+#+ATTR_LATEX: :width 1\textwidth
+[[file:q3.png]]
+\restoregeometry

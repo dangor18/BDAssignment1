@@ -1,0 +1,60 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{l+s+s2}{\PYGZdq{}book\PYGZus{}id\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}98\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{l+s+s2}{\PYGZdq{}isbn\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}1401359604\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{l+s+s2}{\PYGZdq{}isbn13\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}9781401359610.0\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{l+s+s2}{\PYGZdq{}authors\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{p}{[}
+\PYG{+w}{        }\PYG{l+s+s2}{\PYGZdq{}Plum Sykes\PYGZdq{}}
+\PYG{+w}{    }\PYG{p}{],}
+\PYG{+w}{    }\PYG{l+s+s2}{\PYGZdq{}original\PYGZus{}publication\PYGZus{}year\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{2004}\PYG{p}{,}
+\PYG{+w}{    }\PYG{l+s+s2}{\PYGZdq{}title\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}Bergdorf Blondes\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{l+s+s2}{\PYGZdq{}language\PYGZus{}code\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}en\PYGZhy{}US\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{l+s+s2}{\PYGZdq{}average\PYGZus{}rating\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{3.26}\PYG{p}{,}
+\PYG{+w}{    }\PYG{l+s+s2}{\PYGZdq{}ratings\PYGZus{}count\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{23795}\PYG{p}{,}
+\PYG{+w}{    }\PYG{l+s+s2}{\PYGZdq{}total\PYGZus{}ratings\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{l+s+s2}{\PYGZdq{}ratings\PYGZus{}1\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{2020}\PYG{p}{,}
+\PYG{+w}{        }\PYG{l+s+s2}{\PYGZdq{}ratings\PYGZus{}2\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{4428}\PYG{p}{,}
+\PYG{+w}{        }\PYG{l+s+s2}{\PYGZdq{}ratings\PYGZus{}3\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{8669}\PYG{p}{,}
+\PYG{+w}{        }\PYG{l+s+s2}{\PYGZdq{}ratings\PYGZus{}4\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{6144}\PYG{p}{,}
+\PYG{+w}{        }\PYG{l+s+s2}{\PYGZdq{}ratings\PYGZus{}5\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{4561}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{},}
+\PYG{+w}{    }\PYG{l+s+s2}{\PYGZdq{}image\PYGZus{}url\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}https://s.gr\PYGZhy{}assets.com/assets/nophoto/book/111x148\PYGZhy{}bcc042a9c91a29c1d680899eff700a03.png\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{l+s+s2}{\PYGZdq{}tags\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{p}{[}
+\PYG{+w}{        }\PYG{p}{\PYGZob{}}
+\PYG{+w}{            }\PYG{l+s+s2}{\PYGZdq{}tag\PYGZus{}id\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{11743}\PYG{p}{,}
+\PYG{+w}{            }\PYG{l+s+s2}{\PYGZdq{}tag\PYGZus{}name\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}fiction\PYGZdq{}}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{},}
+\PYG{+w}{        }\PYG{p}{\PYGZob{}}
+\PYG{+w}{            }\PYG{l+s+s2}{\PYGZdq{}tag\PYGZus{}id\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{8717}\PYG{p}{,}
+\PYG{+w}{            }\PYG{l+s+s2}{\PYGZdq{}tag\PYGZus{}name\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}currently\PYGZhy{}reading\PYGZdq{}}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{},}
+\PYG{+w}{        }\PYG{p}{\PYGZob{}}
+\PYG{+w}{            }\PYG{l+s+s2}{\PYGZdq{}tag\PYGZus{}id\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{8055}\PYG{p}{,}
+\PYG{+w}{            }\PYG{l+s+s2}{\PYGZdq{}tag\PYGZus{}name\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}contemporary\PYGZdq{}}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{p}{],}
+\PYG{+w}{    }\PYG{l+s+s2}{\PYGZdq{}ratings\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{p}{[}
+\PYG{+w}{        }\PYG{p}{\PYGZob{}}
+\PYG{+w}{            }\PYG{l+s+s2}{\PYGZdq{}user\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{                }\PYG{l+s+s2}{\PYGZdq{}user\PYGZus{}id\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{237}\PYG{p}{,}
+\PYG{+w}{                }\PYG{l+s+s2}{\PYGZdq{}user\PYGZus{}name\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}David Smith\PYGZdq{}}
+\PYG{+w}{            }\PYG{p}{\PYGZcb{},}
+\PYG{+w}{            }\PYG{l+s+s2}{\PYGZdq{}rating\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{1}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{},}
+\PYG{+w}{        }\PYG{p}{\PYGZob{}}
+\PYG{+w}{            }\PYG{l+s+s2}{\PYGZdq{}user\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{                }\PYG{l+s+s2}{\PYGZdq{}user\PYGZus{}id\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{364}\PYG{p}{,}
+\PYG{+w}{                }\PYG{l+s+s2}{\PYGZdq{}user\PYGZus{}name\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}Christina Calderon\PYGZdq{}}
+\PYG{+w}{            }\PYG{p}{\PYGZcb{},}
+\PYG{+w}{            }\PYG{l+s+s2}{\PYGZdq{}rating\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{1}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{},}
+\PYG{+w}{        }\PYG{p}{\PYGZob{}}
+\PYG{+w}{            }\PYG{l+s+s2}{\PYGZdq{}user\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{                }\PYG{l+s+s2}{\PYGZdq{}user\PYGZus{}id\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{399}\PYG{p}{,}
+\PYG{+w}{                }\PYG{l+s+s2}{\PYGZdq{}user\PYGZus{}name\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}Stephen Pugh\PYGZdq{}}
+\PYG{+w}{            }\PYG{p}{\PYGZcb{},}
+\PYG{+w}{            }\PYG{l+s+s2}{\PYGZdq{}rating\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{2}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{p}{]}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}
