@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nx}{db}\PYG{p}{.}\PYG{n+nx}{users}\PYG{p}{.}\PYG{n+nx}{find}\PYG{p}{(}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{l+s+s2}{\PYGZdq{}to\PYGZus{}read.book.title\PYGZdq{}}\PYG{o}{:}\PYG{l+s+s2}{\PYGZdq{}The Book Thief\PYGZdq{}}
+\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{l+s+s2}{\PYGZdq{}\PYGZus{}id\PYGZdq{}}\PYG{o}{:}\PYG{l+m+mf}{0}\PYG{p}{,}\PYG{l+s+s2}{\PYGZdq{}user\PYGZus{}name\PYGZdq{}}\PYG{o}{:}\PYG{l+m+mf}{1}
+\PYG{p}{\PYGZcb{})}
+\end{Verbatim}
