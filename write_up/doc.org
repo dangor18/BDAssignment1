@@ -30,8 +30,8 @@ The dataset includes data from an online book review platform (https://goodreads
 *Dataset Content*:
 - *books.csv*: Each entry represents a book with a unique ~book_id~. There are multiple data fields for a book:
   - *~book_id~, ~goodreads_book_id~, ~best_book_id~, ~work_id~*: Unique id’s representing a book, each with a different purpose. We only used ~book_id~ and ~goodreads_book_id~ as they’re used to link books to user ~ratings~ and user ~to_read~ lists.
-  - *~ratings_1~, ~ratings_2~, …*: Number of user ratings by rating value. eg. ~ratings_1~ represents the number of 1 star ratings given to that book.
-  - The rest of the fields are self explanatory but include info relating to authors, title, release date, and isbn number.
+  - *~ratings_1~, ~ratings_2~, …*: Number of user ratings by rating value. eg. ~ratings_1~ represents the number of 1-star ratings given to that book.
+  - The rest of the fields are self-explanatory but include info relating to authors, title, release date, and isbn number.
 - *ratings.csv*: Each entry is a ~user_id~ to ~book_id~ mapping with a rating.
   - *~book_tags.csv~*: Each entry is a ~book_id~ to ~tag_id~ mapping.
   - *~tags.csv~*: Each entry is a tag_id to ~tag_name~ mapping.
@@ -39,7 +39,7 @@ The dataset includes data from an online book review platform (https://goodreads
 ** Data Pre-Processing
 The data was processed such that the data was represented in JSON format with evidence of nested objects so that we could demonstrate the capabilities of MongoDB.\\
 \linebreak
-Here is a quick outline on how we processed the data to create JSON files:\\
+Here is a quick outline of how we processed the data to create JSON files:\\
 Libraries used: ~Pandas~, ~PyArrow~, ~Faker~\\
 \linebreak
 ~Pandas~ was used to load the csv files into dataframes where we merged data and applied ~group by~ aggregate functions to obtain lists of data objects per a unique entry id. This was useful, for example, when we obtained a list of tags per ~book_id~.\\
@@ -267,11 +267,11 @@ The shell commands were tested and the output has been annotated on the followin
 
 * Discuss the Relative Benefits and Disadvantages of MongoDB
 ** MongoDB (Document Store)
-MongoDB is a document store database. Document store databases favour low retrieval latency and efficiency over consistency and functionality (expressiveness) when compared with relational databases. MongoDB is flexible: it fascilitates incremental schema modification as the schema is not rigidly defined. This can improve development velocity and account for changing stakeholder requirements.\\
+MongoDB is a document store database. Document store databases favour low retrieval latency and efficiency over consistency and functionality (expressiveness) when compared with relational databases. MongoDB is flexible: it facilitates incremental schema modification as the schema is not rigidly defined. This can improve development velocity and account for changing stakeholder requirements.\\
 \linebreak
-MongoDB is highly scalable and will be efficient with the ever increasing addition of books being published. MongoDB meets a good middle-ground when compared with other NoSQL databases. It is fascilitates nested data and objects and allows querying on those objects without being overly strict or complex. Each Book and User is able to store all necessary information while allow for performant data retrieval without the overhead of complex joins.\\
+MongoDB is highly scalable and will be efficient with the ever increasing addition of books being published. MongoDB meets a good middle-ground when compared with other NoSQL databases. It is facilitates nested data and objects and allows querying on those objects without being overly strict or complex. Each Book and User is able to store all necessary information while allow for performant data retrieval without the overhead of complex joins.\\
 \linebreak
-The disadvantages of using a MongoDB is that there is a high degree of duplication and redundant data. This means that storing and transferring all of this data is computationally expensive. Secondly, inserting and updating data can be much more expensive than a relational database on account of the necessity to make updates in multiple places (due to the duplication). However, data about books is unlikely to change frequently (as the book has already been published) and thus this downside is heavily mitigated in the chosen example.
+The disadvantages of using a MongoDB are that there is a high degree of duplication and redundant data. This means that storing and transferring all of this data is computationally expensive. Secondly, inserting and updating data can be much more expensive than a relational database on account of the necessity to make updates in multiple places (due to the duplication). However, data about books is unlikely to change frequently (as the book has already been published) and thus this downside is heavily mitigated in the chosen example.
 
 - *Benefits* (When compared with relational): Scalable, schema-free design, data-access performance
 - *Disadvantages* (When compared with relational): Duplication, high storage use, slow modification, poor query expressiveness (functionality)
@@ -281,29 +281,29 @@ The disadvantages of using a MongoDB is that there is a high degree of duplicati
   - User telemetry could also be stored as in a document store database as it is high volume with very infrequent modification
 
 ** Graph DB
-Graph based databases allow for expressive and performant relationship representation and would be ideal for relationship related queries. Each relationship can be given properties that qualitatively describe that relationship. This is ideal for data where the relationships to other data is the primary provider of utility (eg. a knowledge graph), as opposed to the structured categorisation (as is the case in MongoDB and relational databases).\\
+Graph databases allow for expressive and performant relationship representation and would be ideal for relationship-related queries. Each relationship can be given properties that qualitatively describe that relationship. This is ideal for data where the relationships to other data is the primary provider of utility (eg. a knowledge graph), as opposed to the structured categorisation (as is the case in MongoDB and relational databases).\\
 \linebreak
-The chosen dataset is highly structured without a large number of annotated relationships between data and it thus be a poor choice for graph DBs. The dataset would not leverage the benefits of a graph DB and would miss out on the well-fitted the benefits of MongoDB, namely schema flexibility, performance, and scalability, and simplicity.
+The chosen dataset is highly structured without a large number of annotated relationships between data and it thus is a poor choice for graph DBs. The dataset would not leverage the benefits of a graph DB and would miss out on the well-fitted benefits of MongoDB, namely schema flexibility, performance, scalability, and simplicity.
 
 - *Benefits*: Efficient modelling of highly inter-linked data, Query expressiveness (functionality), Great relationship representation (for which it is scalable and performant)
 - *Disadvantages*: Unnecessary complexity, poor modelling of structured data
 - *Role in polyglot persistence*:
-  - A future polyglot design could include a graph database that models the relationship books have to each other.
+  - A future polyglot design could include a graph database that models the relationship books have with each other.
   - Each book could have an outgoing edge to related books with a descriptive tag that describes their relationship strength and type.
-  - This would prove highly useful for the sites recommendation engine.
+  - This would prove highly useful for the site's recommendation engine.
 
 ** Key-value Store
-Key-Value stores are extremely simple. They very similar to a document store but with fewer cabilities in data representation and querying. They offer many of the same benefits of schema flexibility, scalability, and performance. There key benefit and disadvantage over document stores is their simplicity. The simplicity is limiting but ideal for data that can be modelled simply. The chosen dataset is not suited for a key-value store as it includes more complex nested objects.
+Key-Value stores are extremely simple. They are very similar to a document store but with fewer capabilities in data representation and querying. They offer many of the same benefits of schema flexibility, scalability, and performance. Their key benefit and disadvantage over document stores is their simplicity. The simplicity is limiting but ideal for data that can be modelled simply. The chosen dataset is not suited for a key-value store as it includes more complex nested objects.
 - *Benefits*: High performance, Scalability, Simplicity, Flexibility
 - *Disadvantages*: Limited query capabilities and Does not support complex data structures.
 - *Role in polyglot persistence*:
   - It can store the current session data of users. Easy to keep track of users' sessions such as how long they were on the app.
-  - The key-value store's flexability would be very important as it would allow us to store more complex session information about the user which can be used for processing later on to improve the users experience on the application.
+  - The key-value store's flexibility would be very important as it would allow us to store more complex session information about the user which can be used for processing later on to improve the user's experience on the application.
 
 ** Relational
-Relational databases are great for keeping data consistent and for effectively maintaining the relationships of the data. Their ability to store relationships (via foreign keys) between data ensures the following benefits: data consistency, minimal duplication, expressive queries. Relational databases falter when needing to retrieve large quantities of data from different tables. Joins become very expensive as the size of a dataset grows. Data analysis and operations are impacted substantially. It becomes inefficient with a very large (big) data.\\
+Relational databases are great for keeping data consistent and for effectively maintaining the relationships of the data. Their ability to store relationships (via foreign keys) between data ensures the following benefits: data consistency, minimal duplication, and expressive queries. Relational databases falter when needing to retrieve large quantities of data from different tables. Joins become very expensive as the size of a dataset grows. Data analysis and operations are impacted substantially. It becomes inefficient with very large (big) data.\\
 \linebreak
-The goodbooks dataset at present would be well suited to a relational database, however, if we were to massively increase the scale of the data stored the efficiency gains of MongoDB would quickly become apparent. The data is not updated frequently enough and for critical operations and thus the consistency benefits provided by a relational database would be negligible.
+The goodbooks dataset at present would be well suited to a relational database, however, if we were to massively increase the scale of the data stored the efficiency gains of MongoDB would quickly become apparent. The data is not updated frequently enough for critical operations and thus the consistency benefits provided by a relational database would be negligible.
 
 - *Benefits*: Query Expressiveness (functionality), consistency, reliability, low storage use (avoids duplication), accuracy, data integrity
 - *Disadvantages*: Decrease in performance at scale, low flexibility (requires up-front schema design)
@@ -316,7 +316,7 @@ The goodbooks dataset at present would be well suited to a relational database, 
 Column Family DBs are similar to relational databases, however, they bundle groups of frequently accessed columns together. This reduces the performance issues that may occur in relational databases. It does, however, still require up-front schema design without obtaining the expressiveness benefits provided by relational databases.\\
 \linebreak
 
-At present, the good reads database are not well suited to being effectively grouped. The only instance in which this would be useful would be a bundling of ratings data in the books table. However, the benefits are not extensive enough to utilise this over MongoDB for this dataset.
+At present, the ~goodbooks~ database is not well suited to being effectively grouped. The only instance in which this would be useful would be a bundling of ratings data in the books table. However, the benefits are not extensive enough to utilise this over MongoDB for this dataset.
 
 - *Benefits*: Compression of data, Scalable, fast to load queries, good for simple analytics.
 - *Disadvantages*: Limited querying capabilities, limited data modelling capabilities
@@ -327,16 +327,16 @@ At present, the good reads database are not well suited to being effectively gro
   - Each set of metrics relating to a particular type of user data could be grouped into a column family for that user.
 
 ** Hierarchical
-Hierarchical databases are optimised for data that can be stored as deeply nested hierarchies. Document Store DBs are also well suited for hierarchical nesting, however, they access performance greatly suffers when the depth of those hierarchies becomes excessive. Thus, hierarchical databases are great for data with inherently deep hierarchical structure. Hierarchical databases would be effective for fast lookup and to effectively store this data.\\
+Hierarchical databases are optimised for data that can be stored as deeply nested hierarchies. Document Store DBs are also well suited for hierarchical nesting, however, their access performance greatly suffers when the depth of those hierarchies becomes excessive. Thus, hierarchical databases are great for data with inherently deep hierarchical structure. Hierarchical databases would be effective for fast lookup and to effectively store this data.\\
 \linebreak
-While the goodbooks dataset does include hierarchies, the hierarchies seldom extend beyond a depth of 5. This means the data is not inherently hierarchical and does not suffer from performance detriments when traversing the nested data. On account of this, a hierarchical database would be a poor choice as it would miss out on the key benefits of MongoDB (flexibility in particular).
+While the ~goodbooks~ dataset does include hierarchies, the hierarchies seldom extend beyond a depth of 5. This means the data is not inherently hierarchical and does not suffer from performance detriments when traversing the nested data. On account of this, a hierarchical database would be a poor choice as it would miss out on the key benefits of MongoDB (flexibility in particular).
 
 - *Benefits*: Fast retrieval of nested data, efficient storage of data, predictable data structure
-- *Disadvantages*: Limited flexibility, hard to maintain and update, limited interoperability, reduced expresiveness
+- *Disadvantages*: Limited flexibility, hard to maintain and update, limited interoperability, reduced expressiveness
 - *Role in polyglot persistence*:
   - In the future, the platform may wish to hold a representation of books, their predecessors, and their successors.
   - A hierarchical relationship could be modelled such that each book belongs to a subgenre, which belongs to a series of parent genres. These books would have parent and descendant books that are influenced by them.
-  - This hierarchy could be stored separately to the primary book database to avoid affecting its performance and size.
+  - This hierarchy could be stored separately from the primary book database to avoid affecting its performance and size.
 
 * Query and Updating the Database
 ** GRDDAN017
