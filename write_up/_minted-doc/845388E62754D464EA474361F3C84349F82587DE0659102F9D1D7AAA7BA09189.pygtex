@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nx}{db}\PYG{p}{.}\PYG{n+nx}{books}\PYG{p}{.}\PYG{n+nx}{updateMany}\PYG{p}{(}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{l+s+s2}{\PYGZdq{}original\PYGZus{}publication\PYGZus{}year\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{n+nx}{\PYGZdl{}lt}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{2010}\PYG{+w}{ }\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n+nx}{\PYGZdl{}addToSet}\PYG{o}{:}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}tags\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{n+nx}{tag\PYGZus{}id}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{12345}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nx}{tag\PYGZus{}name}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}classic\PYGZdq{}}\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

@@ -637,6 +637,117 @@ db.users.aggregate({
 *Output*\\
 #+ATTR_LATEX: :width 1\textwidth
 [[file:images/WHLJOS001/4.png]]
+\pagebreak
+** KFWJOR001
+*** 1
+*Description*\\
+Finding users who have rated the most diverse genres
+\linebreak
+*Query*
+#+begin_src js
+db.users.aggregate([
+    { $unwind: "$ratings" },
+    { $lookup: {
+        from: "books",
+        localField: "ratings.book.title", foreignField: "title",
+        as: "rated_books" } },
+    { $unwind: "$rated_books" },
+    { $unwind: "$rated_books.tags" },
+    { $group: { _id: "$user_id", user_name: { $first: "$user_name" },
+                genres: { $addToSet: "$rated_books.tags.tag_name" } } },
+    { $addFields: { num_genres: { $size: "$genres" } } },
+    { $sort: { num_genres: -1 } },
+    { $limit: 10 }
+])
+#+end_src
+
+#+RESULTS:
+
+\linebreak
+*Output*\\
+#+ATTR_LATEX: :width 1\textwidth
+[[file:images/KFWJOR001/1.png]]
+\pagebreak
+*** 2
+*Description*\\
+Find highly rated books and only show their title, authors and average rating
+\\
+\linebreak
+*Query*
+#+begin_src js
+db.books.find({ "average_rating": { $gte: 4.5 } }, {title: 1, authors:1, average_rating: 1})
+#+end_src
+
+#+RESULTS:
+
+\linebreak
+*Output*\\
+#+ATTR_LATEX: :width 1\textwidth
+[[file:images/KFWJOR001/2.png]]
+\pagebreak
+
+*** 3
+*Description*\\
+Give all books published before 2010 the “classic” tag\\
+\linebreak
+*Query*
+#+begin_src js
+db.books.updateMany( {
+    "original_publication_year": { $lt: 2010 } }, {
+        $addToSet: { "tags": {tag_id: 12345, tag_name: "classic"} } }
+#+end_src
+\linebreak
+*Output*\\
+
+-  3 - Query
+#+ATTR_LATEX: :width 1\textwidth
+[[file:images/KFWJOR001/3-query.png]]
+
+-  3 - Before
+#+ATTR_LATEX: :width 1\textwidth
+[[file:images/KFWJOR001/3-before.png]]
+
+-  3 - After
+#+ATTR_LATEX: :width 1\textwidth
+[[file:images/KFWJOR001/3-after.png]]
+\pagebreak
+*** 4
+*Description*\\
+Updates all books authored by J.K. Rowling (all Harry Potter) by removing the incorrect author “Mary Grandpr" while also removing any ratings below 5 stars for those books\\
+\linebreak
+*Query*
+#+begin_src js
+db.books.updateMany(
+    { "authors": "JK Rowling" },
+    {
+        $set: { "authors": ["JK Rowling"] },
+        $pull: { "ratings": { "rating": { $lt: 5 } } }
+    }
+);
+#+end_src
+
+\linebreak
+*Output*\\
+
+-  4 - Query
+#+ATTR_LATEX: :width 1\textwidth
+[[file:images/KFWJOR001/4-query.png]]
+
+-  4 - Before Ratings
+#+ATTR_LATEX: :width 1\textwidth
+[[file:images/KFWJOR001/4-before-ratings.png]]
+
+-  4 - After Ratings
+#+ATTR_LATEX: :width 1\textwidth
+[[file:images/KFWJOR001/4-after-ratings.png]]
+
+-  4 - Before Books
+#+ATTR_LATEX: :width 1\textwidth
+[[file:images/KFWJOR001/4-before-books.png]]
+
+-  4 - After Books
+#+ATTR_LATEX: :width 1\textwidth
+[[file:images/KFWJOR001/4-after-books.png]]
 
 * Link the Database to a Program
 Instructions for running the program can be found in ~README.md~.

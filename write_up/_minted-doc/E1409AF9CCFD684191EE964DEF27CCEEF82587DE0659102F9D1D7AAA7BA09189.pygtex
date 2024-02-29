@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nx}{db}\PYG{p}{.}\PYG{n+nx}{books}\PYG{p}{.}\PYG{n+nx}{find}\PYG{p}{(\PYGZob{}}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}average\PYGZus{}rating\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{n+nx}{\PYGZdl{}gte}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{4.5}\PYG{+w}{ }\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{n+nx}{title}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{1}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nx}{authors}\PYG{o}{:}\PYG{l+m+mf}{1}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nx}{average\PYGZus{}rating}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{1}\PYG{p}{\PYGZcb{})}
+\end{Verbatim}

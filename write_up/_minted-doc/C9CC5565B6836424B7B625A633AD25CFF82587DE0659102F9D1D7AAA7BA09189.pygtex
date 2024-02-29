@@ -1,0 +1,16 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nx}{db}\PYG{p}{.}\PYG{n+nx}{users}\PYG{p}{.}\PYG{n+nx}{aggregate}\PYG{p}{([}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{n+nx}{\PYGZdl{}unwind}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}\PYGZdl{}ratings\PYGZdq{}}\PYG{+w}{ }\PYG{p}{\PYGZcb{},}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{n+nx}{\PYGZdl{}lookup}\PYG{o}{:}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{k+kr}{from}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}books\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{        }\PYG{n+nx}{localField}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}ratings.book.title\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nx}{foreignField}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}title\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{        }\PYG{k+kr}{as}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}rated\PYGZus{}books\PYGZdq{}}\PYG{+w}{ }\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{p}{\PYGZcb{},}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{n+nx}{\PYGZdl{}unwind}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}\PYGZdl{}rated\PYGZus{}books\PYGZdq{}}\PYG{+w}{ }\PYG{p}{\PYGZcb{},}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{n+nx}{\PYGZdl{}unwind}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}\PYGZdl{}rated\PYGZus{}books.tags\PYGZdq{}}\PYG{+w}{ }\PYG{p}{\PYGZcb{},}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{n+nx}{\PYGZdl{}group}\PYG{o}{:}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{n+nx}{\PYGZus{}id}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}\PYGZdl{}user\PYGZus{}id\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nx}{user\PYGZus{}name}\PYG{o}{:}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{n+nx}{\PYGZdl{}first}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}\PYGZdl{}user\PYGZus{}name\PYGZdq{}}\PYG{+w}{ }\PYG{p}{\PYGZcb{},}
+\PYG{+w}{                }\PYG{n+nx}{genres}\PYG{o}{:}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{n+nx}{\PYGZdl{}addToSet}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}\PYGZdl{}rated\PYGZus{}books.tags.tag\PYGZus{}name\PYGZdq{}}\PYG{+w}{ }\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{p}{\PYGZcb{},}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{n+nx}{\PYGZdl{}addFields}\PYG{o}{:}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{n+nx}{num\PYGZus{}genres}\PYG{o}{:}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{n+nx}{\PYGZdl{}size}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}\PYGZdl{}genres\PYGZdq{}}\PYG{+w}{ }\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{p}{\PYGZcb{},}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{n+nx}{\PYGZdl{}sort}\PYG{o}{:}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{n+nx}{num\PYGZus{}genres}\PYG{o}{:}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1}\PYG{+w}{ }\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{p}{\PYGZcb{},}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{n+nx}{\PYGZdl{}limit}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{10}\PYG{+w}{ }\PYG{p}{\PYGZcb{}}
+\PYG{p}{])}
+\end{Verbatim}

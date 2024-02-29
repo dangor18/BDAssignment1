@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nx}{db}\PYG{p}{.}\PYG{n+nx}{books}\PYG{p}{.}\PYG{n+nx}{updateMany}\PYG{p}{(}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}authors\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}JK Rowling\PYGZdq{}}\PYG{+w}{ }\PYG{p}{\PYGZcb{},}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n+nx}{\PYGZdl{}set}\PYG{o}{:}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}authors\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}JK Rowling\PYGZdq{}}\PYG{p}{]}\PYG{+w}{ }\PYG{p}{\PYGZcb{},}
+\PYG{+w}{        }\PYG{n+nx}{\PYGZdl{}pull}\PYG{o}{:}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}ratings\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}rating\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{n+nx}{\PYGZdl{}lt}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{5}\PYG{+w}{ }\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{p}{);}
+\end{Verbatim}
