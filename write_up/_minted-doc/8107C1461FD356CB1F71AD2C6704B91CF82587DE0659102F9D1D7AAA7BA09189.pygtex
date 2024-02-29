@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nx}{db}\PYG{p}{.}\PYG{n+nx}{books}\PYG{p}{.}\PYG{n+nx}{deleteMany}\PYG{p}{(\PYGZob{}}
+\PYG{+w}{    }\PYG{n+nx}{authors}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}Roald Dahl\PYGZdq{}}
+\PYG{p}{\PYGZcb{},\PYGZob{}}
+\PYG{+w}{    }\PYG{n+nx}{title}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{1}
+\PYG{p}{\PYGZcb{})}
+\end{Verbatim}

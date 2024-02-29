@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nx}{db}\PYG{p}{.}\PYG{n+nx}{users}\PYG{p}{.}\PYG{n+nx}{deleteMany}\PYG{p}{(\PYGZob{}}
+\PYG{+w}{    }\PYG{n+nx}{\PYGZdl{}and}\PYG{o}{:}\PYG{+w}{ }\PYG{p}{[\PYGZob{}}\PYG{n+nx}{to\PYGZus{}read}\PYG{o}{:}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{n+nx}{\PYGZdl{}exists}\PYG{o}{:}\PYG{+w}{ }\PYG{k+kc}{false}\PYG{+w}{ }\PYG{p}{\PYGZcb{}\PYGZcb{},}
+\PYG{+w}{           }\PYG{p}{\PYGZob{}}\PYG{n+nx}{ratings}\PYG{o}{:}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{n+nx}{\PYGZdl{}exists}\PYG{o}{:}\PYG{+w}{ }\PYG{k+kc}{false}\PYG{+w}{ }\PYG{p}{\PYGZcb{}\PYGZcb{}]}
+\PYG{p}{\PYGZcb{})}
+\end{Verbatim}

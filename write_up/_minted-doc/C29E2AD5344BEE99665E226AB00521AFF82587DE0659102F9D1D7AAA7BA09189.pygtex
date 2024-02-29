@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nx}{db}\PYG{p}{.}\PYG{n+nx}{books}\PYG{p}{.}\PYG{n+nx}{find}\PYG{p}{(\PYGZob{}}
+\PYG{+w}{    }\PYG{l+s+s2}{\PYGZdq{}original\PYGZus{}publication\PYGZus{}year\PYGZdq{}}\PYG{o}{:}\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}\PYGZdl{}gt\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{2004}\PYG{+w}{ }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{},\PYGZob{}}
+\PYG{+w}{    }\PYG{l+s+s2}{\PYGZdq{}title\PYGZdq{}}\PYG{o}{:}\PYG{l+m+mf}{1}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}\PYGZus{}id\PYGZdq{}}\PYG{o}{:}\PYG{l+m+mf}{0}\PYG{p}{,}\PYG{l+s+s2}{\PYGZdq{}original\PYGZus{}publication\PYGZus{}year\PYGZdq{}}\PYG{o}{:}\PYG{l+m+mf}{1}
+\PYG{p}{\PYGZcb{})}
+\end{Verbatim}

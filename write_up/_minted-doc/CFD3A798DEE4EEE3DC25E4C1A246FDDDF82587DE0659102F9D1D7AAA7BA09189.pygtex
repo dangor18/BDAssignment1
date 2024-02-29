@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nx}{db}\PYG{p}{.}\PYG{n+nx}{books}\PYG{p}{.}\PYG{n+nx}{find}\PYG{p}{(\PYGZob{}}
+\PYG{+w}{    }\PYG{n+nx}{tags}\PYG{o}{:}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{n+nx}{\PYGZdl{}elemMatch}\PYG{o}{:}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{n+nx}{tag\PYGZus{}name}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}sci\PYGZhy{}fi\PYGZdq{}}\PYG{p}{\PYGZcb{}\PYGZcb{}}
+\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n+nx}{\PYGZus{}id}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{0}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nx}{title}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{1}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nx}{authors}\PYG{o}{:}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{n+nx}{\PYGZdl{}slice}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{1}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{n+nx}{average\PYGZus{}rating}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{1}\PYG{p}{,}
+\PYG{p}{\PYGZcb{}).}\PYG{n+nx}{sort}\PYG{p}{(\PYGZob{}}\PYG{n+nx}{average\PYGZus{}rating}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1}\PYG{+w}{ }\PYG{p}{\PYGZcb{}).}\PYG{n+nx}{limit}\PYG{p}{(}\PYG{l+m+mf}{5}\PYG{p}{)}
+\end{Verbatim}

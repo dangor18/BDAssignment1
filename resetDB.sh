@@ -1,3 +1,3 @@
 #!/bin/bash
 mongosh bookstore --eval "db.dropDatabase();"
-python3 ./load_database.py
+./mongo-seed/import.sh

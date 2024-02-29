@@ -354,6 +354,7 @@ db.books.find({},{
 *Output*\\
 #+ATTR_LATEX: :width 1\textwidth
 [[file:images/GRDDAN017/1.png]]
+\pagebreak
 *** 2
 *Description*\\
 Find 2 books with the "fantasy" tag with a high average rating.\\
@@ -368,6 +369,7 @@ db.books.find({
 *Output*\\
 #+ATTR_LATEX: :width 1\textwidth
 [[file:images/GRDDAN017/2.png]]
+\pagebreak
 *** 3
 *Description*\\
 Find users who have rated a book but have an empty to_read list.\\
@@ -385,6 +387,7 @@ db.users.find({
 *Output*\\
 #+ATTR_LATEX: :width 1\textwidth
 [[file:images/GRDDAN017/3.png]]
+\pagebreak
 *** 4
 *Description*\\
 Add a book to a user's to-read list.\\
@@ -407,7 +410,7 @@ db.users.updateOne({
 *Output*\\
 #+ATTR_LATEX: :width 1\textwidth
 [[file:images/GRDDAN017/4.png]]
-
+\pagebreak
 ** MRCGAB004
 *** 1
 *Description*\\
@@ -425,6 +428,7 @@ db.users.find( {
 *Output*\\
 #+ATTR_LATEX: :width 1\textwidth
 [[file:images/MRCGAB004/1.png]]
+\pagebreak
 *** 2
 *Description*\\
 Find a list of books published after 2004 and return the title and year it was published.\\
@@ -441,6 +445,7 @@ db.books.find({
 *Output*\\
 #+ATTR_LATEX: :width 1\textwidth
 [[file:images/MRCGAB004/2.png]]
+\pagebreak
 *** 3
 *Description*\\
 Update the book “Bergdorf Blondes” with a new publishing date of 2005 db.books.updateOne. \\
@@ -460,6 +465,7 @@ db.books.updateOne({
 *Output*\\
 #+ATTR_LATEX: :width 1\textwidth
 [[file:images/MRCGAB004/3.png]]
+\pagebreak
 *** 4
 *Description*\\
 Delete user with the user_id 10.\\
@@ -473,7 +479,7 @@ db.users.deleteOne({"user_id":10})
 *Output*\\
 #+ATTR_LATEX: :width 1\textwidth
 [[file:images/MRCGAB004/4.png]]
-
+\pagebreak
 ** CRGMAT002
 *** 1
 *Description*\\
@@ -491,6 +497,7 @@ db.books.find({
 *Output*\\
 #+ATTR_LATEX: :width 1\textwidth
 [[file:images/CRGMAT002/1.png]]
+\pagebreak
 *** 2
 *Description*\\
 Aggregate user_ids alongside the total number of ratings that user has submitted (size of ratings array). The result is sorted by the number of ratings they have submitted and the top 10 are shown. \\
@@ -509,6 +516,7 @@ db.users.aggregate([ {
 *Output*\\
 #+ATTR_LATEX: :width 1\textwidth
 [[file:images/CRGMAT002/2.png]]
+\pagebreak
 *** 3
 *Description*\\
 Update a user that has rated "The Book Thief" with 4 stars. Change their name to: "Update_User!"\\
@@ -525,6 +533,7 @@ db.users.updateOne({
 *Output*\\
 #+ATTR_LATEX: :width 1\textwidth
 [[file:images/CRGMAT002/3.png]]
+\pagebreak
 *** 4
 *Description*\\
 test\\
@@ -542,6 +551,7 @@ db.books.deleteMany({
 *Output*\\
 #+ATTR_LATEX: :width 1\textwidth
 [[file:images/CRGMAT002/4.png]]
+\pagebreak
 ** WHLJOS001
 *** 1
 *Description*\\
@@ -563,6 +573,7 @@ db.books.aggregate([{
 *Output*\\
 #+ATTR_LATEX: :width 1\textwidth
 [[file:images/WHLJOS001/1.png]]
+\pagebreak
 *** 2
 *Description*\\
 Delete all users who have never rated a book and never marked a book as to_read:
@@ -582,6 +593,7 @@ db.users.deleteMany({
 *Output*\\
 #+ATTR_LATEX: :width 1\textwidth
 [[file:images/WHLJOS001/2.png]]
+\pagebreak
 *** 3
 *Description*\\
 Delete all books with an average rating less than 2 and more than 300 ratings.\\
@@ -601,6 +613,7 @@ db.books.deleteMany({
 
 #+ATTR_LATEX: :width 1\textwidth
 [[file:images/WHLJOS001/3.png]]
+\pagebreak
 *** 4
 *Description*\\
 Find the name of the user who has rated the most books.\\
@@ -624,3 +637,17 @@ db.users.aggregate({
 *Output*\\
 #+ATTR_LATEX: :width 1\textwidth
 [[file:images/WHLJOS001/4.png]]
+
+* Link the Database to a Program
+
+* Contribution Statement
+|-------------------------------+-------------------------|
+| Task                          | Who did it              |
+| Design Schema/JSON            | Matthew & Gabe          |
+| Setup Devops (Github, Docker) | Jordy                   |
+| Preprocessing                 | Joe & Daniel            |
+| Create the App                | Jordy                   |
+| Query                         | Everyone                |
+| Load into mongodb             | Mathew                  |
+| Write Up                      | Gabe & Matthew & Daniel |
+|-------------------------------+-------------------------|
