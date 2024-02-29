@@ -1,1 +1,1 @@
-mongoimport --db bookstore --collection users --file mongo-seed/users.json --jsonArray
+sauce

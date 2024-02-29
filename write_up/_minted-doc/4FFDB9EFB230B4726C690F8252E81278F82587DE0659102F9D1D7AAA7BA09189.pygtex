@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nx}{db}\PYG{p}{.}\PYG{n+nx}{users}\PYG{p}{.}\PYG{n+nx}{updateOne}\PYG{p}{(\PYGZob{}}
+\PYG{+w}{    }\PYG{l+s+s2}{\PYGZdq{}user\PYGZus{}id\PYGZdq{}}\PYG{+w}{   }\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{4}
+\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n+nx}{\PYGZdl{}push}\PYG{o}{:}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{l+s+s2}{\PYGZdq{}to\PYGZus{}read\PYGZdq{}}\PYG{o}{:}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{            }\PYG{n+nx}{book}\PYG{o}{:}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{n+nx}{book\PYGZus{}id}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{0}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nx}{authors}\PYG{o}{:}\PYG{+w}{ }\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}Daniel Gordon\PYGZdq{}}\PYG{p}{],}\PYG{+w}{ }\PYG{n+nx}{title}\PYG{o}{:}\PYG{+w}{ }\PYG{n+nx}{My}\PYG{+w}{ }\PYG{n+nx}{Story}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nx}{isbn}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}0\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nx}{isbn13}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mf}{0}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nx}{average\PYGZus{}rating}\PYG{o}{:}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nx}{tags}\PYG{o}{:}\PYG{+w}{ }\PYG{p}{[}\PYG{err}{“}\PYG{n+nx}{trash}\PYG{err}{”}\PYG{p}{]\PYGZcb{}}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{})}
+\end{Verbatim}

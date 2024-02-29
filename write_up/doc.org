@@ -5,7 +5,7 @@
   {\Large\bfseries Big Data Assignment 1 \par}
   \vspace{0.5cm}
 
-  {\large KFWJOR001 MRCGAB004 WHLJOS001 CRGMAT002\par}
+  {\large CRGMAT002 GRDDAN017 KFWJOR001 MRCGAB004 WHLJOS001\par}
   \vspace{0.5cm}
 
   {\large March 1, 2024\par}
@@ -337,3 +337,290 @@ While the goodbooks dataset does include hierarchies, the hierarchies seldom ext
   - In the future, the platform may wish to hold a representation of books, their predecessors, and their successors.
   - A hierarchical relationship could be modelled such that each book belongs to a subgenre, which belongs to a series of parent genres. These books would have parent and descendant books that are influenced by them.
   - This hierarchy could be stored separately to the primary book database to avoid affecting its performance and size.
+
+* Query and Updating the Database
+** GRDDAN017
+*** 1
+*Description*\\
+Find the book title and author list of the top 3 highest rated books.\\
+\linebreak
+*Query*
+#+begin_src js
+db.books.find({},{
+    _id: false, book_id: true, title: true, authors: true, average_rating: true
+}).sort({average_rating:-1}).limit(3);
+#+end_src
+\linebreak
+*Output*\\
+#+ATTR_LATEX: :width 1\textwidth
+[[file:images/GRDDAN017/1.png]]
+*** 2
+*Description*\\
+Find 2 books with the "fantasy" tag with a high average rating.\\
+\linebreak
+*Query*
+#+begin_src js
+db.books.find({
+    $and: [{ "tags.tag_name": "fantasy" }, { "average_rating": { $gt: 4 } }]
+}).limit(2)
+#+end_src
+\linebreak
+*Output*\\
+#+ATTR_LATEX: :width 1\textwidth
+[[file:images/GRDDAN017/2.png]]
+*** 3
+*Description*\\
+Find users who have rated a book but have an empty to_read list.\\
+\linebreak
+*Query*
+#+begin_src js
+db.users.find({
+    ratings: { $exists: true, $not: {$size: 0} },
+    to_read: { $size: 0 }
+}, {
+    _id: false, ratings: false
+});
+#+end_src
+\linebreak
+*Output*\\
+#+ATTR_LATEX: :width 1\textwidth
+[[file:images/GRDDAN017/3.png]]
+*** 4
+*Description*\\
+Add a book to a user's to-read list.\\
+\linebreak
+*Query*
+#+begin_src js
+db.users.updateOne({
+    "user_id"   : 4
+}, {
+    $push: {
+        "to_read": {
+            book: { book_id: 0, authors: ["Daniel Gordon"], title: My Story,
+                    isbn: "0", isbn13: 0, average_rating: -1, tags: ["trash"]}
+        }
+    }
+})
+#+end_src
+
+\linebreak
+*Output*\\
+#+ATTR_LATEX: :width 1\textwidth
+[[file:images/GRDDAN017/4.png]]
+
+** MRCGAB004
+*** 1
+*Description*\\
+Find and return a list of users’ names  who want to read “The book Thief”.\\
+\linebreak
+*Query*
+#+begin_src js
+db.users.find( {
+    "to_read.book.title":"The Book Thief"
+}, {
+    "_id":0,"user_name":1
+})
+#+end_src
+\linebreak
+*Output*\\
+#+ATTR_LATEX: :width 1\textwidth
+[[file:images/MRCGAB004/1.png]]
+*** 2
+*Description*\\
+Find a list of books published after 2004 and return the title and year it was published.\\
+\linebreak
+*Query*
+#+begin_src js
+db.books.find({
+    "original_publication_year":{ "$gt": 2004 }
+},{
+    "title":1, "_id":0,"original_publication_year":1
+})
+#+end_src
+\linebreak
+*Output*\\
+#+ATTR_LATEX: :width 1\textwidth
+[[file:images/MRCGAB004/2.png]]
+*** 3
+*Description*\\
+Update the book “Bergdorf Blondes” with a new publishing date of 2005 db.books.updateOne. \\
+\linebreak
+*Query*
+#+begin_src js
+db.books.updateOne({
+    "title":"Bergdorf Blondes"
+},{
+    "$set":{"original_publication_year":2005}
+})
+#+end_src
+
+#+RESULTS:
+
+\linebreak
+*Output*\\
+#+ATTR_LATEX: :width 1\textwidth
+[[file:images/MRCGAB004/3.png]]
+*** 4
+*Description*\\
+Delete user with the user_id 10.\\
+\linebreak
+*Query*
+#+begin_src js
+db.users.deleteOne({"user_id":10})
+#+end_src
+
+\linebreak
+*Output*\\
+#+ATTR_LATEX: :width 1\textwidth
+[[file:images/MRCGAB004/4.png]]
+
+** CRGMAT002
+*** 1
+*Description*\\
+Find the top 5 books (by average_rating) with tag_name "sci-fi". Show only a single author for each book. \\
+\linebreak
+*Query*
+#+begin_src js
+db.books.find({
+    tags: {$elemMatch: {tag_name: "sci-fi"}}
+}, {
+    _id: 0, title: 1, authors: {$slice: 1}, average_rating: 1,
+}).sort({average_rating : -1 }).limit(5)
+#+end_src
+\linebreak
+*Output*\\
+#+ATTR_LATEX: :width 1\textwidth
+[[file:images/CRGMAT002/1.png]]
+*** 2
+*Description*\\
+Aggregate user_ids alongside the total number of ratings that user has submitted (size of ratings array). The result is sorted by the number of ratings they have submitted and the top 10 are shown. \\
+\linebreak
+*Query*
+#+begin_src js
+db.users.aggregate([ {
+    $project: {_id: 0, user_id: 1, numRatings: { $size: "$ratings" }}
+}, {
+    $sort: { numRatings: -1 }
+}, {
+    $limit: 10
+}])
+#+end_src
+\linebreak
+*Output*\\
+#+ATTR_LATEX: :width 1\textwidth
+[[file:images/CRGMAT002/2.png]]
+*** 3
+*Description*\\
+Update a user that has rated "The Book Thief" with 4 stars. Change their name to: "Update_User!"\\
+\linebreak
+*Query*
+#+begin_src js
+db.users.updateOne({
+    "ratings": {$elemMatch: {rating: 4, "book.title": "The Book Thief"}}
+},{
+    $set: {user_name: "Update_Username!"}
+})
+#+end_src
+\linebreak
+*Output*\\
+#+ATTR_LATEX: :width 1\textwidth
+[[file:images/CRGMAT002/3.png]]
+*** 4
+*Description*\\
+test\\
+\linebreak
+*Query*
+#+begin_src js
+db.books.deleteMany({
+    authors: "Roald Dahl"
+},{
+    title: 1
+})
+#+end_src
+
+\linebreak
+*Output*\\
+#+ATTR_LATEX: :width 1\textwidth
+[[file:images/CRGMAT002/4.png]]
+** WHLJOS001
+*** 1
+*Description*\\
+Find the names and ratings of the top 50 fiction books with at least 1000 ratings.\\
+\linebreak
+*Query*
+#+begin_src js
+db.books.aggregate([{
+    $match: { "total_ratings": { $gte: 1000 }, "tags.tag_name": "fiction" }
+}, {
+    $sort: { "average_rating": -1 }
+}, {
+    $limit: 50
+}, {
+    $project: { _id: 0, title: 1, average_rating: 1 }
+}] )
+#+end_src
+\linebreak
+*Output*\\
+#+ATTR_LATEX: :width 1\textwidth
+[[file:images/WHLJOS001/1.png]]
+*** 2
+*Description*\\
+Delete all users who have never rated a book and never marked a book as to_read:
+\\
+\linebreak
+*Query*
+#+begin_src js
+db.users.deleteMany({
+    $and: [{to_read: { $exists: false }},
+           {ratings: { $exists: false }}]
+})
+#+end_src
+
+#+RESULTS:
+
+\linebreak
+*Output*\\
+#+ATTR_LATEX: :width 1\textwidth
+[[file:images/WHLJOS001/2.png]]
+*** 3
+*Description*\\
+Delete all books with an average rating less than 2 and more than 300 ratings.\\
+\linebreak
+*Query*
+#+begin_src js
+db.books.deleteMany({
+    $and: [ {
+        "average_rating": { $lt: 2 }
+    }, {
+        "total_ratings": { $gt: 300 }
+    }]
+})
+#+end_src
+\linebreak
+*Output*\\
+
+#+ATTR_LATEX: :width 1\textwidth
+[[file:images/WHLJOS001/3.png]]
+*** 4
+*Description*\\
+Find the name of the user who has rated the most books.\\
+\linebreak
+*Query*
+#+begin_src js
+db.users.aggregate({
+    $project: { user_id: 1, user_name: 1, num_ratings: { $size: "$ratings" } }
+},{
+    $sort: { num_ratings: -1 }
+},{
+    $limit: 1
+}, {
+    $project: {
+        _id: 0, user_name: 1
+    }
+})
+#+end_src
+
+\linebreak
+*Output*\\
+#+ATTR_LATEX: :width 1\textwidth
+[[file:images/WHLJOS001/4.png]]
