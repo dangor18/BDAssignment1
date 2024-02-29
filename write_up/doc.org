@@ -11,7 +11,8 @@
   {\large March 1, 2024\par}
 
   \vspace{2cm}
-  \includegraphics[width=0.5\textwidth]{uct.png}
+  \includegraphics[width=0.4\textwidth]{mongo.png}
+  \includegraphics[width=0.4\textwidth]{uct.png}
 \end{titlepage}
 \tableofcontents
 #+END_LATEX
