@@ -468,11 +468,11 @@ db.books.updateOne({
 \pagebreak
 *** 4
 *Description*\\
-Delete user with the user_id 10.\\
+Delete user with the user_id 32.\\
 \linebreak
 *Query*
 #+begin_src js
-db.users.deleteOne({"user_id":10})
+db.users.deleteOne({"user_id":32})
 #+end_src
 
 \linebreak
