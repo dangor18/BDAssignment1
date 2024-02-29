@@ -124,7 +124,7 @@ const UserSchema = new Schema<IUser>({
     }
 });
 
-const BookModel: Model<IBook> = model<IBook>('Book', BookSchema)
-const UserModel: Model<IUser> = model<IUser>('User', UserSchema)
+const Book: Model<IBook> = model<IBook>('Book', BookSchema)
+const User: Model<IUser> = model<IUser>('User', UserSchema)
 
-export { BookModel, UserModel }
+export { Book, User }
