@@ -36,7 +36,6 @@ docker compose up -d
 ```
 
 ## Using
-### Dependencies
 - If all went to plan, the docker container will have automatically:
     - Installed all dependencies
     - Launched the mongod service

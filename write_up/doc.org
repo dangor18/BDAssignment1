@@ -639,6 +639,7 @@ db.users.aggregate({
 [[file:images/WHLJOS001/4.png]]
 
 * Link the Database to a Program
+Instructions for running the program can be found in ~README.md~.
 
 * Contribution Statement
 |-------------------------------+-------------------------|
