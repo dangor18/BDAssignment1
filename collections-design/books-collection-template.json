@@ -9,8 +9,8 @@
     "title": "Bergdorf Blondes",
     "language_code": "en-US",
     "average_rating": 3.26,
-    "ratings_count": 23795,
-    "total_ratings": {
+    "total_ratings": 23795,
+    "rating_counts": {
         "ratings_1": 2020,
         "ratings_2": 4428,
         "ratings_3": 8669,
