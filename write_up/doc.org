@@ -48,7 +48,7 @@ Libraries used: ~Pandas~, ~PyArrow~, ~Faker~\\
 All data pre-processing code is in the data-processing directory but the output JSON files are included in the final submission.
 
 * Design a MongoDB Database
-Both Collection Schemas were designed by creating hand-made JSON example objects. Each of these objects shows what a document in the DB may look like. Underneath each JSON example, we have included a diagram which represents the example's nesting visually.
+Both Collection Schemas were designed by creating hand-made JSON example objects. Each of these objects shows what a document in the DB would look like. Underneath each JSON example, we have included a diagram which represents the example's nesting visually.
 ** Collection 1 - ~books~
 
 \paragraph{JSON example} \small
@@ -207,7 +207,7 @@ Both Collection Schemas were designed by creating hand-made JSON example objects
 
 \newgeometry{margin=0in}
 #+ATTR_LATEX: :height 1.2\textwidth :angle 180
-[[file:Collection1Rotate.png]]
+[[file:Collection2Rotate.png]]
 \restoregeometry
 
 ** Explanation and Justification
@@ -242,3 +242,20 @@ Unlike ~books~, the ~users~ collection does not directly correspond to a csv fil
 \linebreak
 Use case examples:\\
         Collection of users: what books user X wants to read.
+
+* Create and Load This MongoDB Database
+** Load the Database
+\paragraph{Loading via Python}
+The database was loaded programatically via ~PyMongo~. The script for which can be found as ~load_database.py~. This was done that the process of seeding the databae could be done automatically such that it is identical for each member of our group. The script very simply reads in the json data produced in "[[*Data Pre-Processing]]" and calls ~insertMany~ on the database.
+
+\paragraph{Loading via shell}
+However, the database can also be loaded via the following shell commands:
+
+#+begin_src shell
+mongoimport --db goodbooks --collection users --file mongo-seed/users.json --jsonArray
+mongoimport --db goodbooks --collection books --file mongo-seed/books.json --jsonArray
+#+end_src
+
+These commands similarly
+
+** Testing
