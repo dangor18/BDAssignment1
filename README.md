@@ -47,3 +47,7 @@ docker compose up -d
 
 ### Open the WebApp
 - The WebApp will running at [localhost:3000](http:localhost:3000)
+
+### Running preprocess
+- use pip install -r requirements.txt
+- then run python3 data-processing/preprocess.py
