@@ -1,4 +1,4 @@
-import { Schema, Model, model } from "mongoose"
+import mongoose, { Schema, Model, model } from "mongoose"
 import { IBook, IUser } from "./interfaces"
 
 
@@ -90,7 +90,7 @@ const UserSchema = new Schema<IUser>({
     }]
 })
 
-const Book: Model<IBook> = model<IBook>('Book', BookSchema)
-const User: Model<IUser> = model<IUser>('User', UserSchema)
+const Book: Model<IBook> =  mongoose.models.Book || model<IBook>('Book', BookSchema)
+const User: Model<IUser> = mongoose.models.User || model<IUser>('User', UserSchema)
 
 export { Book, User }

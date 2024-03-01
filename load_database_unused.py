@@ -8,7 +8,7 @@ def read_json(filename):
 
 def main():
     client = MongoClient('localhost', 27017)
-    db = client['bookstore']
+    db = client['goodbooks']
     users_data = read_json('mongo-seed/users.json')
     books_data = read_json('mongo-seed/books.json')
     users_collection = db['users']
