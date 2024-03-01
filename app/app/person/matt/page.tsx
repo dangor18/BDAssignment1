@@ -4,7 +4,7 @@ import { Matt } from "@/server/actions"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 
 
-export default async function JoePage() {
+export default async function MattPage() {
  const data = await Matt()
 
   return (

@@ -23,7 +23,7 @@ const Joe = async () => {
         { $match: { "total_ratings": { $gte: 1000 }, "tags.tag_name": "fiction" } },
         { $sort: { "average_rating": -1 } },
         { $limit: 50 },
-        { $project: { _id: 0, title: 1, average_rating: 1 } }
+        { $project: { _id: 0, title: 1, average_rating: 1, image_url: 1 } }
     ])
     return data
 }
