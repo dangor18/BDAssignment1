@@ -1,6 +1,5 @@
 import QueryBlock from "@/components/query-block"
 import Image from "next/image"
-import EmptyPlaceholder from "@/components/empty-placeholder"
 import { Dan } from "@/server/actions"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 

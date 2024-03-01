@@ -9,7 +9,7 @@
 - Ensure that no local MongoDB service (mongod) is running.
 - Differ by OS or if using Docker Desktop
 
-On linux:
+On Linux:
 
 ```shell
 sudo systemctl stop mongod 
