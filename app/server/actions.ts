@@ -5,6 +5,11 @@ const Matt = async () => {
     await dbConnect()
     const data = await User.aggregate([
         {
+            $match: {
+                ratings: { $exists: true }
+            }
+        },
+        {
             $project: {
                 _id: 0,
                 user_id: 1,
