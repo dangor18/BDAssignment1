@@ -1,6 +1,6 @@
 import QueryBlock from "@/components/query-block"
 import Image from "next/image"
-import { Dan, Joe } from "@/server/actions"
+import { Joe } from "@/server/actions"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 
 
