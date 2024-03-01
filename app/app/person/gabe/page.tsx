@@ -18,7 +18,7 @@ export default async function GabePage() {
                     aspectRatio: "200/200",
                     objectFit: "cover",
                 }}
-                className="rounded-full mr-2" />
+                className="mr-2 rounded-full" />
             <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
             Gabe's Query
             </h1>
@@ -26,7 +26,7 @@ export default async function GabePage() {
         <p className="max-w-[700px] text-lg text-muted-foreground">
             Find users who want to read “The Book Thief”
         </p>
-        <div className="max-w-prose text-lg mt-2 outline outline-muted rounded-sm">
+        <div className="mt-2 max-w-prose rounded-sm text-lg outline outline-muted">
             <QueryBlock 
             query={`db.users.find({"to_read.book.title": "The Book Thief"},{"_id": 0, "user_name": 1})`}
             />

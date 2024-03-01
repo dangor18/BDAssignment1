@@ -19,7 +19,7 @@ export default async function JoePage() {
                 aspectRatio: "200/200",
                 objectFit: "cover",
               }}
-            className="rounded-full mr-2" />
+            className="mr-2 rounded-full" />
         <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
           Joe's Query
         </h1>
@@ -28,7 +28,7 @@ export default async function JoePage() {
       <p className="max-w-[700px] text-lg text-muted-foreground">
         Find the names and ratings of the top 50 fiction books with at least 1000 ratings
       </p>
-      <div className="max-w-prose text-lg mt-2 outline outline-muted rounded-sm">
+      <div className="mt-2 max-w-prose rounded-sm text-lg outline outline-muted">
         <QueryBlock 
           query={`db.books.aggregate([{ $match: { "total_ratings": { $gte: 1000 }, "tags.tag_name": "fiction" }}, {$sort: { "average_rating": -1 }}, {$limit: 50}, {$project: { _id: 0, title: 1, average_rating: 1 }}])`}
         />
@@ -61,7 +61,7 @@ export default async function JoePage() {
             </TableCell>
             <TableCell>
                 <div className="flex items-center">
-                    <svg className="w-4 h-4 text-yellow-300 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                    <svg className="me-1 size-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
                         <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
                     </svg>
                     <p className="ms-2 text-sm font-bold text-white">{book.average_rating}</p>

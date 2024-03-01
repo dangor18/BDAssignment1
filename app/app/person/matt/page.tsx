@@ -19,7 +19,7 @@ export default async function MattPage() {
                 aspectRatio: "200/200",
                 objectFit: "cover",
               }}
-            className="rounded-full mr-2" />
+            className="mr-2 rounded-full" />
         <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
           Matt's Query
         </h1>
@@ -28,7 +28,7 @@ export default async function MattPage() {
       <p className="max-w-[700px] text-lg text-muted-foreground">
         Aggregate user IDs alongside the total number of ratings that user has submitted. The result is sorted by the number of ratings they have submitted and the top 10 are shown
       </p>
-      <div className="max-w-prose text-lg mt-2 outline outline-muted rounded-sm">
+      <div className="mt-2 max-w-prose rounded-sm text-lg outline outline-muted">
         <QueryBlock 
           query={`db.users.aggregate([{$project: {_id: 0, user_id: 1, numRatings: { $size: "$ratings" }}}, { $sort: { numRatings: -1 }}, { $limit: 10 }])`}
         />

@@ -19,7 +19,7 @@ export default async function DanielPage() {
                 aspectRatio: "200/200",
                 objectFit: "cover",
               }}
-            className="rounded-full mr-2" />
+            className="mr-2 rounded-full" />
         <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
           Daniel's Query
         </h1>
@@ -28,7 +28,7 @@ export default async function DanielPage() {
       <p className="max-w-[700px] text-lg text-muted-foreground">
         Find users who have rated a book but have an empty to read list
       </p>
-      <div className="max-w-prose text-lg mt-2 outline outline-muted rounded-sm">
+      <div className="mt-2 max-w-prose rounded-sm text-lg outline outline-muted">
         <QueryBlock 
           query={`db.users.find({ ratings: { $exists: true, $not: { $size: 0 } }, to_read: { $size: 0 } }, { _id: false, ratings: false });`}
         />

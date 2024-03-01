@@ -15,7 +15,7 @@ export default function IndexPage() {
         Explore our MongoDB queries from our CSC4019Z Big Data assignment
         </p>
       </div>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 items-start">
+      <div className="grid items-start gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
         <FaceCard name="Daniel" image="/daniel.png" />
         <FaceCard name="Gabe" image="/gabe.png" />
         <FaceCard name="Joe" image="/joe.png" />

@@ -19,7 +19,7 @@ export default async function JordyPage() {
                     aspectRatio: "200/200",
                     objectFit: "cover",
                 }}
-                className="rounded-full mr-2" />
+                className="mr-2 rounded-full" />
             <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
             Jordy's Query
             </h1>
@@ -27,7 +27,7 @@ export default async function JordyPage() {
         <p className="max-w-[700px] text-lg text-muted-foreground">
             Find the top 10 users who have rated the most diverse range of genres
         </p>
-        <div className="max-w-prose text-lg mt-2 outline outline-muted rounded-sm">
+        <div className="mt-2 max-w-prose rounded-sm text-lg outline outline-muted">
             <QueryBlock 
             query={`db.users.aggregate([{ $unwind: "$ratings" }, { $lookup: { from: "books", localField: "ratings.book.title", foreignField: "title", as: "rated_books" } }, { $unwind: "$rated_books" },{ $unwind: "$rated_books.tags" },{ $group: { _id: "$user_id", user_name: { $first: "$user_name" }, genres: { $addToSet: "$rated_books.tags.tag_name" } } },{ $addFields: { num_genres: { $size: "$genres" } } },{ $sort: { num_genres: -1 } },{ $limit: 10 }])`}
             />
@@ -43,7 +43,7 @@ export default async function JordyPage() {
                         <CardContent>
                             <div className="flex flex-wrap gap-2">
                                 {user.genres.map((genre: any) => (
-                                    <Badge key={genre} variant={"outline"} className="text-muted-foreground text-md">{genre}</Badge>
+                                    <Badge key={genre} variant={"outline"} className="text-md text-muted-foreground">{genre}</Badge>
                                 ))}
                             </div>
                         </CardContent>

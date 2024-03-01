@@ -12,10 +12,10 @@ export function FaceCard({ name, image }: FaceCardProps) {
     <div className="aspect-card transition-all duration-500 hover:scale-105">
       <Card>
         <Link href={`person/${name.toLowerCase()}`} passHref>
-          <CardContent className="flex flex-col items-center gap-2 p-4 rounded">
+          <CardContent className="flex flex-col items-center gap-2 rounded p-4">
             <Image
               alt={`Photo of ${name}`}
-              className="rounded-full cursor-pointer"
+              className="cursor-pointer rounded-full"
               height="200"
               src={image}
               style={{
@@ -24,7 +24,7 @@ export function FaceCard({ name, image }: FaceCardProps) {
               }}
               width="200"
             />
-            <p className="text-lg font-semibold cursor-pointer">{name}</p>
+            <p className="cursor-pointer text-lg font-semibold">{name}</p>
           </CardContent>
         </Link>
       </Card>
