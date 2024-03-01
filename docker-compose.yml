@@ -7,9 +7,11 @@ services:
       - "27017:27017"
     environment:
       MONGO_INITDB_DATABASE: goodbooks
-
+      
   mongo_seed:
     image: mongo:latest
+    depends_on:
+      - mongodb
     links:
       - mongodb
     volumes:
@@ -22,4 +24,6 @@ services:
     ports:
       - "3000:3000"
     depends_on:
+      - mongodb
+    links:
       - mongodb
