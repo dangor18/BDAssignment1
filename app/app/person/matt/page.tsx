@@ -21,7 +21,7 @@ export default async function MattPage() {
               }}
             className="mr-2 rounded-full" />
         <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
-          Matt's Query
+          Matt&apos;s Query
         </h1>
         
       </div>

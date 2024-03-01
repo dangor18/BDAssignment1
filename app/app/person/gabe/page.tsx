@@ -20,11 +20,11 @@ export default async function GabePage() {
                 }}
                 className="mr-2 rounded-full" />
             <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
-            Gabe's Query
+            Gabe&apos;s Query
             </h1>
         </div>
         <p className="max-w-[700px] text-lg text-muted-foreground">
-            Find users who want to read “The Book Thief”
+            Find users who want to read &lsquo;The Book Thief&rsquo;
         </p>
         <div className="mt-2 max-w-prose rounded-sm text-lg outline outline-muted">
             <QueryBlock 

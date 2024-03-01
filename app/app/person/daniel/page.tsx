@@ -21,7 +21,7 @@ export default async function DanielPage() {
               }}
             className="mr-2 rounded-full" />
         <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
-          Daniel's Query
+          Daniel&apos;s Query
         </h1>
         
       </div>

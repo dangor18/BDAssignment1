@@ -9,7 +9,7 @@ export default function EmptyPlaceholder() {
                 <Icons.logo className="size-10" />
             </div>
             <h2 className="mt-6 text-xl font-semibold">No data</h2>
-            <p className="mb-8 mt-2 text-center text-sm font-normal leading-6 text-muted-foreground">You don't have any data yet. Run the query to fetch the data from MongoDB.</p>
+            <p className="mb-8 mt-2 text-center text-sm font-normal leading-6 text-muted-foreground">You don&apos;t have any data yet. Run the query to fetch the data from MongoDB.</p>
             <Button variant={"outline"}>Run query</Button>
         </div>
       </div>
