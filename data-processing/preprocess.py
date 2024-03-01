@@ -185,8 +185,8 @@ def csv_to_json(csv_file, json_file):
                 "title": row["title"],
                 "language_code": row["language_code"],
                 "average_rating": float(row["average_rating"]) if row["average_rating"] else None,
-                "ratings_count": int(row["ratings_count"]) if row["ratings_count"] else None,
-                "total_ratings": rating_counts,
+                "total_ratings": int(row["ratings_count"]) if row["ratings_count"] else None,
+                "rating_counts": rating_counts,
                 "image_url": row["image_url"],
                 "tags": tags,
                 "ratings": ratings
